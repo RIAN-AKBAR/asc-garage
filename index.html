@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>ASC GARAGE | Daftar Member Esthetic</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
             min-height: 100vh;
         }
 
-        /* === BACKGROUND ESTETIK === */
+        /* === BACKGROUND ESTETIK (tetap responsif) === */
         .bg-soft {
             position: fixed;
             top: 0;
@@ -139,7 +139,7 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* ===== LOADER SUPER KEREN DENGAN LOGO DI TENGAH ===== */
+        /* ===== LOADER RESPONSIF ===== */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -151,27 +151,28 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
             z-index: 10000;
             transition: opacity 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             backdrop-filter: blur(4px);
+            padding: 20px;
         }
         
-        /* Container animasi lingkaran berlapis dengan logo di tengah */
         .loader-ring-container {
             position: relative;
-            width: 160px;
-            height: 160px;
+            width: min(160px, 35vw);
+            height: min(160px, 35vw);
+            max-width: 160px;
+            max-height: 160px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* Lingkaran luar berputar lambat */
         .loader-ring-outer {
             position: absolute;
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             border: 2px solid transparent;
             border-top: 2px solid #A855F7;
@@ -179,11 +180,10 @@
             animation: spinSlow 3s linear infinite;
         }
         
-        /* Lingkaran kedua berputar berlawanan */
         .loader-ring-middle {
             position: absolute;
-            width: 120px;
-            height: 120px;
+            width: 75%;
+            height: 75%;
             border-radius: 50%;
             border: 2px solid transparent;
             border-bottom: 2px solid #8B5CF6;
@@ -191,11 +191,10 @@
             animation: spinReverse 2.5s linear infinite;
         }
         
-        /* Lingkaran dalam */
         .loader-ring-inner {
             position: absolute;
-            width: 90px;
-            height: 90px;
+            width: 55%;
+            height: 55%;
             border-radius: 50%;
             border: 2px solid transparent;
             border-top: 2px solid #C084FC;
@@ -203,11 +202,10 @@
             animation: spinSlow 1.8s linear infinite;
         }
         
-        /* Lingkaran paling kecil */
         .loader-ring-mini {
             position: absolute;
-            width: 55px;
-            height: 55px;
+            width: 35%;
+            height: 35%;
             border-radius: 50%;
             border: 1.5px solid transparent;
             border-bottom: 1.5px solid #E9D5FF;
@@ -215,11 +213,10 @@
             animation: spinReverse 1.2s linear infinite;
         }
         
-        /* Logo di tengah lingkaran */
         .loader-center-logo {
             position: absolute;
-            width: 65px;
-            height: 65px;
+            width: 45%;
+            height: 45%;
             object-fit: contain;
             border-radius: 50%;
             z-index: 10;
@@ -245,28 +242,28 @@
         
         .loader-text {
             color: #C084FC;
-            font-size: 1rem;
-            letter-spacing: 6px;
+            font-size: clamp(0.8rem, 4vw, 1rem);
+            letter-spacing: clamp(3px, 2vw, 6px);
             font-weight: 600;
             text-transform: uppercase;
             opacity: 0;
             animation: fadeInText 1s ease-out forwards;
             animation-delay: 0.8s;
+            text-align: center;
         }
         
         @keyframes fadeInText {
             0% { opacity: 0; letter-spacing: 12px; }
-            100% { opacity: 1; letter-spacing: 6px; }
+            100% { opacity: 1; letter-spacing: clamp(3px, 2vw, 6px); }
         }
         
-        /* Progress bar */
         .loader-progress {
-            width: 250px;
+            width: min(250px, 60vw);
             height: 2px;
             background: rgba(139, 92, 246, 0.2);
             border-radius: 10px;
             overflow: hidden;
-            margin-top: 10px;
+            margin-top: 5px;
             opacity: 0;
             animation: fadeInProgress 0.8s ease-out forwards;
             animation-delay: 1s;
@@ -295,30 +292,15 @@
             100% { opacity: 0.7; transform: translateY(0); }
         }
         
-        .loader-subtext {
-            color: rgba(168, 85, 247, 0.5);
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-top: 8px;
-            opacity: 0;
-            animation: fadeInSubtext 1s ease-out forwards;
-            animation-delay: 1.3s;
-        }
-        
-        @keyframes fadeInSubtext {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
-        /* Teks berganti-ganti (loading messages) */
         .loader-messages {
-            margin-top: 5px;
+            margin-top: 8px;
             height: 20px;
             overflow: hidden;
+            text-align: center;
         }
         .loader-message {
             color: rgba(168, 85, 247, 0.6);
-            font-size: 0.65rem;
+            font-size: clamp(0.6rem, 3vw, 0.7rem);
             letter-spacing: 1px;
             opacity: 0;
             animation: messageCycle 2s ease-in-out infinite;
@@ -334,41 +316,56 @@
             48% { opacity: 0; transform: translateY(-5px); }
             100% { opacity: 0; transform: translateY(-5px); }
         }
+        
+        .loader-subtext {
+            color: rgba(168, 85, 247, 0.5);
+            font-size: clamp(0.6rem, 3vw, 0.7rem);
+            letter-spacing: 2px;
+            margin-top: 5px;
+            opacity: 0;
+            animation: fadeInSubtext 1s ease-out forwards;
+            animation-delay: 1.3s;
+        }
+        
+        @keyframes fadeInSubtext {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: clamp(0.8rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem);
             position: relative;
             z-index: 1;
         }
 
-        /* === NAVBAR === */
+        /* === NAVBAR RESPONSIF === */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(10, 7, 22, 0.65);
             backdrop-filter: blur(18px);
-            padding: 0.6rem 1.8rem;
+            padding: clamp(0.4rem, 2vw, 0.6rem) clamp(1rem, 4vw, 1.8rem);
             border-radius: 100px;
             border: 0.5px solid rgba(168, 85, 247, 0.4);
-            margin-bottom: 2rem;
+            margin-bottom: clamp(1rem, 3vw, 2rem);
         }
         .logo-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(6px, 2vw, 12px);
         }
         .logo-brand img {
-            width: 50px;
-            height: 50px;
+            width: clamp(35px, 8vw, 50px);
+            height: clamp(35px, 8vw, 50px);
             object-fit: contain;
             border-radius: 50%;
             box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
         }
         .logo-brand span {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 4vw, 1.5rem);
             font-weight: 800;
             background: linear-gradient(135deg, #FFFFFF, #D8B4FE);
             -webkit-background-clip: text;
@@ -377,7 +374,7 @@
         }
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: clamp(0.8rem, 3vw, 2rem);
             align-items: center;
         }
         .nav-menu a {
@@ -385,62 +382,67 @@
             text-decoration: none;
             font-weight: 500;
             transition: 0.2s;
+            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
         }
         .member-trigger-nav {
             background: linear-gradient(95deg, #A855F7, #6D28D9);
-            padding: 6px 22px;
+            padding: clamp(4px, 1.5vw, 6px) clamp(14px, 4vw, 22px);
             border-radius: 60px;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 2px 12px rgba(168, 85, 247, 0.4);
+            white-space: nowrap;
         }
         .hamburger {
             display: none;
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 5vw, 1.6rem);
             cursor: pointer;
             color: #CBA6FF;
         }
-        @media (max-width: 800px) {
+        
+        /* === RESPONSIVE NAVBAR === */
+        @media (max-width: 680px) {
             .nav-menu {
                 position: fixed;
-                top: 80px;
+                top: 70px;
                 right: -280px;
                 flex-direction: column;
                 background: rgba(6, 4, 22, 0.98);
                 backdrop-filter: blur(30px);
-                width: 250px;
-                padding: 2rem;
-                border-radius: 32px;
-                gap: 1.8rem;
+                width: min(250px, 70vw);
+                padding: 1.5rem;
+                border-radius: 28px;
+                gap: 1.5rem;
                 transition: 0.3s;
                 border: 1px solid #A855F7;
                 z-index: 1000;
             }
             .nav-menu.active {
-                right: 20px;
+                right: clamp(10px, 4vw, 20px);
             }
             .hamburger {
                 display: block;
             }
-            .container {
-                padding: 1rem;
+            .member-trigger-nav {
+                white-space: normal;
+                text-align: center;
             }
         }
 
-        /* === HERO SECTION === */
+        /* === HERO SECTION RESPONSIF === */
         .member-hero {
             text-align: center;
-            margin: 1.5rem 0 2.5rem;
-            padding: 1rem;
+            margin: clamp(1rem, 5vw, 2rem) 0 clamp(1.5rem, 5vw, 2.5rem);
+            padding: clamp(0.5rem, 2vw, 1rem);
         }
         .member-hero-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: clamp(0.8rem, 3vw, 1.5rem);
         }
         .member-hero-logo img {
-            width: 150px;
-            height: 150px;
+            width: clamp(100px, 25vw, 150px);
+            height: clamp(100px, 25vw, 150px);
             object-fit: contain;
             border-radius: 50%;
             filter: drop-shadow(0 0 25px #A855F7);
@@ -451,7 +453,7 @@
             100% { filter: drop-shadow(0 0 40px #C084FC); transform: scale(1.02);}
         }
         .member-hero h1 {
-            font-size: 2.8rem;
+            font-size: clamp(1.6rem, 8vw, 2.8rem);
             font-weight: 700;
             background: linear-gradient(125deg, #F0E6FF, #C084FC, #A855F7);
             -webkit-background-clip: text;
@@ -463,17 +465,18 @@
         .member-hero p {
             opacity: 0.7;
             margin-top: 0.3rem;
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            padding: 0 clamp(10px, 5vw, 20px);
         }
         .btn-open-member {
             background: linear-gradient(95deg, #A855F7, #7C3AED);
             border: none;
-            padding: 14px 40px;
+            padding: clamp(10px, 3vw, 14px) clamp(25px, 8vw, 40px);
             border-radius: 60px;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 3.5vw, 1rem);
             font-weight: 700;
             color: white;
-            margin-top: 1.8rem;
+            margin-top: clamp(1rem, 4vw, 1.8rem);
             cursor: pointer;
             transition: 0.2s;
             box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
@@ -486,7 +489,7 @@
             box-shadow: 0 8px 28px #A855F7;
         }
 
-        /* === MODAL FORM MEMBER === */
+        /* === MODAL FORM MEMBER RESPONSIF === */
         .modal-member {
             display: none;
             position: fixed;
@@ -499,12 +502,13 @@
             justify-content: center;
             align-items: center;
             z-index: 10001;
+            padding: 20px;
         }
         .modal-card {
             background: rgba(14, 10, 34, 0.96);
             backdrop-filter: blur(20px);
             border-radius: 48px;
-            padding: 2rem;
+            padding: clamp(1.2rem, 5vw, 2rem);
             width: 90%;
             max-width: 450px;
             border: 1px solid #A855F7;
@@ -516,7 +520,7 @@
             to { opacity: 1; transform: scale(1); }
         }
         .modal-card h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
             text-align: center;
             margin-bottom: 0.5rem;
         }
@@ -524,63 +528,67 @@
             text-align: center;
             opacity: 0.7;
             margin-bottom: 1.5rem;
+            font-size: clamp(0.7rem, 3vw, 0.8rem);
         }
         .modal-form input, .modal-form select {
             width: 100%;
-            padding: 12px 16px;
-            margin: 10px 0;
+            padding: clamp(10px, 3vw, 12px) clamp(12px, 4vw, 16px);
+            margin: 8px 0;
             background: #1E1A42;
             border: 0.5px solid #8B5CF6;
             border-radius: 60px;
             color: white;
             font-family: inherit;
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
         }
         .modal-form button {
             width: 100%;
             background: linear-gradient(95deg, #A855F7, #7C3AED);
             border: none;
-            padding: 14px;
+            padding: clamp(10px, 3vw, 14px);
             border-radius: 60px;
             font-weight: 700;
             color: white;
-            margin-top: 18px;
+            margin-top: 16px;
             cursor: pointer;
             transition: 0.2s;
+            font-size: clamp(0.8rem, 3vw, 1rem);
         }
         .close-modal {
             background: #2E2560;
             margin-top: 10px;
             width: 100%;
-            padding: 10px;
+            padding: clamp(8px, 2.5vw, 10px);
             border-radius: 60px;
             border: none;
             color: white;
             cursor: pointer;
         }
 
-        /* === PRODUK GRID === */
+        /* === PRODUK GRID RESPONSIF === */
         .search-wrapper {
             margin-bottom: 1.5rem;
         }
         .search-wrapper input {
             width: 100%;
-            padding: 12px 20px;
+            padding: clamp(10px, 3vw, 12px) clamp(15px, 4vw, 20px);
             border-radius: 60px;
             background: rgba(20, 16, 45, 0.7);
             border: 0.5px solid #7C3AED;
             color: white;
             outline: none;
+            font-size: clamp(0.8rem, 3vw, 1rem);
         }
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: clamp(1rem, 3vw, 1.5rem);
         }
         .product-card {
             background: rgba(18, 14, 40, 0.65);
             backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 1.2rem;
+            border-radius: 28px;
+            padding: clamp(0.8rem, 3vw, 1.2rem);
             border: 0.5px solid rgba(139, 92, 246, 0.35);
             transition: all 0.25s;
         }
@@ -602,7 +610,7 @@
             object-fit: cover;
         }
         .product-title {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 4vw, 1.2rem);
             font-weight: 700;
             margin: 12px 0 4px;
         }
@@ -610,54 +618,60 @@
             color: #D8B4FE;
             font-weight: 700;
             margin: 8px 0;
+            font-size: clamp(0.85rem, 3vw, 1rem);
         }
         .btn-buy {
             width: 100%;
             background: #2A1F55;
             border: 1px solid #8B5CF6;
-            padding: 10px;
+            padding: clamp(8px, 2.5vw, 10px);
             border-radius: 60px;
             font-weight: 600;
             color: white;
             cursor: pointer;
             transition: 0.2s;
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
         }
         .btn-buy:hover {
             background: #7C3AED;
         }
 
-        /* Team Block */
+        /* Team Block Responsif */
         .team-block {
             background: rgba(12, 9, 30, 0.7);
             backdrop-filter: blur(14px);
             border-radius: 42px;
-            padding: 1.2rem 1.5rem;
+            padding: clamp(1rem, 4vw, 1.5rem);
             margin: 2rem 0 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: clamp(1rem, 4vw, 1.8rem);
             flex-wrap: wrap;
             border: 0.5px solid #6D28D9;
         }
         .team-avatar {
-            width: 80px;
-            height: 80px;
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(60px, 15vw, 80px);
             border-radius: 50%;
             border: 2.5px solid #C084FC;
             object-fit: cover;
             box-shadow: 0 0 14px #A855F7;
         }
         .team-info h4 {
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
         }
         .role {
             color: #C084FC;
             font-weight: 600;
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
+        }
+        .team-info p {
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
         }
         .view-profile-btn {
             display: inline-block;
             background: linear-gradient(95deg, #7C3AED, #A855F7);
-            padding: 7px 22px;
+            padding: clamp(5px, 2vw, 7px) clamp(16px, 5vw, 22px);
             border-radius: 40px;
             text-decoration: none;
             color: white;
@@ -665,6 +679,7 @@
             margin-top: 8px;
             transition: 0.2s;
             box-shadow: 0 2px 12px rgba(139,92,246,0.5);
+            font-size: clamp(0.7rem, 3vw, 0.8rem);
         }
         .view-profile-btn:hover {
             transform: translateY(-2px);
@@ -673,7 +688,7 @@
 
         footer {
             text-align: center;
-            padding: 1.8rem;
+            padding: clamp(1rem, 4vw, 1.8rem);
             border-top: 0.5px solid #2E2660;
             margin-top: 1.5rem;
         }
@@ -681,29 +696,33 @@
             background: #19153A;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 28px;
+            gap: 8px;
+            padding: clamp(6px, 2vw, 8px) clamp(20px, 6vw, 28px);
             border-radius: 60px;
             text-decoration: none;
             color: white;
             border: 0.5px solid #FF1A66;
             transition: 0.2s;
+            font-size: clamp(0.7rem, 3vw, 0.85rem);
         }
         .tiktok-btn:hover {
             background: #FF1A66;
         }
 
-        @media (max-width: 650px) {
-            .member-hero h1 { font-size: 1.9rem; }
-            .product-grid { grid-template-columns: 1fr; }
-            .member-hero-logo img { width: 110px; height: 110px; }
-            .logo-brand img { width: 40px; height: 40px; }
-            .loader-center-logo { width: 50px; height: 50px; }
-            .loader-ring-container { width: 130px; height: 130px; }
-            .loader-ring-outer { width: 120px; height: 120px; }
-            .loader-ring-middle { width: 95px; height: 95px; }
-            .loader-ring-inner { width: 70px; height: 70px; }
-            .loader-ring-mini { width: 45px; height: 45px; }
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .team-block {
+                flex-direction: column;
+                text-align: center;
+            }
+            .member-hero-logo img {
+                width: 90px;
+                height: 90px;
+            }
+            .loader-ring-container {
+                width: 120px;
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -715,7 +734,6 @@
         <div class="loader-ring-middle"></div>
         <div class="loader-ring-inner"></div>
         <div class="loader-ring-mini"></div>
-        <!-- LOGO BERADA DI TENGAH LINGKARAN ANIMASI -->
         <img src="logo.png" class="loader-center-logo" alt="logo.png" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
     </div>
     <div class="loader-text">ASC GARAGE</div>
@@ -740,7 +758,6 @@
 <div class="particle-field" id="particleContainer"></div>
 
 <div class="container">
-    <!-- Navbar -->
     <div class="navbar">
         <div class="logo-brand">
             <img src="logo.png" alt="logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
@@ -757,7 +774,6 @@
         </div>
     </div>
 
-    <!-- HERO: DAFTAR MEMBER -->
     <div class="member-hero">
         <div class="member-hero-logo">
             <img src="logo.png" alt="logo.png" onerror="this.src='https://placehold.co/200x200/A855F7/FFFFFF?text=ASC'">
@@ -769,7 +785,6 @@
         </button>
     </div>
 
-    <!-- Search & Produk -->
     <div class="search-wrapper">
         <input type="text" id="searchInput" placeholder="🔎 Cari produk... (kemeja, racing, pink)">
     </div>
@@ -779,12 +794,12 @@
             <div class="product-img">
                 <img src="https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter" alt="Kemeja ASC">
             </div>
-            <div class="product-title">Kemeja ASC</div>
+            <div class="product-title">Kemeja ASC • Garage</div>
+            <div class="price">⭐ 199 Robux</div>
             <button class="btn-buy" data-link="https://www.roblox.com/catalog/106160087993164">BELI SEKARANG</button>
         </div>
     </div>
 
-    <!-- Team Block -->
     <div id="teamSection" class="team-block">
         <img class="team-avatar" src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="annn_pov">
         <div class="team-info">
@@ -797,11 +812,10 @@
 
     <footer>
         <a href="https://www.tiktok.com/@acr.all.star.crew?_r=1&_t=ZS-95xULFEPAd3" id="tiktokBtnFooter" class="tiktok-btn"><i class="fab fa-tiktok"></i> @acr.all.star.crew</a>
-        <p style="margin-top: 1rem; font-size: 0.7rem;">© ASC GARAGE — daftar member esthetic</p>
+        <p style="margin-top: 1rem; font-size: clamp(0.6rem, 2.5vw, 0.7rem);">© ASC GARAGE — daftar member esthetic</p>
     </footer>
 </div>
 
-<!-- MODAL FORM MEMBER -->
 <div id="memberModal" class="modal-member">
     <div class="modal-card">
         <h2>✨ Daftar Member ASC</h2>
@@ -823,7 +837,6 @@
 </div>
 
 <script>
-    // Membuat bintang-bintang
     function createStars() {
         const starsContainer = document.getElementById('starsContainer');
         for(let i = 0; i < 150; i++) {
@@ -839,7 +852,6 @@
         }
     }
 
-    // Membuat partikel berjatuhan
     function createParticles() {
         const particleContainer = document.getElementById('particleContainer');
         for(let i = 0; i < 60; i++) {
@@ -857,7 +869,6 @@
     createStars();
     createParticles();
 
-    // LOADER - DIPERLAMBAT (durasi 5 detik untuk pengalaman yang lebih mewah)
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
@@ -865,10 +876,9 @@
                 ld.style.opacity = '0';
                 setTimeout(() => ld.style.display = 'none', 1500);
             }
-        }, 5000); // Loading tampil selama 5 detik (lebih lambat)
+        }, 5000);
     });
 
-    // MODAL LOGIC
     const modal = document.getElementById('memberModal');
     const openModalBtns = document.querySelectorAll('#heroMemberBtn, #navMemberOpen');
     const closeModal = document.getElementById('closeModalBtn');
@@ -880,7 +890,6 @@
     closeModal.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
 
-    // FORM SUBMIT KE GMAIL ascgmailcom4@gmail.com
     const memberModalForm = document.getElementById('memberModalForm');
     memberModalForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -911,7 +920,6 @@
         }
     });
 
-    // Tombol Beli
     document.querySelectorAll('.btn-buy').forEach(btn => {
         btn.addEventListener('click', () => {
             const link = btn.getAttribute('data-link');
@@ -920,7 +928,6 @@
         });
     });
 
-    // Search filter
     const searchInput = document.getElementById('searchInput');
     const products = document.querySelectorAll('.product-card');
     function filterProducts() {
@@ -936,7 +943,6 @@
         searchInput.focus();
     });
 
-    // Hamburger menu
     const hamburger = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
     hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
