@@ -30,41 +30,116 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -3;
-            background: radial-gradient(circle at 30% 20%, #0D0B1F, #020106);
+            z-index: -5;
+            background: radial-gradient(circle at 20% 30%, #0D0B1F, #020106);
         }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -4;
+            pointer-events: none;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+
         .aura-float {
             position: fixed;
-            width: 65vw;
-            height: 65vw;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), rgba(79, 42, 165, 0) 70%);
-            top: -20vh;
-            right: -20vw;
-            filter: blur(100px);
-            z-index: -2;
-            animation: auraMove 16s infinite alternate;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2), rgba(79, 42, 165, 0) 70%);
+            top: -30vh;
+            right: -30vw;
+            filter: blur(120px);
+            z-index: -3;
+            animation: auraMove 18s infinite alternate ease-in-out;
         }
         .aura-float2 {
             position: fixed;
-            width: 60vh;
-            height: 60vh;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0) 70%);
-            bottom: -10vh;
-            left: -15vw;
-            filter: blur(95px);
-            z-index: -2;
-            animation: auraMove2 20s infinite alternate;
+            width: 65vh;
+            height: 65vh;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.18), rgba(236, 72, 153, 0) 70%);
+            bottom: -20vh;
+            left: -20vw;
+            filter: blur(110px);
+            z-index: -3;
+            animation: auraMove2 22s infinite alternate;
+        }
+        .aura-float3 {
+            position: fixed;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0) 70%);
+            top: 40%;
+            left: 30%;
+            filter: blur(100px);
+            z-index: -3;
+            animation: auraMove3 15s infinite alternate;
         }
         @keyframes auraMove {
             0% { transform: translate(0,0) scale(1); opacity: 0.4; }
-            100% { transform: translate(40px, -30px) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(60px, -40px) scale(1.3); opacity: 0.9; }
         }
         @keyframes auraMove2 {
             0% { transform: translate(0,0) scale(1); opacity: 0.3; }
-            100% { transform: translate(-50px, 40px) scale(1.3); opacity: 0.7; }
+            100% { transform: translate(-70px, 50px) scale(1.4); opacity: 0.8; }
+        }
+        @keyframes auraMove3 {
+            0% { transform: translate(0,0) scale(1); opacity: 0.2; }
+            100% { transform: translate(40px, 40px) scale(1.2); opacity: 0.6; }
         }
 
-        /* Loader */
+        .particle-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, #A855F7, #C084FC);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatParticle 12s infinite linear;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ===== LOADER SUPER KEREN DENGAN LOGO DI TENGAH ===== */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -76,32 +151,196 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
             z-index: 10000;
-            transition: opacity 0.5s;
+            transition: opacity 1.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(4px);
         }
-        .loader-logo {
-            width: 110px;
-            height: 110px;
-            object-fit: contain;
-            animation: bounceLoader 0.9s infinite alternate;
+        
+        /* Container animasi lingkaran berlapis dengan logo di tengah */
+        .loader-ring-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Lingkaran luar berputar lambat */
+        .loader-ring-outer {
+            position: absolute;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            box-shadow: 0 0 35px rgba(168, 85, 247, 0.7);
+            border: 2px solid transparent;
+            border-top: 2px solid #A855F7;
+            border-right: 2px solid #C084FC;
+            animation: spinSlow 3s linear infinite;
         }
-        @keyframes bounceLoader {
-            0% { transform: translateY(0px); opacity: 0.7; }
-            100% { transform: translateY(-12px); opacity: 1; }
+        
+        /* Lingkaran kedua berputar berlawanan */
+        .loader-ring-middle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-bottom: 2px solid #8B5CF6;
+            border-left: 2px solid #D8B4FE;
+            animation: spinReverse 2.5s linear infinite;
         }
+        
+        /* Lingkaran dalam */
+        .loader-ring-inner {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top: 2px solid #C084FC;
+            border-right: 2px solid #A855F7;
+            animation: spinSlow 1.8s linear infinite;
+        }
+        
+        /* Lingkaran paling kecil */
+        .loader-ring-mini {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 1.5px solid transparent;
+            border-bottom: 1.5px solid #E9D5FF;
+            border-left: 1.5px solid #A855F7;
+            animation: spinReverse 1.2s linear infinite;
+        }
+        
+        /* Logo di tengah lingkaran */
+        .loader-center-logo {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            border-radius: 50%;
+            z-index: 10;
+            animation: pulseLogoLoader 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
+        }
+        
+        @keyframes spinSlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes spinReverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes pulseLogoLoader {
+            0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 10px #A855F7; }
+            50% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 30px #C084FC; }
+            100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 10px #A855F7; }
+        }
+        
         .loader-text {
             color: #C084FC;
-            font-size: 0.8rem;
+            font-size: 1rem;
+            letter-spacing: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInText 1s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+        
+        @keyframes fadeInText {
+            0% { opacity: 0; letter-spacing: 12px; }
+            100% { opacity: 1; letter-spacing: 6px; }
+        }
+        
+        /* Progress bar */
+        .loader-progress {
+            width: 250px;
+            height: 2px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInProgress 0.8s ease-out forwards;
+            animation-delay: 1s;
+        }
+        
+        .loader-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #A855F7, #C084FC, #E9D5FF);
+            border-radius: 10px;
+            animation: progressLoad 4s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            20% { width: 15%; }
+            40% { width: 35%; }
+            60% { width: 60%; }
+            80% { width: 85%; }
+            100% { width: 100%; }
+        }
+        
+        @keyframes fadeInProgress {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 0.7; transform: translateY(0); }
+        }
+        
+        .loader-subtext {
+            color: rgba(168, 85, 247, 0.5);
+            font-size: 0.7rem;
             letter-spacing: 2px;
+            margin-top: 8px;
+            opacity: 0;
+            animation: fadeInSubtext 1s ease-out forwards;
+            animation-delay: 1.3s;
+        }
+        
+        @keyframes fadeInSubtext {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        /* Teks berganti-ganti (loading messages) */
+        .loader-messages {
+            margin-top: 5px;
+            height: 20px;
+            overflow: hidden;
+        }
+        .loader-message {
+            color: rgba(168, 85, 247, 0.6);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: messageCycle 2s ease-in-out infinite;
+        }
+        .loader-message:nth-child(1) { animation-delay: 0s; }
+        .loader-message:nth-child(2) { animation-delay: 0.8s; }
+        .loader-message:nth-child(3) { animation-delay: 1.6s; }
+        
+        @keyframes messageCycle {
+            0% { opacity: 0; transform: translateY(5px); }
+            15% { opacity: 1; transform: translateY(0); }
+            33% { opacity: 1; transform: translateY(0); }
+            48% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 0; transform: translateY(-5px); }
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1.2rem 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* === NAVBAR === */
@@ -188,7 +427,7 @@
             }
         }
 
-        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO DIPERBESAR === */
+        /* === HERO SECTION === */
         .member-hero {
             text-align: center;
             margin: 1.5rem 0 2.5rem;
@@ -459,27 +698,51 @@
             .product-grid { grid-template-columns: 1fr; }
             .member-hero-logo img { width: 110px; height: 110px; }
             .logo-brand img { width: 40px; height: 40px; }
-            .loader-logo { width: 85px; height: 85px; }
+            .loader-center-logo { width: 50px; height: 50px; }
+            .loader-ring-container { width: 130px; height: 130px; }
+            .loader-ring-outer { width: 120px; height: 120px; }
+            .loader-ring-middle { width: 95px; height: 95px; }
+            .loader-ring-inner { width: 70px; height: 70px; }
+            .loader-ring-mini { width: 45px; height: 45px; }
         }
     </style>
 </head>
 <body>
 
 <div class="loader-wrap" id="loader">
-    <!-- GANTI src="logo.png" dengan file logo kamu -->
-    <img src="logo.png" class="loader-logo" alt="logo.png" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC+GARAGE'">
-    <div class="loader-text">loading esthetic universe...</div>
+    <div class="loader-ring-container">
+        <div class="loader-ring-outer"></div>
+        <div class="loader-ring-middle"></div>
+        <div class="loader-ring-inner"></div>
+        <div class="loader-ring-mini"></div>
+        <!-- LOGO BERADA DI TENGAH LINGKARAN ANIMASI -->
+        <img src="logo.png" class="loader-center-logo" alt="logo.png" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
+    </div>
+    <div class="loader-text">ASC GARAGE</div>
+    <div class="loader-progress">
+        <div class="loader-progress-bar"></div>
+    </div>
+    <div class="loader-messages">
+        <div class="loader-message">✨ loading esthetic assets...</div>
+        <div class="loader-message">🎨 preparing dream collection...</div>
+        <div class="loader-message">💜 aura ungu activated...</div>
+    </div>
+    <div class="loader-subtext">esthetic universe</div>
 </div>
 
+<!-- BACKGROUND EFEK ESTETIK -->
 <div class="bg-soft"></div>
+<div class="grid-overlay"></div>
 <div class="aura-float"></div>
 <div class="aura-float2"></div>
+<div class="aura-float3"></div>
+<div class="stars" id="starsContainer"></div>
+<div class="particle-field" id="particleContainer"></div>
 
 <div class="container">
     <!-- Navbar -->
     <div class="navbar">
         <div class="logo-brand">
-            <!-- GANTI src="logo.png" dengan file logo kamu (ukuran diperbesar jadi 50px) -->
             <img src="logo.png" alt="logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
             <span>ASC GARAGE</span>
         </div>
@@ -494,10 +757,9 @@
         </div>
     </div>
 
-    <!-- HERO: DAFTAR MEMBER dengan LOGO DIPERBESAR (150px) -->
+    <!-- HERO: DAFTAR MEMBER -->
     <div class="member-hero">
         <div class="member-hero-logo">
-            <!-- GANTI src="logo.png" dengan file logo kamu -->
             <img src="logo.png" alt="logo.png" onerror="this.src='https://placehold.co/200x200/A855F7/FFFFFF?text=ASC'">
         </div>
         <h1>DAFTAR MEMBER</h1>
@@ -517,8 +779,7 @@
             <div class="product-img">
                 <img src="https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter" alt="Kemeja ASC">
             </div>
-            <div class="product-title">Kemeja ASC • Garage</div>
-            <div class="price">⭐ 199 Robux</div>
+            <div class="product-title">Kemeja ASC</div>
             <button class="btn-buy" data-link="https://www.roblox.com/catalog/106160087993164">BELI SEKARANG</button>
         </div>
     </div>
@@ -562,15 +823,49 @@
 </div>
 
 <script>
-    // LOADER HILANG
+    // Membuat bintang-bintang
+    function createStars() {
+        const starsContainer = document.getElementById('starsContainer');
+        for(let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 2 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 5 + 's';
+            star.style.animationDuration = Math.random() * 3 + 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Membuat partikel berjatuhan
+    function createParticles() {
+        const particleContainer = document.getElementById('particleContainer');
+        for(let i = 0; i < 60; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = Math.random() * 8 + 6 + 's';
+            particleContainer.appendChild(particle);
+        }
+    }
+
+    createStars();
+    createParticles();
+
+    // LOADER - DIPERLAMBAT (durasi 5 detik untuk pengalaman yang lebih mewah)
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
             if(ld) {
                 ld.style.opacity = '0';
-                setTimeout(() => ld.style.display = 'none', 500);
+                setTimeout(() => ld.style.display = 'none', 1500);
             }
-        }, 1000);
+        }, 5000); // Loading tampil selama 5 detik (lebih lambat)
     });
 
     // MODAL LOGIC
@@ -647,12 +942,6 @@
     hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
     document.querySelectorAll('#navMenu a, #navMenu div').forEach(link => {
         link.addEventListener('click', () => navMenu.classList.remove('active'));
-    });
-
-    // TikTok
-    document.getElementById('tiktokBtnFooter').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.open('https://www.tiktok.com/@ascgarage', '_blank');
     });
 </script>
 </body>
