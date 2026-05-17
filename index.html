@@ -2,102 +2,661 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Doa Pendek Harian - Website Islami</title>
-    <meta name="description" content="Kumpulan doa sehari-hari lengkap dengan arab, latin, dan terjemahannya">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ASC GARAGE | Daftar Member Esthetic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            background: #05040E;
+            color: #F0EBFF;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* === BACKGROUND ESTETIK === */
+        .bg-soft {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: radial-gradient(circle at 30% 20%, #0D0B1F, #020106);
+        }
+        .aura-float {
+            position: fixed;
+            width: 65vw;
+            height: 65vw;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), rgba(79, 42, 165, 0) 70%);
+            top: -20vh;
+            right: -20vw;
+            filter: blur(100px);
+            z-index: -2;
+            animation: auraMove 16s infinite alternate;
+        }
+        .aura-float2 {
+            position: fixed;
+            width: 60vh;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0) 70%);
+            bottom: -10vh;
+            left: -15vw;
+            filter: blur(95px);
+            z-index: -2;
+            animation: auraMove2 20s infinite alternate;
+        }
+        @keyframes auraMove {
+            0% { transform: translate(0,0) scale(1); opacity: 0.4; }
+            100% { transform: translate(40px, -30px) scale(1.2); opacity: 0.8; }
+        }
+        @keyframes auraMove2 {
+            0% { transform: translate(0,0) scale(1); opacity: 0.3; }
+            100% { transform: translate(-50px, 40px) scale(1.3); opacity: 0.7; }
+        }
+
+        /* Loader */
+        .loader-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #05030D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+        .loader-logo {
+            width: 75px;
+            animation: bounceLoader 0.9s infinite alternate;
+        }
+        @keyframes bounceLoader {
+            0% { transform: translateY(0px); opacity: 0.6; }
+            100% { transform: translateY(-12px); opacity: 1; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+        }
+
+        /* === NAVBAR === */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 7, 22, 0.65);
+            backdrop-filter: blur(18px);
+            padding: 0.6rem 1.8rem;
+            border-radius: 100px;
+            border: 0.5px solid rgba(168, 85, 247, 0.4);
+            margin-bottom: 2rem;
+        }
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-brand img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #6D28D9;
+            padding: 5px;
+        }
+        .logo-brand span {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #D8B4FE);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: #E0D6FF;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .member-trigger-nav {
+            background: linear-gradient(95deg, #A855F7, #6D28D9);
+            padding: 6px 22px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(168, 85, 247, 0.4);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #CBA6FF;
+        }
+        @media (max-width: 800px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -280px;
+                flex-direction: column;
+                background: rgba(6, 4, 22, 0.98);
+                backdrop-filter: blur(30px);
+                width: 250px;
+                padding: 2rem;
+                border-radius: 32px;
+                gap: 1.8rem;
+                transition: 0.3s;
+                border: 1px solid #A855F7;
+                z-index: 1000;
+            }
+            .nav-menu.active {
+                right: 20px;
+            }
+            .hamburger {
+                display: block;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO === */
+        .member-hero {
+            text-align: center;
+            margin: 1.5rem 0 2rem;
+            padding: 1rem;
+        }
+        .member-hero-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .member-hero-logo img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #8B5CF6, #4C1D95);
+            padding: 12px;
+            box-shadow: 0 0 25px #A855F7;
+            transition: 0.3s;
+            animation: gentlePulse 2s infinite alternate;
+        }
+        @keyframes gentlePulse {
+            0% { box-shadow: 0 0 10px #A855F7; transform: scale(0.98);}
+            100% { box-shadow: 0 0 30px #C084FC; transform: scale(1.02);}
+        }
+        .member-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(125deg, #F0E6FF, #C084FC, #A855F7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .member-hero p {
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .btn-open-member {
+            background: linear-gradient(95deg, #A855F7, #7C3AED);
+            border: none;
+            padding: 14px 40px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        }
+        .btn-open-member:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 28px #A855F7;
+        }
+
+        /* === MODAL FORM MEMBER (POPUP ESTETIK) === */
+        .modal-member {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+        }
+        .modal-card {
+            background: rgba(14, 10, 34, 0.96);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid #A855F7;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-card h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .modal-card p {
+            text-align: center;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+        .modal-form input, .modal-form select {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0;
+            background: #1E1A42;
+            border: 0.5px solid #8B5CF6;
+            border-radius: 60px;
+            color: white;
+            font-family: inherit;
+        }
+        .modal-form button {
+            width: 100%;
+            background: linear-gradient(95deg, #A855F7, #7C3AED);
+            border: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: white;
+            margin-top: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-modal {
+            background: #2E2560;
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 60px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* === PRODUK GRID (MODERN) === */
+        .section-title {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-wrapper {
+            margin-bottom: 1.5rem;
+        }
+        .search-wrapper input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 60px;
+            background: rgba(20, 16, 45, 0.7);
+            border: 0.5px solid #7C3AED;
+            color: white;
+            outline: none;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: rgba(18, 14, 40, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 1.2rem;
+            border: 0.5px solid rgba(139, 92, 246, 0.35);
+            transition: all 0.25s;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #A855F7;
+            box-shadow: 0 18px 30px -12px rgba(139, 92, 246, 0.3);
+        }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #221F44;
+        }
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 12px 0 4px;
+        }
+        .price {
+            color: #D8B4FE;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+        .btn-buy {
+            width: 100%;
+            background: #2A1F55;
+            border: 1px solid #8B5CF6;
+            padding: 10px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-buy:hover {
+            background: #7C3AED;
+        }
+
+        /* Team Block dengan View Profile mencolok */
+        .team-block {
+            background: rgba(12, 9, 30, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 42px;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border: 0.5px solid #6D28D9;
+        }
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2.5px solid #C084FC;
+            object-fit: cover;
+            box-shadow: 0 0 14px #A855F7;
+        }
+        .team-info h4 {
+            font-size: 1.4rem;
+        }
+        .role {
+            color: #C084FC;
+            font-weight: 600;
+        }
+        .view-profile-btn {
+            display: inline-block;
+            background: linear-gradient(95deg, #7C3AED, #A855F7);
+            padding: 7px 22px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: 0.2s;
+            box-shadow: 0 2px 12px rgba(139,92,246,0.5);
+        }
+        .view-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px #A855F7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            border-top: 0.5px solid #2E2660;
+            margin-top: 1.5rem;
+        }
+        .tiktok-btn {
+            background: #19153A;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            color: white;
+            border: 0.5px solid #FF1A66;
+        }
+
+        @media (max-width: 650px) {
+            .member-hero h1 { font-size: 1.9rem; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
-    
-    <header>
-        <nav>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html"><i class="fas fa-hands-praying"></i> Doa Pendek</a></li>
-                <li><a href="tahlil.html"><i class="fas fa-dharmachakra"></i> Zikir</a></li>
-                <li><a href="zikir%20pagi.html"><i class="fas fa-sun"></i> Zikir Pagi</a></li>
-                <li><a href="hadis.html"><i class="fas fa-book-quran"></i> Hadis</a></li>
-                <li><a href="kitab.html"><i class="fas fa-book"></i> Kitab</a></li>
-                <li><a href="tata-sholat.html"><i class="fas fa-praying-hands"></i> Tata Sholat</a></li>
-                <li><a href="kisah-nabi.html"><i class="fas fa-landmark"></i> Kisah Nabi</a></li>
-                <li><a href="vidio%20ceramah.html"><i class="fas fa-video"></i> Ceramah</a></li>
-                <li><a href="jadwal%20sholat.html"><i class="fas fa-mosque"></i> Jadwal Sholat</a></li>
-                <li><a href="rating.html"><i class="fas fa-comment"></i> Komentar</a></li>
-                <li><a href="contact.html"><i class="fas fa-envelope"></i> Kontak</a></li>
-                <li><a href="settings.html"><i class="fas fa-cog"></i> Pengaturan</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <div class="container fade-in">
-            <h1><i class="fas fa-hands-praying" style="color: var(--secondary); margin-right: 15px;"></i>Doa Pendek Harian</h1>
-            <p style="text-align: center; margin-bottom: 30px;">Kumpulan doa sehari-hari lengkap dengan arab, latin, dan artinya</p>
-            
-            <div class="doa-list" id="doa-list"></div>
+<div class="loader-wrap" id="loader">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%238B5CF6' /%3E%3Ctext x='50' y='70' font-size='44' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" class="loader-logo" alt="logo">
+    <div style="color:#C084FC;">loading esthetic universe...</div>
+</div>
+
+<div class="bg-soft"></div>
+<div class="aura-float"></div>
+<div class="aura-float2"></div>
+
+<div class="container">
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo-brand">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%238B5CF6' /%3E%3Ctext x='50' y='70' font-size='44' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" alt="logo">
+            <span>ASC GARAGE</span>
         </div>
-    </main>
+        <div class="hamburger" id="hamburgerBtn">
+            <i class="fas fa-bars-staggered"></i>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="#">Beranda</a>
+            <div class="member-trigger-nav" id="navMemberOpen">✨ Daftar Member</div>
+            <a href="#teamSection">Tim</a>
+            <a href="#" id="searchFocusLink">🔍 Cari</a>
+        </div>
+    </div>
+
+    <!-- HERO: DAFTAR MEMBER dengan LOGO di atas -->
+    <div class="member-hero">
+        <div class="member-hero-logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23A855F7' /%3E%3Ctext x='50' y='70' font-size='42' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" alt="logo.png">
+        </div>
+        <h1>✦ DAFTAR MEMBER ✦</h1>
+        <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
+        <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
+    </div>
+
+    <!-- Search & Produk -->
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="🔎 Cari produk... (kemeja, racing, pink)">
+    </div>
+
+    <div class="product-grid" id="productGrid">
+        <div class="product-card" data-name="kemeja asc garage hitam">
+            <div class="product-img">
+                <img src="https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter" alt="Kemeja ASC">
+            </div>
+            <div class="product-title">Kemeja ASC • Garage</div>
+            <div class="price">⭐ 199 Robux</div>
+            <button class="btn-buy" data-link="https://www.roblox.com/catalog/106160087993164">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="racing suit purple edition">
+            <div class="product-img"><img src="https://placehold.co/400x400/4C2D8C/FFFFFF?text=Racing+Purple" alt="Racing"></div>
+            <div class="product-title">UG Custom Racing Suit</div>
+            <div class="price">⭐ 249 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="pink racing love">
+            <div class="product-img"><img src="https://placehold.co/400x400/9B4DFF/FFFFFF?text=Pink+Love" alt="Pink"></div>
+            <div class="product-title">UTARA - Pink Racing Love</div>
+            <div class="price">⭐ 179 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="jersey racing team utara">
+            <div class="product-img"><img src="https://placehold.co/400x400/6D28D9/FFFFFF?text=Jersey" alt="Jersey"></div>
+            <div class="product-title">UTARA GARAGE Racing Jersey</div>
+            <div class="price">⭐ 159 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
+        </div>
+    </div>
+
+    <!-- Team Block -->
+    <div id="teamSection" class="team-block">
+        <img class="team-avatar" src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="annn_pov">
+        <div class="team-info">
+            <h4>annn_pov</h4>
+            <div class="role"><i class="fas fa-crown"></i> Owner & Creative Director</div>
+            <p>pioneer esthetic garage & aura ungu collector</p>
+            <a href="https://www.roblox.com/users/10416810312" target="_blank" class="view-profile-btn"><i class="fab fa-roblox"></i> View Profile →</a>
+        </div>
+    </div>
 
     <footer>
-        <div class="footer-content">
-            <p>&copy; 2026 Website Islami. Developed with <i class="fas fa-heart" style="color: var(--secondary);"></i> by Muhammad Rian Akbar</p>
-        </div>
+        <a href="#" id="tiktokBtnFooter" class="tiktok-btn"><i class="fab fa-tiktok"></i> @ascgarage_official</a>
+        <p style="margin-top: 1rem; font-size: 0.7rem;">© ASC GARAGE — daftar member esthetic</p>
     </footer>
+</div>
 
-    <script>
-        const doaList = [
-            { title: "Doa Sebelum Makan", arab: "اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ", latin: "Allahumma barik lana fima razaqtana wa qina 'adzabannar.", arti: "Ya Allah, berkahilah kami dalam rezeki yang Engkau berikan kepada kami dan lindungilah kami dari siksa api neraka." },
-            { title: "Doa Setelah Makan", arab: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ", latin: "Alhamdulillahilladzi ath'amana wa saqana wa ja'alana muslimin.", arti: "Segala puji bagi Allah yang telah memberi kami makan dan minum serta menjadikan kami sebagai orang Islam." },
-            { title: "Doa Sebelum Tidur", arab: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا", latin: "Bismika Allahumma amutu wa ahya.", arti: "Dengan nama-Mu, ya Allah, aku mati dan hidup." },
-            { title: "Doa Bangun Tidur", arab: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", latin: "Alhamdulillahil ladzi ahyana ba’da ma amatana wa ilaihin nusyur.", arti: "Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya kami dibangkitkan." },
-            { title: "Doa Masuk Kamar Mandi", arab: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبْثِ وَالْخَبَائِثِ", latin: "Allahumma inni a’udzu bika minal khubutsi wal khaba’its.", arti: "Ya Allah, aku berlindung kepada-Mu dari godaan setan laki-laki dan setan perempuan." },
-            { title: "Doa Keluar Kamar Mandi", arab: "غُفْرَانَكَ", latin: "Ghufranaka.", arti: "Aku memohon ampunan-Mu." },
-            { title: "Doa Masuk Rumah", arab: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى رَبِّنَا تَوَكَّلْنَا", latin: "Bismillahi walajna wa bismillahi kharajna wa ‘ala rabbina tawakkalna.", arti: "Dengan nama Allah kami masuk, dengan nama Allah kami keluar, dan kepada Tuhan kami, kami bertawakkal." },
-            { title: "Doa Keluar Rumah", arab: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", latin: "Bismillahi tawakkaltu ‘alallah, la haula wa la quwwata illa billah.", arti: "Dengan nama Allah, aku bertawakkal kepada Allah, tiada daya dan kekuatan kecuali dengan pertolongan Allah." },
-            { title: "Doa Sebelum Belajar", arab: "رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا", latin: "Rabbi zidni ‘ilma warzuqni fahma.", arti: "Ya Tuhanku, tambahkanlah ilmu kepadaku dan berilah aku pemahaman." },
-            { title: "Doa Sesudah Belajar", arab: "الْحَمْدُ لِلَّهِ عَلَى كُلِّ حَالٍ", latin: "Alhamdulillahi ‘ala kulli hal.", arti: "Segala puji bagi Allah dalam setiap keadaan." }
-        ];
+<!-- MODAL FORM MEMBER (muncul saat klik tombol) -->
+<div id="memberModal" class="modal-member">
+    <div class="modal-card">
+        <h2>✨ Daftar Member ASC</h2>
+        <p>isi data untuk bergabung ke keluarga estetik</p>
+        <form class="modal-form" id="memberModalForm">
+            <input type="text" id="modalName" placeholder="Nama lengkap" required>
+            <select id="modalGender" required>
+                <option value="">Pilih Gender</option>
+                <option>Perempuan</option>
+                <option>Laki-laki</option>
+                <option>Non-binary</option>
+            </select>
+            <input type="number" id="modalAge" placeholder="Umur" required>
+            <input type="tel" id="modalWa" placeholder="Nomor WhatsApp" required>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Kirim & Daftar</button>
+        </form>
+        <button class="close-modal" id="closeModalBtn">Tutup</button>
+    </div>
+</div>
 
-        const container = document.querySelector('.doa-list');
-        doaList.forEach((doa) => {
-            const item = document.createElement('div');
-            item.classList.add('doa-item');
-            item.innerHTML = `<span>${doa.title}</span><i class="fas fa-chevron-down"></i>`;
-            const details = document.createElement('div');
-            details.classList.add('details');
-            details.innerHTML = `<p><strong>Arab:</strong> <span style="font-size: 1.3rem; font-family: 'Amiri', serif; display: block; margin-top: 10px;">${doa.arab}</span></p><p><strong>Latin:</strong> ${doa.latin}</p><p><strong>Arti:</strong> ${doa.arti}</p>`;
-            item.addEventListener('click', () => {
-                details.classList.toggle('show');
-                item.classList.toggle('completed');
-                const icon = item.querySelector('i');
-                icon.style.transform = details.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-            container.appendChild(item);
-            container.appendChild(details);
-        });
+<script>
+    // LOADER HILANG
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const ld = document.getElementById('loader');
+            ld.style.opacity = '0';
+            setTimeout(() => ld.style.display = 'none', 500);
+        }, 800);
+    });
 
-        const mobileToggle = document.getElementById('mobile-menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-        if (mobileToggle) {
-            mobileToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                const icon = mobileToggle.querySelector('i');
-                icon.classList.toggle('fa-bars');
-                icon.classList.toggle('fa-times');
-            });
+    // MODAL LOGIC
+    const modal = document.getElementById('memberModal');
+    const openModalBtns = document.querySelectorAll('#heroMemberBtn, #navMemberOpen');
+    const closeModal = document.getElementById('closeModalBtn');
+
+    function openModal() {
+        modal.style.display = 'flex';
+    }
+    openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
+    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
+
+    // FORM SUBMIT KE GMAIL ascgmailcom4@gmail.com
+    const memberModalForm = document.getElementById('memberModalForm');
+    memberModalForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('modalName').value.trim();
+        const gender = document.getElementById('modalGender').value;
+        const age = document.getElementById('modalAge').value.trim();
+        const wa = document.getElementById('modalWa').value.trim();
+        if(!name || !gender || !age || !wa) return alert("Harap lengkapi semua data!");
+        
+        const fd = new FormData();
+        fd.append('Nama', name);
+        fd.append('Gender', gender);
+        fd.append('Umur', age);
+        fd.append('WhatsApp', wa);
+        fd.append('_subject', `📌 Pendaftaran Member ASC - ${name}`);
+        fd.append('_template', 'table');
+        fd.append('_captcha', 'false');
+        
+        try {
+            const res = await fetch('https://formsubmit.co/ajax/ascgmailcom4@gmail.com', { method: 'POST', body: fd });
+            if(res.ok) {
+                alert(`✅ Halo ${name}, pendaftaran member berhasil dikirim! Admin akan hubungi WA.`);
+                modal.style.display = 'none';
+                memberModalForm.reset();
+            } else alert('Gagal mengirim. Coba lagi nanti.');
+        } catch(err) {
+            alert('Error jaringan, periksa koneksi.');
         }
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 && !navLinks.contains(e.target) && !mobileToggle.contains(e.target)) {
-                navLinks.classList.remove('active');
-                const icon = mobileToggle?.querySelector('i');
-                if (icon) { icon.classList.remove('fa-times'); icon.classList.add('fa-bars'); }
-            }
+    });
+
+    // Tombol Beli
+    document.querySelectorAll('.btn-buy').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const link = btn.getAttribute('data-link');
+            if(link && link !== '#') window.open(link, '_blank');
+            else alert("🔗 Link akan segera rilis! Follow sosial media ASC GARAGE.");
         });
-    </script>
-    <script src="theme.js"></script>
+    });
+    // fix kemeja ASC link
+    const firstBuy = document.querySelector('.product-card:first-child .btn-buy');
+    if(firstBuy) firstBuy.setAttribute('data-link', 'https://www.roblox.com/catalog/106160087993164');
+
+    // Search filter
+    const searchInput = document.getElementById('searchInput');
+    const products = document.querySelectorAll('.product-card');
+    function filterProducts() {
+        const kw = searchInput.value.toLowerCase();
+        products.forEach(p => {
+            const text = p.getAttribute('data-name') + p.innerText.toLowerCase();
+            p.style.display = text.includes(kw) || kw === '' ? 'block' : 'none';
+        });
+    }
+    searchInput.addEventListener('input', filterProducts);
+    document.getElementById('searchFocusLink')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        searchInput.focus();
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+    document.querySelectorAll('#navMenu a, #navMenu div').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('active'));
+    });
+
+    // TikTok
+    document.getElementById('tiktokBtnFooter').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.open('https://www.tiktok.com/@ascgarage', '_blank');
+    });
+</script>
 </body>
 </html>
