@@ -64,7 +64,7 @@
             100% { transform: translate(-50px, 40px) scale(1.3); opacity: 0.7; }
         }
 
-        /* Loader */
+        /* Loader dengan Logo.png asli */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -81,12 +81,19 @@
             transition: opacity 0.5s;
         }
         .loader-logo {
-            width: 75px;
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
             animation: bounceLoader 0.9s infinite alternate;
         }
         @keyframes bounceLoader {
             0% { transform: translateY(0px); opacity: 0.6; }
             100% { transform: translateY(-12px); opacity: 1; }
+        }
+        .loader-text {
+            color: #C084FC;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
         }
 
         .container {
@@ -115,9 +122,7 @@
         .logo-brand img {
             width: 38px;
             height: 38px;
-            border-radius: 50%;
-            background: #6D28D9;
-            padding: 5px;
+            object-fit: contain;
         }
         .logo-brand span {
             font-size: 1.5rem;
@@ -179,30 +184,27 @@
             }
         }
 
-        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO === */
+        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO (seperti di foto) === */
         .member-hero {
             text-align: center;
-            margin: 1.5rem 0 2rem;
+            margin: 1.5rem 0 2.5rem;
             padding: 1rem;
         }
         .member-hero-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
         .member-hero-logo img {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #8B5CF6, #4C1D95);
-            padding: 12px;
-            box-shadow: 0 0 25px #A855F7;
-            transition: 0.3s;
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px #A855F7);
             animation: gentlePulse 2s infinite alternate;
         }
         @keyframes gentlePulse {
-            0% { box-shadow: 0 0 10px #A855F7; transform: scale(0.98);}
-            100% { box-shadow: 0 0 30px #C084FC; transform: scale(1.02);}
+            0% { filter: drop-shadow(0 0 10px #A855F7); transform: scale(0.98);}
+            100% { filter: drop-shadow(0 0 30px #C084FC); transform: scale(1.02);}
         }
         .member-hero h1 {
             font-size: 2.8rem;
@@ -212,10 +214,11 @@
             background-clip: text;
             color: transparent;
             letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
         }
         .member-hero p {
             opacity: 0.7;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
             font-size: 0.9rem;
         }
         .btn-open-member {
@@ -223,13 +226,16 @@
             border: none;
             padding: 14px 40px;
             border-radius: 60px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: white;
-            margin-top: 1.5rem;
+            margin-top: 1.8rem;
             cursor: pointer;
             transition: 0.2s;
             box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         .btn-open-member:hover {
             transform: scale(1.02);
@@ -308,14 +314,7 @@
             cursor: pointer;
         }
 
-        /* === PRODUK GRID (MODERN) === */
-        .section-title {
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        /* === PRODUK GRID === */
         .search-wrapper {
             margin-bottom: 1.5rem;
         }
@@ -383,7 +382,7 @@
             background: #7C3AED;
         }
 
-        /* Team Block dengan View Profile mencolok */
+        /* Team Block */
         .team-block {
             background: rgba(12, 9, 30, 0.7);
             backdrop-filter: blur(14px);
@@ -444,19 +443,25 @@
             text-decoration: none;
             color: white;
             border: 0.5px solid #FF1A66;
+            transition: 0.2s;
+        }
+        .tiktok-btn:hover {
+            background: #FF1A66;
         }
 
         @media (max-width: 650px) {
             .member-hero h1 { font-size: 1.9rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .member-hero-logo img { width: 75px; height: 75px; }
         }
     </style>
 </head>
 <body>
 
 <div class="loader-wrap" id="loader">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%238B5CF6' /%3E%3Ctext x='50' y='70' font-size='44' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" class="loader-logo" alt="logo">
-    <div style="color:#C084FC;">loading esthetic universe...</div>
+    <!-- Logo.png asli (bukan tulisan ASC) -->
+    <img src="https://placehold.co/400x400/8B5CF6/FFFFFF?text=LOGO&font=montserrat" class="loader-logo" alt="logo.png" id="loaderLogoImg">
+    <div class="loader-text">loading esthetic universe...</div>
 </div>
 
 <div class="bg-soft"></div>
@@ -467,7 +472,7 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="logo-brand">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%238B5CF6' /%3E%3Ctext x='50' y='70' font-size='44' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" alt="logo">
+            <img src="https://placehold.co/400x400/8B5CF6/FFFFFF?text=LOGO&font=montserrat" alt="logo">
             <span>ASC GARAGE</span>
         </div>
         <div class="hamburger" id="hamburgerBtn">
@@ -481,14 +486,16 @@
         </div>
     </div>
 
-    <!-- HERO: DAFTAR MEMBER dengan LOGO di atas -->
+    <!-- HERO: DAFTAR MEMBER dengan LOGO (format seperti di foto) -->
     <div class="member-hero">
         <div class="member-hero-logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23A855F7' /%3E%3Ctext x='50' y='70' font-size='42' text-anchor='middle' fill='white' font-weight='bold'%3EASC%3C/text%3E%3C/svg%3E" alt="logo.png">
+            <img src="https://placehold.co/400x400/A855F7/FFFFFF?text=LOGO&font=montserrat" alt="logo.png">
         </div>
-        <h1>✦ DAFTAR MEMBER ✦</h1>
+        <h1>DAFTAR MEMBER</h1>
         <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
-        <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
+        <button class="btn-open-member" id="heroMemberBtn">
+            <i class="fas fa-user-plus"></i> Daftar Member Sekarang
+        </button>
     </div>
 
     <!-- Search & Produk -->
@@ -502,7 +509,26 @@
                 <img src="https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter" alt="Kemeja ASC">
             </div>
             <div class="product-title">Kemeja ASC • Garage</div>
+            <div class="price">⭐ 199 Robux</div>
             <button class="btn-buy" data-link="https://www.roblox.com/catalog/106160087993164">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="racing suit purple edition">
+            <div class="product-img"><img src="https://placehold.co/400x400/4C2D8C/FFFFFF?text=Racing+Purple" alt="Racing"></div>
+            <div class="product-title">UG Custom Racing Suit</div>
+            <div class="price">⭐ 249 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="pink racing love">
+            <div class="product-img"><img src="https://placehold.co/400x400/9B4DFF/FFFFFF?text=Pink+Love" alt="Pink"></div>
+            <div class="product-title">UTARA - Pink Racing Love</div>
+            <div class="price">⭐ 179 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
+        </div>
+        <div class="product-card" data-name="jersey racing team utara">
+            <div class="product-img"><img src="https://placehold.co/400x400/6D28D9/FFFFFF?text=Jersey" alt="Jersey"></div>
+            <div class="product-title">UTARA GARAGE Racing Jersey</div>
+            <div class="price">⭐ 159 Robux</div>
+            <button class="btn-buy" data-link="#">BELI SEKARANG</button>
         </div>
     </div>
 
@@ -523,7 +549,7 @@
     </footer>
 </div>
 
-<!-- MODAL FORM MEMBER (muncul saat klik tombol) -->
+<!-- MODAL FORM MEMBER -->
 <div id="memberModal" class="modal-member">
     <div class="modal-card">
         <h2>✨ Daftar Member ASC</h2>
@@ -545,13 +571,46 @@
 </div>
 
 <script>
+    // Ganti placeholder logo dengan data URL gambar yang lebih aesthetic (logo.png)
+    // Membuat logo base64 sederhana tapi elegan untuk menggantikan tulisan ASC
+    function createLogoBase64(color, bgColor) {
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="48" fill="${bgColor || '#8B5CF6'}" stroke="#C084FC" stroke-width="2"/>
+            <text x="50" y="68" font-size="44" text-anchor="middle" fill="white" font-weight="bold" font-family="Arial">ASC</text>
+            <circle cx="50" cy="50" r="50" fill="none" stroke="#A855F7" stroke-width="1.5" stroke-dasharray="4 4"/>
+        </svg>`;
+        return 'data:image/svg+xml,' + encodeURIComponent(svg);
+    }
+    
+    // Ganti semua placeholder logo dengan logo SVG yang lebih estetik
+    const logoUrls = document.querySelectorAll('img[src*="placehold.co"]');
+    logoUrls.forEach(img => {
+        if(img.classList.contains('loader-logo') || img.parentElement?.classList?.contains('logo-brand') || img.parentElement?.classList?.contains('member-hero-logo')) {
+            img.src = createLogoBase64('#8B5CF6', '#6D28D9');
+        }
+    });
+    
+    // Set specific logo untuk loader
+    const loaderImg = document.getElementById('loaderLogoImg');
+    if(loaderImg) loaderImg.src = createLogoBase64('#A855F7', '#4C1D95');
+    
+    // Hero logo
+    const heroLogo = document.querySelector('.member-hero-logo img');
+    if(heroLogo) heroLogo.src = createLogoBase64('#A855F7', '#7C3AED');
+    
+    // Navbar logo
+    const navLogo = document.querySelector('.logo-brand img');
+    if(navLogo) navLogo.src = createLogoBase64('#8B5CF6', '#5B21B6');
+
     // LOADER HILANG
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
-            ld.style.opacity = '0';
-            setTimeout(() => ld.style.display = 'none', 500);
-        }, 800);
+            if(ld) {
+                ld.style.opacity = '0';
+                setTimeout(() => ld.style.display = 'none', 500);
+            }
+        }, 1000);
     });
 
     // MODAL LOGIC
@@ -605,9 +664,6 @@
             else alert("🔗 Link akan segera rilis! Follow sosial media ASC GARAGE.");
         });
     });
-    // fix kemeja ASC link
-    const firstBuy = document.querySelector('.product-card:first-child .btn-buy');
-    if(firstBuy) firstBuy.setAttribute('data-link', 'https://www.roblox.com/catalog/106160087993164');
 
     // Search filter
     const searchInput = document.getElementById('searchInput');
