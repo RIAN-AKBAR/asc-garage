@@ -23,7 +23,7 @@
             min-height: 100vh;
         }
 
-        /* === BACKGROUND ESTETIK (tetap responsif) === */
+        /* === BACKGROUND ESTETIK === */
         .bg-soft {
             position: fixed;
             top: 0;
@@ -139,7 +139,7 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* ===== LOADER RESPONSIF ===== */
+        /* === LOADER === */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -326,11 +326,6 @@
             animation: fadeInSubtext 1s ease-out forwards;
             animation-delay: 1.3s;
         }
-        
-        @keyframes fadeInSubtext {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
 
         .container {
             max-width: 1400px;
@@ -340,7 +335,7 @@
             z-index: 1;
         }
 
-        /* === NAVBAR RESPONSIF === */
+        /* === NAVBAR === */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -372,64 +367,101 @@
             background-clip: text;
             color: transparent;
         }
-        .nav-menu {
-            display: flex;
-            gap: clamp(0.8rem, 3vw, 2rem);
-            align-items: center;
-        }
-        .nav-menu a {
-            color: #E0D6FF;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-        }
-        .member-trigger-nav {
-            background: linear-gradient(95deg, #A855F7, #6D28D9);
-            padding: clamp(4px, 1.5vw, 6px) clamp(14px, 4vw, 22px);
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(168, 85, 247, 0.4);
-            white-space: nowrap;
-        }
         .hamburger {
             display: none;
             font-size: clamp(1.3rem, 5vw, 1.6rem);
             cursor: pointer;
             color: #CBA6FF;
+            z-index: 1001;
+            transition: 0.2s;
         }
-        
-        /* === RESPONSIVE NAVBAR === */
+        .hamburger:hover {
+            color: #FFFFFF;
+        }
+
+        /* === MOBILE MENU OVERLAY FULLSCREEN (MODERN) === */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 4, 14, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            visibility: hidden;
+        }
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+            visibility: visible;
+        }
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            color: #CBA6FF;
+            cursor: pointer;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-close:hover {
+            background: rgba(168, 85, 247, 0.3);
+            color: white;
+        }
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: center;
+            padding: 2rem;
+        }
+        .menu-items a, .menu-items div {
+            font-size: clamp(1.2rem, 6vw, 1.8rem);
+            font-weight: 600;
+            color: #E0D6FF;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 60px;
+            transition: 0.2s;
+            cursor: pointer;
+            background: rgba(168, 85, 247, 0.1);
+            backdrop-filter: blur(10px);
+            border: 0.5px solid rgba(168, 85, 247, 0.3);
+        }
+        .menu-items a:hover, .menu-items div:hover {
+            background: linear-gradient(95deg, #A855F7, #7C3AED);
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+        .menu-items i {
+            margin-right: 12px;
+            width: 28px;
+        }
+
         @media (max-width: 680px) {
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                right: -280px;
-                flex-direction: column;
-                background: rgba(6, 4, 22, 0.98);
-                backdrop-filter: blur(30px);
-                width: min(250px, 70vw);
-                padding: 1.5rem;
-                border-radius: 28px;
-                gap: 1.5rem;
-                transition: 0.3s;
-                border: 1px solid #A855F7;
-                z-index: 1000;
-            }
-            .nav-menu.active {
-                right: clamp(10px, 4vw, 20px);
-            }
             .hamburger {
                 display: block;
             }
-            .member-trigger-nav {
-                white-space: normal;
-                text-align: center;
+            .nav-menu {
+                display: none; /* Sembunyikan menu desktop */
             }
         }
 
-        /* === HERO SECTION RESPONSIF === */
+        /* === HERO SECTION === */
         .member-hero {
             text-align: center;
             margin: clamp(1rem, 5vw, 2rem) 0 clamp(1.5rem, 5vw, 2.5rem);
@@ -489,7 +521,7 @@
             box-shadow: 0 8px 28px #A855F7;
         }
 
-        /* === MODAL FORM MEMBER RESPONSIF === */
+        /* === MODAL FORM MEMBER === */
         .modal-member {
             display: none;
             position: fixed;
@@ -565,7 +597,7 @@
             cursor: pointer;
         }
 
-        /* === PRODUK GRID RESPONSIF === */
+        /* === PRODUK GRID === */
         .search-wrapper {
             margin-bottom: 1.5rem;
         }
@@ -636,7 +668,7 @@
             background: #7C3AED;
         }
 
-        /* Team Block Responsif */
+        /* Team Block */
         .team-block {
             background: rgba(12, 9, 30, 0.7);
             backdrop-filter: blur(14px);
@@ -709,7 +741,6 @@
             background: #FF1A66;
         }
 
-        /* Extra small devices */
         @media (max-width: 480px) {
             .team-block {
                 flex-direction: column;
@@ -748,7 +779,6 @@
     <div class="loader-subtext">esthetic universe</div>
 </div>
 
-<!-- BACKGROUND EFEK ESTETIK -->
 <div class="bg-soft"></div>
 <div class="grid-overlay"></div>
 <div class="aura-float"></div>
@@ -766,11 +796,25 @@
         <div class="hamburger" id="hamburgerBtn">
             <i class="fas fa-bars-staggered"></i>
         </div>
-        <div class="nav-menu" id="navMenu">
+        <!-- Menu desktop (hidden on mobile) -->
+        <div class="nav-menu" id="navMenuDesktop">
             <a href="#">Beranda</a>
-            <div class="member-trigger-nav" id="navMemberOpen">✨ Daftar Member</div>
+            <div class="member-trigger-nav" id="navMemberOpenDesktop">✨ Daftar Member</div>
             <a href="#teamSection">Tim</a>
-            <a href="#" id="searchFocusLink">🔍 Cari</a>
+            <a href="#" id="searchFocusLinkDesktop">🔍 Cari</a>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay">
+        <div class="menu-close" id="closeMenuBtn">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="menu-items">
+            <a href="#"><i class="fas fa-home"></i> Beranda</a>
+            <div id="mobileMemberOpen"><i class="fas fa-user-plus"></i> Daftar Member</div>
+            <a href="#teamSection"><i class="fas fa-users"></i> Tim</a>
+            <a href="#" id="mobileSearchFocus"><i class="fas fa-search"></i> Cari</a>
         </div>
     </div>
 
@@ -837,6 +881,7 @@
 </div>
 
 <script>
+    // Stars & Particles
     function createStars() {
         const starsContainer = document.getElementById('starsContainer');
         for(let i = 0; i < 150; i++) {
@@ -869,6 +914,7 @@
     createStars();
     createParticles();
 
+    // Loader (5 detik)
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
@@ -879,17 +925,43 @@
         }, 5000);
     });
 
+    // Mobile Menu Logic
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenuOverlay');
+    const closeMenu = document.getElementById('closeMenuBtn');
+
+    function openMenu() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenuFunc() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFunc);
+    // Tutup menu jika klik di luar? overlay sudah full, jadi cukup tombol close.
+    // Juga tutup saat item menu diklik
+    const menuItems = document.querySelectorAll('#mobileMenuOverlay .menu-items a, #mobileMenuOverlay .menu-items div');
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            closeMenuFunc();
+        });
+    });
+
+    // Modal Logic
     const modal = document.getElementById('memberModal');
-    const openModalBtns = document.querySelectorAll('#heroMemberBtn, #navMemberOpen');
-    const closeModal = document.getElementById('closeModalBtn');
+    const openModalBtns = document.querySelectorAll('#heroMemberBtn, #navMemberOpenDesktop, #mobileMemberOpen');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
     function openModal() {
         modal.style.display = 'flex';
     }
     openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
-    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === modal) modal.style.display = 'none'; });
 
+    // Form Submit
     const memberModalForm = document.getElementById('memberModalForm');
     memberModalForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -920,6 +992,7 @@
         }
     });
 
+    // Buy button
     document.querySelectorAll('.btn-buy').forEach(btn => {
         btn.addEventListener('click', () => {
             const link = btn.getAttribute('data-link');
@@ -928,6 +1001,7 @@
         });
     });
 
+    // Search filter
     const searchInput = document.getElementById('searchInput');
     const products = document.querySelectorAll('.product-card');
     function filterProducts() {
@@ -938,17 +1012,38 @@
         });
     }
     searchInput.addEventListener('input', filterProducts);
-    document.getElementById('searchFocusLink')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        searchInput.focus();
-    });
+    const searchFocusDesktop = document.getElementById('searchFocusLinkDesktop');
+    if(searchFocusDesktop) {
+        searchFocusDesktop.addEventListener('click', (e) => {
+            e.preventDefault();
+            searchInput.focus();
+        });
+    }
+    const mobileSearchFocus = document.getElementById('mobileSearchFocus');
+    if(mobileSearchFocus) {
+        mobileSearchFocus.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMenuFunc();
+            setTimeout(() => searchInput.focus(), 300);
+        });
+    }
 
-    const hamburger = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
-    document.querySelectorAll('#navMenu a, #navMenu div').forEach(link => {
-        link.addEventListener('click', () => navMenu.classList.remove('active'));
-    });
+    // Smooth scroll untuk mobile menu "Tim"
+    const teamLinkMobile = document.querySelector('#mobileMenuOverlay a[href="#teamSection"]');
+    if(teamLinkMobile) {
+        teamLinkMobile.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMenuFunc();
+            document.getElementById('teamSection').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    const teamLinkDesktop = document.querySelector('#navMenuDesktop a[href="#teamSection"]');
+    if(teamLinkDesktop) {
+        teamLinkDesktop.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('teamSection').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 </script>
 </body>
 </html>
