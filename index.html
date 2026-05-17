@@ -64,7 +64,7 @@
             100% { transform: translate(-50px, 40px) scale(1.3); opacity: 0.7; }
         }
 
-        /* Loader dengan Logo */
+        /* Loader */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -463,7 +463,8 @@
 <body>
 
 <div class="loader-wrap" id="loader">
-    <img id="loaderLogo" class="loader-logo" alt="logo.png">
+    <!-- GANTI src="logo.png" dengan file logo kamu -->
+    <img src="logo.png" class="loader-logo" alt="logo.png" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC+GARAGE'">
     <div class="loader-text">loading esthetic universe...</div>
 </div>
 
@@ -475,7 +476,8 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="logo-brand">
-            <img id="navLogo" alt="logo">
+            <!-- GANTI src="logo.png" dengan file logo kamu -->
+            <img src="logo.png" alt="logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
             <span>ASC GARAGE</span>
         </div>
         <div class="hamburger" id="hamburgerBtn">
@@ -492,7 +494,8 @@
     <!-- HERO: DAFTAR MEMBER dengan LOGO (seperti di foto) -->
     <div class="member-hero">
         <div class="member-hero-logo">
-            <img id="heroLogo" alt="logo.png">
+            <!-- GANTI src="logo.png" dengan file logo kamu -->
+            <img src="logo.png" alt="logo.png" onerror="this.src='https://placehold.co/200x200/A855F7/FFFFFF?text=ASC'">
         </div>
         <h1>DAFTAR MEMBER</h1>
         <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
@@ -574,76 +577,6 @@
 </div>
 
 <script>
-    // MEMBUAT LOGO.PNG ASLI (BUKAN SVG/TEKS BIASA)
-    // Ini adalah gambar base64 yang tampak seperti logo estetik dengan gradasi ungu, bintang, dan teks ASC
-    function getLogoBase64() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 200;
-        canvas.height = 200;
-        const ctx = canvas.getContext('2d');
-        
-        // Lingkaran luar gradasi
-        const grad = ctx.createLinearGradient(0, 0, 200, 200);
-        grad.addColorStop(0, '#8B5CF6');
-        grad.addColorStop(0.5, '#A855F7');
-        grad.addColorStop(1, '#6D28D9');
-        ctx.beginPath();
-        ctx.arc(100, 100, 95, 0, Math.PI * 2);
-        ctx.fillStyle = grad;
-        ctx.fill();
-        
-        // Lingkaran dalam
-        ctx.beginPath();
-        ctx.arc(100, 100, 75, 0, Math.PI * 2);
-        ctx.fillStyle = '#1E1A42';
-        ctx.fill();
-        
-        // Border neon
-        ctx.beginPath();
-        ctx.arc(100, 100, 95, 0, Math.PI * 2);
-        ctx.strokeStyle = '#C084FC';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        
-        // Bintang kecil
-        ctx.fillStyle = '#FFD700';
-        for(let i = 0; i < 5; i++) {
-            let angle = (i * 72) * Math.PI / 180;
-            let x = 100 + 70 * Math.cos(angle);
-            let y = 100 + 70 * Math.sin(angle);
-            ctx.beginPath();
-            ctx.arc(x, y, 4, 0, Math.PI * 2);
-            ctx.fill();
-        }
-        
-        // Teks ASC
-        ctx.font = 'bold 48px "Space Grotesk", "Inter", sans-serif';
-        ctx.fillStyle = '#FFFFFF';
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = '#A855F7';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('ASC', 100, 105);
-        
-        // Efek glow tambahan
-        ctx.shadowBlur = 0;
-        ctx.beginPath();
-        ctx.arc(100, 100, 98, 0, Math.PI * 2);
-        ctx.strokeStyle = '#A855F7';
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([5, 8]);
-        ctx.stroke();
-        
-        return canvas.toDataURL('image/png');
-    }
-    
-    // Terapkan logo ke semua tempat
-    const logoDataURL = getLogoBase64();
-    
-    document.getElementById('loaderLogo').src = logoDataURL;
-    document.getElementById('navLogo').src = logoDataURL;
-    document.getElementById('heroLogo').src = logoDataURL;
-    
     // LOADER HILANG
     window.addEventListener('load', () => {
         setTimeout(() => {
