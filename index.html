@@ -81,12 +81,12 @@
             transition: opacity 0.5s;
         }
         .loader-logo {
-            width: 95px;
-            height: 95px;
+            width: 110px;
+            height: 110px;
             object-fit: contain;
             animation: bounceLoader 0.9s infinite alternate;
             border-radius: 50%;
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            box-shadow: 0 0 35px rgba(168, 85, 247, 0.7);
         }
         @keyframes bounceLoader {
             0% { transform: translateY(0px); opacity: 0.7; }
@@ -119,13 +119,14 @@
         .logo-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .logo-brand img {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             object-fit: contain;
             border-radius: 50%;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
         }
         .logo-brand span {
             font-size: 1.5rem;
@@ -187,7 +188,7 @@
             }
         }
 
-        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO === */
+        /* === HERO SECTION: DAFTAR MEMBER dengan LOGO DIPERBESAR === */
         .member-hero {
             text-align: center;
             margin: 1.5rem 0 2.5rem;
@@ -196,19 +197,19 @@
         .member-hero-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
         }
         .member-hero-logo img {
-            width: 110px;
-            height: 110px;
+            width: 150px;
+            height: 150px;
             object-fit: contain;
             border-radius: 50%;
-            filter: drop-shadow(0 0 20px #A855F7);
+            filter: drop-shadow(0 0 25px #A855F7);
             animation: gentlePulse 2s infinite alternate;
         }
         @keyframes gentlePulse {
-            0% { filter: drop-shadow(0 0 10px #A855F7); transform: scale(0.98);}
-            100% { filter: drop-shadow(0 0 30px #C084FC); transform: scale(1.02);}
+            0% { filter: drop-shadow(0 0 15px #A855F7); transform: scale(0.98);}
+            100% { filter: drop-shadow(0 0 40px #C084FC); transform: scale(1.02);}
         }
         .member-hero h1 {
             font-size: 2.8rem;
@@ -456,7 +457,9 @@
         @media (max-width: 650px) {
             .member-hero h1 { font-size: 1.9rem; }
             .product-grid { grid-template-columns: 1fr; }
-            .member-hero-logo img { width: 80px; height: 80px; }
+            .member-hero-logo img { width: 110px; height: 110px; }
+            .logo-brand img { width: 40px; height: 40px; }
+            .loader-logo { width: 85px; height: 85px; }
         }
     </style>
 </head>
@@ -476,7 +479,7 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="logo-brand">
-            <!-- GANTI src="logo.png" dengan file logo kamu -->
+            <!-- GANTI src="logo.png" dengan file logo kamu (ukuran diperbesar jadi 50px) -->
             <img src="logo.png" alt="logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
             <span>ASC GARAGE</span>
         </div>
@@ -491,7 +494,7 @@
         </div>
     </div>
 
-    <!-- HERO: DAFTAR MEMBER dengan LOGO (seperti di foto) -->
+    <!-- HERO: DAFTAR MEMBER dengan LOGO DIPERBESAR (150px) -->
     <div class="member-hero">
         <div class="member-hero-logo">
             <!-- GANTI src="logo.png" dengan file logo kamu -->
