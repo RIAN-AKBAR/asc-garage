@@ -23,7 +23,7 @@
             min-height: 100vh;
         }
 
-        /* === BACKGROUND ESTETIK (tetap sama) === */
+        /* === BACKGROUND ESTETIK === */
         .bg-soft {
             position: fixed;
             top: 0;
@@ -133,7 +133,7 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* === LOADER (sama) === */
+        /* === LOADER === */
         .loader-wrap {
             position: fixed;
             top: 0;
@@ -369,7 +369,7 @@
             z-index: 1001;
         }
 
-        /* MOBILE MENU OVERLAY - SETENGAH LAYAR (tidak full) */
+        /* MOBILE MENU OVERLAY - SETENGAH LAYAR */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
@@ -467,7 +467,7 @@
             }
         }
 
-        /* HERO & lainnya (sama seperti sebelumnya, ringkas) */
+        /* HERO SECTION */
         .member-hero {
             text-align: center;
             margin: 1rem 0 2rem;
@@ -512,6 +512,85 @@
             align-items: center;
             gap: 8px;
         }
+
+        /* PERSYARATAN JOIN TEAM */
+        .requirements-box {
+            background: rgba(18, 14, 45, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 0.5px solid rgba(168, 85, 247, 0.4);
+        }
+        .requirements-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #D8B4FE;
+        }
+        .requirements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.6rem;
+        }
+        .requirements-list li {
+            list-style: none;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .requirements-list li i {
+            color: #A855F7;
+            width: 20px;
+        }
+
+        /* DUKUNGAN GRUP */
+        .support-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.1));
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 0.5px solid rgba(168, 85, 247, 0.5);
+        }
+        .support-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .support-box p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .sociabuzz-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(95deg, #F59E0B, #D97706);
+            padding: 12px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .sociabuzz-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #F59E0B;
+        }
+
         .search-wrapper input {
             width: 100%;
             padding: 12px 20px;
@@ -548,11 +627,6 @@
             font-size: 1.2rem;
             font-weight: 700;
             margin: 10px 0 4px;
-        }
-        .price {
-            color: #D8B4FE;
-            font-weight: 700;
-            margin: 6px 0;
         }
         .btn-buy {
             width: 100%;
@@ -596,6 +670,7 @@
             text-align: center;
             padding: 1.5rem;
             border-top: 0.5px solid #2E2660;
+            margin-top: 1rem;
         }
         .tiktok-btn {
             background: #19153A;
@@ -660,6 +735,7 @@
             .member-hero h1 { font-size: 1.6rem; }
             .product-grid { grid-template-columns: 1fr; }
             .team-block { flex-direction: column; text-align: center; }
+            .requirements-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -708,7 +784,7 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay (setengah layar) -->
+    <!-- Mobile Menu Overlay -->
     <div id="mobileMenuOverlay" class="mobile-menu-overlay">
         <div class="menu-close" id="closeMenuBtn"><i class="fas fa-times"></i></div>
         <div class="menu-items">
@@ -724,6 +800,34 @@
         <h1>DAFTAR MEMBER</h1>
         <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
         <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
+    </div>
+
+    <!-- PERSYARATAN JOIN TEAM -->
+    <div class="requirements-box">
+        <h3><i class="fas fa-scroll"></i> 📜 PERSYARATAN JOIN TEAM</h3>
+        <ul class="requirements-list">
+            <li><i class="fas fa-ban"></i> Dilarang ngemis GP</li>
+            <li><i class="fas fa-ban"></i> Dilarang ngemis minta jadi admin</li>
+            <li><i class="fas fa-ban"></i> No share link 18+</li>
+            <li><i class="fas fa-ban"></i> No kirim foto/video 18+</li>
+            <li><i class="fas fa-ban"></i> No kirim link phising</li>
+            <li><i class="fas fa-smile"></i> Toxic sewajarnya</li>
+            <li><i class="fas fa-ban"></i> No share link GB lain</li>
+            <li><i class="fas fa-ban"></i> No kirim stiker 18+</li>
+            <li><i class="fas fa-handshake"></i> Hormati anggota & admin</li>
+            <li><i class="fas fa-check-circle"></i> Patuhi aturan & arahan</li>
+            <li><i class="fas fa-ban"></i> Dilarang curang/merugikan</li>
+            <li><i class="fas fa-calendar-check"></i> Wajib aktif & ikut kegiatan</li>
+        </ul>
+    </div>
+
+    <!-- DUKUNGAN GRUP -->
+    <div class="support-box">
+        <h3><i class="fas fa-heart" style="color: #F59E0B;"></i> DUKUNG GRUP KAMI</h3>
+        <p>Dukung ASC GARAGE untuk terus berkembang dan berkarya</p>
+        <a href="https://sociabuzz.com/ascgerage" target="_blank" class="sociabuzz-btn">
+            <i class="fas fa-coffee"></i> Support via Sociabuzz
+        </a>
     </div>
 
     <div class="search-wrapper"><input type="text" id="searchInput" placeholder="🔎 Cari produk... (kemeja, racing, pink)"></div>
