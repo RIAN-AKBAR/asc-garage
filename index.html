@@ -591,6 +591,63 @@
             box-shadow: 0 0 20px #F59E0B;
         }
 
+        /* BLOCK TES JOKI & CINIMATIK */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .partner-card {
+            background: rgba(18, 14, 45, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 0.5px solid rgba(168, 85, 247, 0.4);
+            transition: all 0.3s ease;
+        }
+        .partner-card:hover {
+            transform: translateY(-5px);
+            border-color: #A855F7;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+        }
+        .partner-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #A855F7;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+        .partner-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #D8B4FE;
+        }
+        .partner-card p {
+            opacity: 0.7;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .partner-wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(95deg, #25D366, #128C7E);
+            padding: 10px 24px;
+            border-radius: 60px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .partner-wa-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #25D366;
+        }
+
         .search-wrapper input {
             width: 100%;
             padding: 12px 20px;
@@ -736,6 +793,7 @@
             .product-grid { grid-template-columns: 1fr; }
             .team-block { flex-direction: column; text-align: center; }
             .requirements-list { grid-template-columns: 1fr; }
+            .partner-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -828,6 +886,29 @@
         <a href="https://sociabuzz.com/ascgerage" target="_blank" class="sociabuzz-btn">
             <i class="fas fa-coffee"></i> Support via Sociabuzz
         </a>
+    </div>
+
+    <!-- BLOCK TES JOKI & CINIMATIK -->
+    <div class="partner-grid">
+        <!-- Tes Joki -->
+        <div class="partner-card">
+            <img src="https://files.catbox.moe/cvxjmi.jpg" alt="Logo Tes Joki" class="partner-logo" onerror="this.src='https://placehold.co/200x200/3B82F6/FFFFFF?text=Tes+Joki'">
+            <h3>⚡ TES JOKI</h3>
+            <p>Layanan joki terpercaya & aman</p>
+            <a href="https://chat.whatsapp.com/KImwGed9to89EPPdGpqSty" target="_blank" class="partner-wa-btn">
+                <i class="fab fa-whatsapp"></i> Join Grup WhatsApp
+            </a>
+        </div>
+
+        <!-- Cinimatik -->
+        <div class="partner-card">
+            <img src="https://files.catbox.moe/8uigk1.jpg" alt="Logo Cinimatik" class="partner-logo" onerror="this.src='https://placehold.co/200x200/EC4899/FFFFFF?text=Cinimatik'">
+            <h3>🎬 CINIMATIK</h3>
+            <p>Komunitas pecinta film & sinematik</p>
+            <a href="https://chat.whatsapp.com/Lo2P65eRac5HwPOw4Y0xXO" target="_blank" class="partner-wa-btn">
+                <i class="fab fa-whatsapp"></i> Join Grup WhatsApp
+            </a>
+        </div>
     </div>
 
     <div class="search-wrapper"><input type="text" id="searchInput" placeholder="🔎 Cari produk... (kemeja, racing, pink)"></div>
