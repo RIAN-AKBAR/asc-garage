@@ -1006,7 +1006,7 @@
     closeModal.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
 
-    // ✅ FORM SUBMIT: menggunakan mailto agar otomatis membuka aplikasi email (Gmail App) dengan data terisi
+    // ✅ FORM SUBMIT dengan format body email yang RAPIH dan bersih
     const memberForm = document.getElementById('memberModalForm');
     memberForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1019,13 +1019,14 @@
         // Email target
         const targetEmail = "ascgmailcom4@gmail.com";
         const subject = `Pendaftaran Member ASC - ${name}`;
-        // Body email yang sudah diisi otomatis
+        
+        // Body email dengan format rapi, setiap data di baris baru, tanpa karakter aneh
         const body = `Nama Lengkap: ${name}%0AGender: ${gender}%0AUmur: ${age}%0ANomor WhatsApp: ${wa}%0A%0A--%0A✨ Pendaftaran dari ASC GARAGE%0ASaya ingin bergabung menjadi member. Terima kasih.`;
         
-        // Membuat mailto link
-        const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Membuat mailto link (akan membuka aplikasi email default seperti Gmail App)
+        const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${body}`;
         
-        // Buka aplikasi email default (bisa Gmail App di HP)
+        // Arahkan ke mailto, otomatis membuka aplikasi email dengan data terisi
         window.location.href = mailtoLink;
         
         // Notifikasi & tutup modal
