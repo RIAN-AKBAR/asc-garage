@@ -1006,7 +1006,7 @@
     closeModal.addEventListener('click', () => modal.style.display = 'none');
     window.addEventListener('click', e => { if(e.target === modal) modal.style.display = 'none'; });
 
-    // ✅ PERUBAHAN UTAMA: langsung arahkan ke Gmail target dengan data terisi
+    // ✅ FORM SUBMIT: menggunakan mailto agar otomatis membuka aplikasi email (Gmail App) dengan data terisi
     const memberForm = document.getElementById('memberModalForm');
     memberForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1016,20 +1016,20 @@
         const wa = document.getElementById('modalWa').value.trim();
         if(!name || !gender || !age || !wa) return alert("Lengkapi semua data!");
         
-        // Email target (bisa diganti sesuai keinginan)
+        // Email target
         const targetEmail = "ascgmailcom4@gmail.com";
         const subject = `Pendaftaran Member ASC - ${name}`;
-        // Body email dengan format rapi
-        const body = `Nama Lengkap: ${name}%0AGender: ${gender}%0AUmur: ${age}%0ANomor WhatsApp: ${wa}%0A%0A--%0A✨ Pendaftaran dari formulir ASC GARAGE%0ATerima kasih telah bergabung!`;
+        // Body email yang sudah diisi otomatis
+        const body = `Nama Lengkap: ${name}%0AGender: ${gender}%0AUmur: ${age}%0ANomor WhatsApp: ${wa}%0A%0A--%0A✨ Pendaftaran dari ASC GARAGE%0ASaya ingin bergabung menjadi member. Terima kasih.`;
         
-        // Gunakan link compose Gmail (web) agar user langsung diarahkan ke Gmail target
-        const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Membuat mailto link
+        const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
-        // Buka tab baru menuju compose email Gmail
-        window.open(gmailComposeUrl, '_blank');
+        // Buka aplikasi email default (bisa Gmail App di HP)
+        window.location.href = mailtoLink;
         
-        // Notifikasi singkat & tutup modal
-        alert("✅ Data telah disiapkan! Silakan kirim email yang terbuka untuk menyelesaikan pendaftaran.");
+        // Notifikasi & tutup modal
+        alert("✅ Pendaftaran disiapkan! Aplikasi email akan terbuka.\nSilakan tekan ikon kirim (📩) di aplikasi Gmail/email Anda.");
         modal.style.display = 'none';
         memberForm.reset();
     });
