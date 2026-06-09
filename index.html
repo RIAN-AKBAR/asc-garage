@@ -74,11 +74,12 @@
         .member-hero p { opacity: 0.7; font-size: 0.9rem; }
         .btn-open-member { background: linear-gradient(95deg, #A855F7, #7C3AED); border: none; padding: 12px 32px; border-radius: 60px; font-weight: 700; color: white; margin-top: 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
         .carousel-section { margin: 2rem 0; }
-        .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; box-shadow: 0 10px 30px rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); }
+        .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; box-shadow: 0 10px 30px rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); background: #0A0820; }
         .carousel-slides { display: flex; transition: transform 0.5s ease-in-out; }
-        .carousel-slide { min-width: 100%; aspect-ratio: 16 / 9; background: #1A153A; display: flex; align-items: center; justify-content: center; }
-        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; backdrop-filter: blur(5px); z-index: 10; }
+        .carousel-slide { min-width: 100%; display: flex; align-items: center; justify-content: center; background: #0A0820; }
+        .carousel-slide img { width: 100%; height: auto; display: block; object-fit: contain; max-height: 70vh; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; backdrop-filter: blur(5px); z-index: 10; transition: 0.2s; }
+        .carousel-btn:hover { background: rgba(168,85,247,0.8); }
         .carousel-btn.prev { left: 10px; }
         .carousel-btn.next { right: 10px; }
         .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
@@ -183,16 +184,16 @@
         <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
     </div>
 
-    <!-- CAROUSEL AUTO SLIDE 6 FOTO -->
+    <!-- CAROUSEL AUTO SLIDE 6 FOTO (UKURAN FOTO MENYESUAIKAN) -->
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-slides" id="carouselSlides">
-                <div class="carousel-slide"><img src="foto1.jpg" alt="Gallery 1" onerror="this.src='gambar1.jpg'"></div>
-                <div class="carousel-slide"><img src="foto2.jpg" alt="Gallery 2" onerror="this.src='gambar2.jpg'"></div>
-                <div class="carousel-slide"><img src="foto3.jpg" alt="Gallery 3" onerror="this.src='gambar3.jpg'"></div>
-                <div class="carousel-slide"><img src="foto4.jpg" alt="Gallery 4" onerror="this.src='gambar4.jpg'"></div>
-                <div class="carousel-slide"><img src="foto5.jpg" alt="Gallery 5" onerror="this.src='gambar5.jpg'"></div>
-                <div class="carousel-slide"><img src="foto6.jpg" alt="Gallery 6" onerror="this.src='gambar6.jpg'"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/3nkdr4.jpg" alt="Gallery 1" loading="lazy"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/brsgsw.jpg" alt="Gallery 2" loading="lazy"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/giz4jo.jpg" alt="Gallery 3" loading="lazy"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/3v9ff5.jpg" alt="Gallery 4" loading="lazy"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/q6i4tj.jpg" alt="Gallery 5" loading="lazy"></div>
+                <div class="carousel-slide"><img src="https://files.catbox.moe/oicxuj.jpg" alt="Gallery 6" loading="lazy"></div>
             </div>
             <button class="carousel-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
             <button class="carousel-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
@@ -299,11 +300,15 @@
     }
     createStars();
     createParticles();
+    
+    // Hilangkan loader setelah 5 detik
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
-            ld.style.opacity = '0';
-            setTimeout(() => ld.style.display = 'none', 1000);
+            if(ld) {
+                ld.style.opacity = '0';
+                setTimeout(() => ld.style.display = 'none', 1000);
+            }
         }, 5000);
     });
 
@@ -342,33 +347,62 @@
         });
     }
 
-    // CAROUSEL
+    // CAROUSEL dengan penyesuaian ukuran otomatis
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const dotsContainer = document.getElementById('carouselDots');
     let currentIndex = 0;
     let autoInterval;
+    
     function updateCarousel() {
         const slidesContainer = document.getElementById('carouselSlides');
-        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        if(slidesContainer) {
+            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
         document.querySelectorAll('.dot').forEach((dot, idx) => {
             dot.classList.toggle('active', idx === currentIndex);
         });
     }
-    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); }
-    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); }
-    function startAutoSlide() { autoInterval = setInterval(nextSlide, 4000); }
-    function resetAutoSlide() { clearInterval(autoInterval); startAutoSlide(); }
+    
+    function nextSlide() { 
+        currentIndex = (currentIndex + 1) % slides.length; 
+        updateCarousel(); 
+    }
+    
+    function prevSlide() { 
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length; 
+        updateCarousel(); 
+    }
+    
+    function startAutoSlide() { 
+        if(autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(nextSlide, 4000); 
+    }
+    
+    function resetAutoSlide() { 
+        clearInterval(autoInterval); 
+        startAutoSlide(); 
+    }
+    
     if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
     if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-    slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if(i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => { currentIndex = i; updateCarousel(); resetAutoSlide(); });
-        dotsContainer.appendChild(dot);
-    });
+    
+    // Buat dots
+    if(dotsContainer && slides.length) {
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if(i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => { 
+                currentIndex = i; 
+                updateCarousel(); 
+                resetAutoSlide(); 
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+    
     startAutoSlide();
 
     // COLAB & LAGA
@@ -380,20 +414,28 @@
     const teamNameInput = document.getElementById('teamNameInput');
     const closeCollab = document.getElementById('closeCollabModal');
     let currentAction = '';
+    
     function openModal(action) {
         currentAction = action;
-        if(action === 'colab') { modalTitle.innerHTML = '🤝 Ajak Colab'; modalTitle.style.color = '#25D366'; }
-        else { modalTitle.innerHTML = '⚔️ Ajak Laga'; modalTitle.style.color = '#F59E0B'; }
-        teamNameInput.value = '';
-        collabModal.style.display = 'flex';
+        if(action === 'colab') { 
+            modalTitle.innerHTML = '🤝 Ajak Colab'; 
+            modalTitle.style.color = '#25D366'; 
+        } else { 
+            modalTitle.innerHTML = '⚔️ Ajak Laga'; 
+            modalTitle.style.color = '#F59E0B'; 
+        }
+        if(teamNameInput) teamNameInput.value = '';
+        if(collabModal) collabModal.style.display = 'flex';
     }
+    
     if(btnColab) btnColab.addEventListener('click', () => openModal('colab'));
     if(btnLaga) btnLaga.addEventListener('click', () => openModal('laga'));
     if(closeCollab) closeCollab.addEventListener('click', () => collabModal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === collabModal) collabModal.style.display = 'none'; });
+    
     if(sendBtn) {
         sendBtn.addEventListener('click', () => {
-            const teamName = teamNameInput.value.trim();
+            const teamName = teamNameInput ? teamNameInput.value.trim() : '';
             if(!teamName) return alert("Masukkan Nama Team kamu!");
             let message = '', waNumber = '';
             if(currentAction === 'colab') {
@@ -404,7 +446,7 @@
                 message = `Assalamualaikum permisi kak saya mau laga dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
             }
             window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
-            collabModal.style.display = 'none';
+            if(collabModal) collabModal.style.display = 'none';
         });
     }
 
@@ -416,6 +458,7 @@
             else alert("Link segera rilis!");
         });
     });
+    
     const searchInput = document.getElementById('searchInput');
     const products = document.querySelectorAll('.product-card');
     if(searchInput) {
@@ -427,8 +470,11 @@
             });
         });
     }
-    document.getElementById('desktopSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
-    document.getElementById('mobileSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
+    
+    const desktopSearch = document.getElementById('desktopSearchFocus');
+    const mobileSearch = document.getElementById('mobileSearchFocus');
+    if(desktopSearch) desktopSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
+    if(mobileSearch) mobileSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
 </script>
 </body>
 </html>
