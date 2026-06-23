@@ -475,25 +475,6 @@
     const mobileSearch = document.getElementById('mobileSearchFocus');
     if(desktopSearch) desktopSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
     if(mobileSearch) mobileSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
-
-    // =========================================
-    // 🟢 TRACKING VISITOR (ditambahkan sesuai permintaan)
-    // =========================================
-    const domain = 'asc-garage.vercel.app';
-    fetch('https://website-monitor-virid.vercel.app/api/track-visitor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ website: domain, page: window.location.pathname })
-    }).catch(err => console.log('Tracking error:', err));
-
-    setInterval(() => {
-        fetch('https://website-monitor-virid.vercel.app/api/track-visitor', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ website: domain, page: window.location.pathname })
-        }).catch(err => console.log('Tracking error:', err));
-    }, 30000);
-    // =========================================
 </script>
 </body>
 </html>
