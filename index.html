@@ -480,14 +480,14 @@
     // 🟢 TRACKING VISITOR (ditambahkan sesuai permintaan)
     // =========================================
     const domain = 'asc-garage.vercel.app';
-    fetch('https://website-monitor.vercel.app/api/track-visitor', {
+    fetch('https://website-monitor-virid.vercel.app/api/track-visitor', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ website: domain, page: window.location.pathname })
     }).catch(err => console.log('Tracking error:', err));
 
     setInterval(() => {
-        fetch('https://website-monitor.vercel.app/api/track-visitor', {
+        fetch('https://website-monitor-virid.vercel.app/api/track-visitor', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ website: domain, page: window.location.pathname })
