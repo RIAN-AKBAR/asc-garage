@@ -120,12 +120,19 @@
         footer { text-align: center; padding: 1.5rem; border-top: 0.5px solid #2E2660; margin-top: 1rem; }
         .tiktok-btn { background: #19153A; display: inline-flex; gap: 8px; padding: 8px 24px; border-radius: 60px; text-decoration: none; color: white; border: 0.5px solid #FF1A66; }
         .modal-member { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10001; }
-        .modal-card { background: rgba(14,10,34,0.96); backdrop-filter: blur(20px); border-radius: 40px; padding: 1.5rem; width: 90%; max-width: 400px; border: 1px solid #A855F7; }
+        .modal-card { background: rgba(14,10,34,0.96); backdrop-filter: blur(20px); border-radius: 40px; padding: 1.5rem; width: 90%; max-width: 420px; border: 1px solid #A855F7; }
         .modal-card h2 { font-size: 1.5rem; text-align: center; }
-        .modal-form input, .modal-form select { width: 100%; padding: 10px 14px; margin: 8px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; }
-        .modal-form button { width: 100%; background: linear-gradient(95deg, #A855F7, #7C3AED); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 12px; }
-        .close-modal { background: #2E2560; margin-top: 10px; width: 100%; padding: 8px; border-radius: 60px; color: white; }
-        @media (max-width: 550px) { .member-hero h1 { font-size: 1.6rem; } .product-grid { grid-template-columns: 1fr; } .team-block { flex-direction: column; text-align: center; } .collab-laga-buttons { flex-direction: column; } .btn-collab, .btn-laga { width: 100%; } }
+        .modal-card p { text-align: center; opacity: 0.7; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .modal-form input, .modal-form select, .modal-form textarea { width: 100%; padding: 10px 14px; margin: 6px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; font-family: inherit; }
+        .modal-form textarea { border-radius: 20px; min-height: 60px; resize: vertical; }
+        .modal-form button { width: 100%; background: linear-gradient(95deg, #A855F7, #7C3AED); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 10px; border: none; cursor: pointer; }
+        .close-modal { background: #2E2560; margin-top: 10px; width: 100%; padding: 8px; border-radius: 60px; color: white; border: none; cursor: pointer; }
+        .btn-join-discord, .btn-join-wa { flex: 1; padding: 12px; border-radius: 60px; font-weight: 700; color: white; border: none; cursor: pointer; font-size: 1rem; margin: 5px; }
+        .btn-join-discord { background: linear-gradient(95deg, #5865F2, #4752C4); }
+        .btn-join-wa { background: linear-gradient(95deg, #25D366, #128C7E); }
+        .join-options { display: flex; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
+        .join-options button { flex: 1; min-width: 120px; }
+        @media (max-width: 550px) { .member-hero h1 { font-size: 1.6rem; } .product-grid { grid-template-columns: 1fr; } .team-block { flex-direction: column; text-align: center; } .collab-laga-buttons { flex-direction: column; } .btn-collab, .btn-laga { width: 100%; } .join-options { flex-direction: column; } .join-options button { width: 100%; } }
     </style>
 </head>
 <body>
@@ -184,7 +191,7 @@
         <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
     </div>
 
-    <!-- CAROUSEL AUTO SLIDE 6 FOTO (UKURAN FOTO MENYESUAIKAN) -->
+    <!-- CAROUSEL AUTO SLIDE 6 FOTO -->
     <div class="carousel-section">
         <div class="carousel-container">
             <div class="carousel-slides" id="carouselSlides">
@@ -248,16 +255,40 @@
     <footer><a href="https://www.tiktok.com/@acr.all.star.crew" class="tiktok-btn"><i class="fab fa-tiktok"></i> @acr.all.star.crew</a><p style="margin-top:1rem;font-size:0.7rem;">© ASC GARAGE — daftar member esthetic</p></footer>
 </div>
 
+<!-- MEMBER MODAL (Pilihan Join Discord / WhatsApp) -->
 <div id="memberModal" class="modal-member">
-    <div class="modal-card"><h2>✨ Daftar Member ASC</h2><p>isi data untuk bergabung ke keluarga estetik</p>
-        <form class="modal-form" id="memberModalForm">
-            <input type="text" id="modalName" placeholder="Nama lengkap" required>
-            <select id="modalGender" required><option value="">Pilih Gender</option><option>Perempuan</option><option>Laki-laki</option><option>Non-binary</option></select>
-            <input type="number" id="modalAge" placeholder="Umur" required>
-            <input type="tel" id="modalWa" placeholder="Nomor WhatsApp" required>
-            <button type="submit"><i class="fab fa-discord"></i> Daftar & Gabung Discord</button>
-        </form>
+    <div class="modal-card">
+        <h2>✨ Daftar Member ASC</h2>
+        <p>Pilih platform untuk bergabung</p>
+        <div class="join-options">
+            <button class="btn-join-discord" id="joinDiscordBtn"><i class="fab fa-discord"></i> Join Discord</button>
+            <button class="btn-join-wa" id="joinWaBtn"><i class="fab fa-whatsapp"></i> Join WhatsApp</button>
+        </div>
         <button class="close-modal" id="closeModalBtn">Tutup</button>
+    </div>
+</div>
+
+<!-- FORM WA MODAL (muncul setelah pilih Join WhatsApp) -->
+<div id="waFormModal" class="modal-member">
+    <div class="modal-card">
+        <h2>📝 Form Pendaftaran WA</h2>
+        <p>Isi data berikut untuk bergabung ke grup WhatsApp</p>
+        <form class="modal-form" id="waForm">
+            <input type="text" id="waNamaLengkap" placeholder="❖ Nama Lengkap" required>
+            <input type="text" id="waNamaPanggilan" placeholder="❖ Nama Panggilan" required>
+            <select id="waGender" required>
+                <option value="">❖ Gender</option>
+                <option>Perempuan</option>
+                <option>Laki-laki</option>
+                <option>Non-binary</option>
+            </select>
+            <input type="number" id="waUmur" placeholder="❖ Umur" required>
+            <input type="text" id="waAsal" placeholder="❖ Asal" required>
+            <input type="text" id="waTeamLama" placeholder="❖ Team/Komunitas Lama" required>
+            <textarea id="waAlasan" placeholder="❖ Alasan Bergabung di ASC" rows="2" required></textarea>
+            <button type="submit"><i class="fab fa-whatsapp"></i> Kirim & Gabung WA</button>
+        </form>
+        <button class="close-modal" id="closeWaFormBtn">Tutup</button>
     </div>
 </div>
 
@@ -301,14 +332,10 @@
     createStars();
     createParticles();
     
-    // Hilangkan loader setelah 5 detik
     window.addEventListener('load', () => {
         setTimeout(() => {
             const ld = document.getElementById('loader');
-            if(ld) {
-                ld.style.opacity = '0';
-                setTimeout(() => ld.style.display = 'none', 1000);
-            }
+            if(ld) { ld.style.opacity = '0'; setTimeout(() => ld.style.display = 'none', 1000); }
         }, 5000);
     });
 
@@ -324,30 +351,97 @@
 
     // Member Modal
     const modalMember = document.getElementById('memberModal');
+    const waFormModal = document.getElementById('waFormModal');
     const openModalBtns = document.querySelectorAll('#heroMemberBtn, #desktopMemberOpen, #mobileMemberOpen');
-    const closeModalMember = document.getElementById('closeModalBtn');
-    openModalBtns.forEach(btn => btn.addEventListener('click', () => modalMember.style.display = 'flex'));
-    if(closeModalMember) closeModalMember.addEventListener('click', () => modalMember.style.display = 'none');
-    window.addEventListener('click', e => { if(e.target === modalMember) modalMember.style.display = 'none'; });
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeWaFormBtn = document.getElementById('closeWaFormBtn');
+    const joinDiscordBtn = document.getElementById('joinDiscordBtn');
+    const joinWaBtn = document.getElementById('joinWaBtn');
 
-    // Daftar Member -> Discord
-    const memberForm = document.getElementById('memberModalForm');
-    if(memberForm) {
-        memberForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('modalName').value.trim();
-            const gender = document.getElementById('modalGender').value;
-            const age = document.getElementById('modalAge').value.trim();
-            const wa = document.getElementById('modalWa').value.trim();
-            if(!name || !gender || !age || !wa) return alert("Lengkapi semua data!");
-            alert(`✅ Terima kasih ${name}! Pendaftaran berhasil.\nKamu akan diarahkan ke server Discord ASC GARAGE.`);
+    openModalBtns.forEach(btn => btn.addEventListener('click', () => {
+        modalMember.style.display = 'flex';
+        waFormModal.style.display = 'none';
+    }));
+    if(closeModalBtn) closeModalBtn.addEventListener('click', () => modalMember.style.display = 'none');
+    if(closeWaFormBtn) closeWaFormBtn.addEventListener('click', () => waFormModal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if(e.target === modalMember) modalMember.style.display = 'none';
+        if(e.target === waFormModal) waFormModal.style.display = 'none';
+    });
+
+    // Join Discord
+    if(joinDiscordBtn) {
+        joinDiscordBtn.addEventListener('click', () => {
             modalMember.style.display = 'none';
-            memberForm.reset();
             window.open("https://discord.gg/7hJX3xMfD", '_blank');
         });
     }
 
-    // CAROUSEL dengan penyesuaian ukuran otomatis
+    // Join WhatsApp - buka form WA
+    if(joinWaBtn) {
+        joinWaBtn.addEventListener('click', () => {
+            modalMember.style.display = 'none';
+            waFormModal.style.display = 'flex';
+        });
+    }
+
+    // Form WA Submit -> buat intro & arahkan ke grup WA
+    const waForm = document.getElementById('waForm');
+    if(waForm) {
+        waForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const namaLengkap = document.getElementById('waNamaLengkap').value.trim();
+            const namaPanggilan = document.getElementById('waNamaPanggilan').value.trim();
+            const gender = document.getElementById('waGender').value;
+            const umur = document.getElementById('waUmur').value.trim();
+            const asal = document.getElementById('waAsal').value.trim();
+            const teamLama = document.getElementById('waTeamLama').value.trim();
+            const alasan = document.getElementById('waAlasan').value.trim();
+
+            if(!namaLengkap || !namaPanggilan || !gender || !umur || !asal || !teamLama || !alasan) {
+                return alert("Lengkapi semua data!");
+            }
+
+            // Format intro sesuai permintaan
+            const intro = `╔═══════ ✦ 👑 ✦ ═══════╗
+        〔 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗔𝗦𝗖 〕
+          「 𝗠𝗘𝗠𝗕𝗘𝗥 𝗜𝗡𝗧𝗥𝗢 」
+╚═══════ ✦ 👑 ✦ ═══════╝
+
+❖ 𝗡𝗮𝗺𝗮 𝗟𝗲𝗻𝗴𝗸𝗮𝗽 : ${namaLengkap}
+❖ 𝗡𝗮𝗺𝗮 𝗣𝗮𝗻𝗴𝗴𝗶𝗹𝗮𝗻 : ${namaPanggilan}
+❖ 𝗚𝗲𝗻𝗱𝗲𝗿 : ${gender}
+❖ 𝗨𝗺𝘂𝗿 : ${umur}
+❖ 𝗔𝘀𝗮𝗹 : ${asal}
+❖ 𝗧𝗲𝗮𝗺/𝗞𝗼𝗺𝘂𝗻𝗶𝘁𝗮𝘀 𝗟𝗮𝗺𝗮 : ${teamLama}
+❖ 𝗔𝗹𝗮𝘀𝗮𝗻 𝗕𝗲𝗿𝗴𝗮𝗯𝘂𝗻𝗴 𝗱𝗶 𝗔𝗦𝗖 : ${alasan}
+
+════════ ❖ ════════ 
+❖ ════════
+
+✨ 𝗘𝘃𝗲𝗿𝘆 𝗺𝗲𝗺𝗯𝗲𝗿 𝗵𝗮𝘀 𝗮 𝘀𝘁𝗼𝗿𝘆, 𝗲𝘃𝗲𝗿𝘆 𝘀𝘁𝗼𝗿𝘆 𝗵𝗮𝘀 𝗮 𝘃𝗮𝗹𝘂𝗲 ✨
+
+👑 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 𝗔𝗦𝗖 𝗙𝗮𝗺𝗶𝗹𝘆 👑`;
+
+            // Encode untuk URL
+            const encodedIntro = encodeURIComponent(intro);
+            const waGroupLink = `https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1`;
+
+            // Buka grup WA terlebih dahulu, lalu user bisa copy paste intro
+            // Atau buka WA dengan pesan intro (tapi WA group link tidak support text langsung)
+            // Cara: buka grup, lalu user tinggal paste intro
+            alert(`✅ Data berhasil! Silakan copy intro di bawah dan paste di grup WhatsApp.\n\n${intro}`);
+            
+            // Buka grup WA
+            window.open(waGroupLink, '_blank');
+            
+            // Reset form & tutup modal
+            waForm.reset();
+            waFormModal.style.display = 'none';
+        });
+    }
+
+    // CAROUSEL
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -365,44 +459,23 @@
         });
     }
     
-    function nextSlide() { 
-        currentIndex = (currentIndex + 1) % slides.length; 
-        updateCarousel(); 
-    }
-    
-    function prevSlide() { 
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length; 
-        updateCarousel(); 
-    }
-    
-    function startAutoSlide() { 
-        if(autoInterval) clearInterval(autoInterval);
-        autoInterval = setInterval(nextSlide, 4000); 
-    }
-    
-    function resetAutoSlide() { 
-        clearInterval(autoInterval); 
-        startAutoSlide(); 
-    }
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); }
+    function startAutoSlide() { if(autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 4000); }
+    function resetAutoSlide() { clearInterval(autoInterval); startAutoSlide(); }
     
     if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
     if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
     
-    // Buat dots
     if(dotsContainer && slides.length) {
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             if(i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => { 
-                currentIndex = i; 
-                updateCarousel(); 
-                resetAutoSlide(); 
-            });
+            dot.addEventListener('click', () => { currentIndex = i; updateCarousel(); resetAutoSlide(); });
             dotsContainer.appendChild(dot);
         });
     }
-    
     startAutoSlide();
 
     // COLAB & LAGA
@@ -417,13 +490,8 @@
     
     function openModal(action) {
         currentAction = action;
-        if(action === 'colab') { 
-            modalTitle.innerHTML = '🤝 Ajak Colab'; 
-            modalTitle.style.color = '#25D366'; 
-        } else { 
-            modalTitle.innerHTML = '⚔️ Ajak Laga'; 
-            modalTitle.style.color = '#F59E0B'; 
-        }
+        if(action === 'colab') { modalTitle.innerHTML = '🤝 Ajak Colab'; modalTitle.style.color = '#25D366'; }
+        else { modalTitle.innerHTML = '⚔️ Ajak Laga'; modalTitle.style.color = '#F59E0B'; }
         if(teamNameInput) teamNameInput.value = '';
         if(collabModal) collabModal.style.display = 'flex';
     }
@@ -475,6 +543,22 @@
     const mobileSearch = document.getElementById('mobileSearchFocus');
     if(desktopSearch) desktopSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
     if(mobileSearch) mobileSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
+
+    // Tracking Visitor
+    const domain = 'asc-garage.vercel.app';
+    fetch('https://website-monitor.vercel.app/api/track-visitor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ website: domain, page: window.location.pathname })
+    }).catch(err => console.log('Tracking error:', err));
+
+    setInterval(() => {
+        fetch('https://website-monitor.vercel.app/api/track-visitor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ website: domain, page: window.location.pathname })
+        }).catch(err => console.log('Tracking error:', err));
+    }, 30000);
 </script>
 </body>
 </html>
