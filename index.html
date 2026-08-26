@@ -132,6 +132,9 @@
         .btn-join-wa { background: linear-gradient(95deg, #25D366, #128C7E); }
         .join-options { display: flex; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
         .join-options button { flex: 1; min-width: 120px; }
+        .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: rgba(18,14,45,0.95); backdrop-filter: blur(20px); border: 1px solid #A855F7; border-radius: 16px; padding: 16px 24px; color: #F0EBFF; font-size: 0.95rem; z-index: 99999; box-shadow: 0 10px 40px rgba(168,85,247,0.4); opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; transform: translateX(-50%) translateY(20px); pointer-events: none; max-width: 90%; text-align: center; }
+        .toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+        .toast-notification i { color: #25D366; margin-right: 10px; }
         @media (max-width: 550px) { .member-hero h1 { font-size: 1.6rem; } .product-grid { grid-template-columns: 1fr; } .team-block { flex-direction: column; text-align: center; } .collab-laga-buttons { flex-direction: column; } .btn-collab, .btn-laga { width: 100%; } .join-options { flex-direction: column; } .join-options button { width: 100%; } }
     </style>
 </head>
@@ -255,6 +258,11 @@
     <footer><a href="https://www.tiktok.com/@acr.all.star.crew" class="tiktok-btn"><i class="fab fa-tiktok"></i> @acr.all.star.crew</a><p style="margin-top:1rem;font-size:0.7rem;">© ASC GARAGE — daftar member esthetic</p></footer>
 </div>
 
+<!-- TOAST NOTIFICATION -->
+<div class="toast-notification" id="toastNotification">
+    <i class="fas fa-check-circle"></i> <span id="toastMessage">Intro berhasil dicopy!</span>
+</div>
+
 <!-- MEMBER MODAL (Pilihan Join Discord / WhatsApp) -->
 <div id="memberModal" class="modal-member">
     <div class="modal-card">
@@ -349,6 +357,17 @@
         el.addEventListener('click', () => mobileMenu.classList.remove('active'));
     });
 
+    // Toast notification
+    function showToast(message) {
+        const toast = document.getElementById('toastNotification');
+        const toastMsg = document.getElementById('toastMessage');
+        toastMsg.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 4000);
+    }
+
     // Member Modal
     const modalMember = document.getElementById('memberModal');
     const waFormModal = document.getElementById('waFormModal');
@@ -385,7 +404,7 @@
         });
     }
 
-    // Form WA Submit -> buat intro & arahkan ke grup WA
+    // Form WA Submit -> copy intro otomatis & arahkan ke grup WA
     const waForm = document.getElementById('waForm');
     if(waForm) {
         waForm.addEventListener('submit', (e) => {
@@ -423,22 +442,49 @@
 
 👑 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 𝗔𝗦𝗖 𝗙𝗮𝗺𝗶𝗹𝘆 👑`;
 
-            // Encode untuk URL
-            const encodedIntro = encodeURIComponent(intro);
-            const waGroupLink = `https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1`;
+            // 📋 COPY KE CLIPBOARD OTOMATIS
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(intro).then(() => {
+                    showToast('✅ Intro berhasil dicopy! Silakan paste di grup WA.');
+                }).catch(() => {
+                    // Fallback: copy via textarea
+                    copyViaTextarea(intro);
+                });
+            } else {
+                // Fallback untuk browser lama
+                copyViaTextarea(intro);
+            }
 
-            // Buka grup WA terlebih dahulu, lalu user bisa copy paste intro
-            // Atau buka WA dengan pesan intro (tapi WA group link tidak support text langsung)
-            // Cara: buka grup, lalu user tinggal paste intro
-            alert(`✅ Data berhasil! Silakan copy intro di bawah dan paste di grup WhatsApp.\n\n${intro}`);
-            
-            // Buka grup WA
-            window.open(waGroupLink, '_blank');
-            
-            // Reset form & tutup modal
-            waForm.reset();
-            waFormModal.style.display = 'none';
+            // Reset form & tutup modal (setelah 1 detik biar toast kebaca)
+            setTimeout(() => {
+                waForm.reset();
+                waFormModal.style.display = 'none';
+            }, 1000);
+
+            // Buka grup WA (dibuka setelah delay biar user lihat toast dulu)
+            setTimeout(() => {
+                const waGroupLink = 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1';
+                window.open(waGroupLink, '_blank');
+            }, 1500);
         });
+    }
+
+    // Fallback copy via textarea
+    function copyViaTextarea(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showToast('✅ Intro berhasil dicopy! Silakan paste di grup WA.');
+        } catch (err) {
+            showToast('❌ Gagal copy otomatis, silakan copy manual.');
+        }
+        document.body.removeChild(textarea);
     }
 
     // CAROUSEL
