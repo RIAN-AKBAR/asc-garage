@@ -5,7 +5,6 @@ window.CONFIG = {
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6285781209423',
-        waLaga: '6283854980779',
         tiktok: 'https://www.tiktok.com/@acr.all.star.crew',
         sociabuzz: 'https://sociabuzz.com/ascgerage'
     },
