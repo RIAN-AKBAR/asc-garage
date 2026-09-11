@@ -72,7 +72,8 @@
         @keyframes gentlePulse { 0% { filter: drop-shadow(0 0 10px #A855F7); transform: scale(0.98); } 100% { filter: drop-shadow(0 0 30px #C084FC); transform: scale(1.02); } }
         .member-hero h1 { font-size: clamp(1.8rem,8vw,2.8rem); background: linear-gradient(125deg, #F0E6FF, #C084FC, #A855F7); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .member-hero p { opacity: 0.7; font-size: 0.9rem; }
-        .btn-open-member { background: linear-gradient(95deg, #A855F7, #7C3AED); border: none; padding: 12px 32px; border-radius: 60px; font-weight: 700; color: white; margin-top: 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-open-member { background: linear-gradient(95deg, #A855F7, #7C3AED); border: none; padding: 12px 32px; border-radius: 60px; font-weight: 700; color: white; margin-top: 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: 0.2s; }
+        .btn-open-member:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
         .carousel-section { margin: 2rem 0; }
         .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; box-shadow: 0 10px 30px rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); background: #0A0820; }
         .carousel-slides { display: flex; transition: transform 0.5s ease-in-out; }
@@ -89,7 +90,7 @@
         .collab-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 40px; padding: 1.8rem; width: 90%; max-width: 400px; border: 1px solid #A855F7; }
         .collab-card h3 { font-size: 1.5rem; text-align: center; margin-bottom: 1rem; }
         .collab-card input { width: 100%; padding: 12px 14px; margin: 8px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; }
-        .collab-card button { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 12px; }
+        .collab-card button { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 12px; border: none; cursor: pointer; }
         .close-collab { background: #2E2560 !important; margin-top: 8px; }
         .requirements-box { background: rgba(18,14,45,0.7); backdrop-filter: blur(14px); border-radius: 32px; padding: 1.5rem; margin: 1.5rem 0; border: 0.5px solid rgba(168,85,247,0.4); }
         .requirements-box h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; color: #D8B4FE; }
@@ -127,11 +128,6 @@
         .modal-form textarea { border-radius: 20px; min-height: 60px; resize: vertical; }
         .modal-form button { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 10px; border: none; cursor: pointer; }
         .close-modal { background: #2E2560; margin-top: 10px; width: 100%; padding: 8px; border-radius: 60px; color: white; border: none; cursor: pointer; }
-        .btn-join-discord, .btn-join-wa { flex: 1; padding: 12px; border-radius: 60px; font-weight: 700; color: white; border: none; cursor: pointer; font-size: 1rem; margin: 5px; }
-        .btn-join-discord { background: linear-gradient(95deg, #5865F2, #4752C4); }
-        .btn-join-wa { background: linear-gradient(95deg, #25D366, #128C7E); }
-        .join-options { display: flex; gap: 10px; margin: 12px 0; flex-wrap: wrap; }
-        .join-options button { flex: 1; min-width: 120px; }
         .custom-alert { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(16px); justify-content: center; align-items: center; z-index: 99999; }
         .custom-alert.show { display: flex; }
         .alert-box { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 2rem 2rem 1.8rem; max-width: 440px; width: 92%; border: 1px solid #25D366; box-shadow: 0 20px 60px rgba(37,211,102,0.2); text-align: center; animation: alertPop 0.4s cubic-bezier(0.2,0.9,0.4,1.1); }
@@ -144,7 +140,43 @@
         .alert-desc .highlight { color: #A855F7; font-weight: 600; }
         .alert-btn { background: linear-gradient(95deg, #25D366, #128C7E); border: none; padding: 12px 40px; border-radius: 60px; font-weight: 700; color: white; font-size: 1rem; cursor: pointer; transition: 0.2s; }
         .alert-btn:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(37,211,102,0.3); }
-        @media (max-width: 550px) { .member-hero h1 { font-size: 1.6rem; } .product-grid { grid-template-columns: 1fr; } .team-block { flex-direction: column; text-align: center; } .collab-laga-buttons { flex-direction: column; } .btn-collab, .btn-laga { width: 100%; } .join-options { flex-direction: column; } .join-options button { width: 100%; } .alert-box { padding: 1.5rem; } .alert-icon { font-size: 2.8rem; } .alert-title { font-size: 1.1rem; } .alert-desc { font-size: 0.9rem; } }
+        
+        .floating-admin {
+            position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px;
+            border-radius: 50%; background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; box-shadow: 0 8px 30px rgba(245,158,11,0.5);
+            cursor: pointer; z-index: 9999; transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+            text-decoration: none; border: 2px solid rgba(255,255,255,0.2);
+            animation: pulseAdmin 2.5s infinite;
+        }
+        .floating-admin:hover { transform: scale(1.12) rotate(8deg); box-shadow: 0 12px 40px rgba(245,158,11,0.7); }
+        .floating-admin::after {
+            content: 'Admin'; position: absolute; right: 70px;
+            background: rgba(14,10,34,0.95); color: #F59E0B; padding: 6px 14px;
+            border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap;
+            opacity: 0; transform: translateX(10px); transition: all 0.3s ease;
+            pointer-events: none; border: 1px solid rgba(245,158,11,0.4); backdrop-filter: blur(10px);
+        }
+        .floating-admin:hover::after { opacity: 1; transform: translateX(0); }
+        @keyframes pulseAdmin {
+            0% { box-shadow: 0 8px 30px rgba(245,158,11,0.5); }
+            50% { box-shadow: 0 8px 40px rgba(245,158,11,0.9), 0 0 0 10px rgba(245,158,11,0.1); }
+            100% { box-shadow: 0 8px 30px rgba(245,158,11,0.5); }
+        }
+        
+        @media (max-width: 550px) { 
+            .member-hero h1 { font-size: 1.6rem; } 
+            .product-grid { grid-template-columns: 1fr; } 
+            .team-block { flex-direction: column; text-align: center; } 
+            .collab-laga-buttons { flex-direction: column; } 
+            .btn-collab, .btn-laga { width: 100%; } 
+            .alert-box { padding: 1.5rem; } 
+            .alert-icon { font-size: 2.8rem; } 
+            .alert-title { font-size: 1.1rem; } 
+            .alert-desc { font-size: 0.9rem; } 
+            .floating-admin { width: 52px; height: 52px; font-size: 1.3rem; bottom: 18px; right: 18px; }
+        }
     </style>
 </head>
 <body>
@@ -200,27 +232,18 @@
         <div class="member-hero-logo"><img src="logo.png" alt="logo"></div>
         <h1>DAFTAR MEMBER</h1>
         <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
-        <button class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</button>
+        <a href="#" class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</a>
     </div>
 
-    <!-- CAROUSEL AUTO SLIDE 6 FOTO -->
     <div class="carousel-section">
         <div class="carousel-container">
-            <div class="carousel-slides" id="carouselSlides">
-                <div class="carousel-slide"><img src="https://files.catbox.moe/3nkdr4.jpg" alt="Gallery 1" loading="lazy"></div>
-                <div class="carousel-slide"><img src="https://files.catbox.moe/brsgsw.jpg" alt="Gallery 2" loading="lazy"></div>
-                <div class="carousel-slide"><img src="https://files.catbox.moe/giz4jo.jpg" alt="Gallery 3" loading="lazy"></div>
-                <div class="carousel-slide"><img src="https://files.catbox.moe/3v9ff5.jpg" alt="Gallery 4" loading="lazy"></div>
-                <div class="carousel-slide"><img src="https://files.catbox.moe/q6i4tj.jpg" alt="Gallery 5" loading="lazy"></div>
-                <div class="carousel-slide"><img src="https://files.catbox.moe/oicxuj.jpg" alt="Gallery 6" loading="lazy"></div>
-            </div>
+            <div class="carousel-slides" id="carouselSlides"></div>
             <button class="carousel-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
             <button class="carousel-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         </div>
         <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
-    <!-- TOMBOL COLAB & LAGA -->
     <div class="collab-laga-buttons">
         <button class="btn-collab" id="btnColab"><i class="fab fa-whatsapp"></i> 🤝 Ajak Colab</button>
         <button class="btn-laga" id="btnLaga"><i class="fab fa-whatsapp"></i> ⚔️ Ajak Laga</button>
@@ -228,46 +251,30 @@
 
     <div class="requirements-box">
         <h3><i class="fas fa-scroll"></i> 📜 PERSYARATAN JOIN TEAM</h3>
-        <ul class="requirements-list">
-            <li><i class="fas fa-ban"></i> Dilarang ngemis GP</li><li><i class="fas fa-ban"></i> Dilarang ngemis minta jadi admin</li>
-            <li><i class="fas fa-ban"></i> No share link 18+</li><li><i class="fas fa-ban"></i> No kirim foto/video 18+</li>
-            <li><i class="fas fa-ban"></i> No kirim link phising</li><li><i class="fas fa-smile"></i> Toxic sewajarnya</li>
-            <li><i class="fas fa-ban"></i> No share link GB lain</li><li><i class="fas fa-ban"></i> No kirim stiker 18+</li>
-            <li><i class="fas fa-handshake"></i> Hormati anggota & admin</li><li><i class="fas fa-check-circle"></i> Patuhi aturan & arahan</li>
-            <li><i class="fas fa-ban"></i> Dilarang curang/merugikan</li><li><i class="fas fa-calendar-check"></i> Wajib aktif & ikut kegiatan</li>
-        </ul>
+        <ul class="requirements-list" id="requirementsList"></ul>
     </div>
 
     <div class="support-box">
         <h3><i class="fas fa-heart" style="color: #F59E0B;"></i> DUKUNG GRUP KAMI</h3>
         <p>Dukung ASC GARAGE untuk terus berkembang dan berkarya</p>
-        <a href="https://sociabuzz.com/ascgerage" target="_blank" class="sociabuzz-btn"><i class="fas fa-coffee"></i> Support via Sociabuzz</a>
+        <a href="#" id="sociabuzzBtn" target="_blank" class="sociabuzz-btn"><i class="fas fa-coffee"></i> Support via Sociabuzz</a>
     </div>
 
-    <div class="partner-grid">
-        <div class="partner-card"><img src="https://files.catbox.moe/cvxjmi.jpg" class="partner-logo" onerror="this.src='https://placehold.co/200x200/3B82F6/FFFFFF?text=Tes+Joki'"><h3>⚡ TES JOKI</h3><p>Layanan joki terpercaya & aman</p><a href="https://chat.whatsapp.com/KImwGed9to89EPPdGpqSty" target="_blank" class="partner-wa-btn"><i class="fab fa-whatsapp"></i> Join Grup WhatsApp</a></div>
-        <div class="partner-card"><img src="https://files.catbox.moe/8uigk1.jpg" class="partner-logo" onerror="this.src='https://placehold.co/200x200/EC4899/FFFFFF?text=Cinimatik'"><h3>🎬 CINIMATIK</h3><p>Komunitas pecinta film & sinematik</p><a href="https://chat.whatsapp.com/Lo2P65eRac5HwPOw4Y0xXO" target="_blank" class="partner-wa-btn"><i class="fab fa-whatsapp"></i> Join Grup WhatsApp</a></div>
-    </div>
+    <div class="partner-grid" id="partnerGrid"></div>
 
     <div class="search-wrapper"><input type="text" id="searchInput" placeholder="🔎 Cari produk... (kemeja, racing, pink)"></div>
 
-    <div class="product-grid" id="productGrid">
-        <div class="product-card" data-name="kemeja asc garage hitam">
-            <div class="product-img"><img src="https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter" alt="Kemeja ASC"></div>
-            <div class="product-title">Kemeja ASC • Garage</div>
-            <button class="btn-buy" data-link="https://www.roblox.com/catalog/106160087993164">BELI SEKARANG</button>
-        </div>
-    </div>
+    <div class="product-grid" id="productGrid"></div>
 
-    <div id="teamSection" class="team-block">
-        <img class="team-avatar" src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter" alt="annn_pov">
-        <div><h4>annn_pov</h4><div class="role"><i class="fas fa-crown"></i> Owner & Creative Director</div><p>pioneer esthetic garage & aura ungu collector</p><a href="https://www.roblox.com/users/10416810312" target="_blank" class="view-profile-btn"><i class="fab fa-roblox"></i> View Profile →</a></div>
-    </div>
+    <div id="teamSection" class="team-block"></div>
 
-    <footer><a href="https://www.tiktok.com/@acr.all.star.crew" class="tiktok-btn"><i class="fab fa-tiktok"></i> @acr.all.star.crew</a><p style="margin-top:1rem;font-size:0.7rem;">© ASC GARAGE — daftar member esthetic</p></footer>
+    <footer><a href="#" id="tiktokBtnFooter" class="tiktok-btn"><i class="fab fa-tiktok"></i> <span id="tiktokText">@acr.all.star.crew</span></a><p style="margin-top:1rem;font-size:0.7rem;">© ASC GARAGE — daftar member esthetic</p></footer>
 </div>
 
-<!-- CUSTOM ALERT -->
+<a href="#" id="floatingAdminBtn" class="floating-admin" target="_blank" title="Akses Admin">
+    <i class="fas fa-user-shield"></i>
+</a>
+
 <div class="custom-alert" id="customAlert">
     <div class="alert-box">
         <span class="alert-icon"><i class="fas fa-check-circle"></i></span>
@@ -281,20 +288,18 @@
     </div>
 </div>
 
-<!-- MEMBER MODAL (Pilihan Join Discord / WhatsApp) -->
 <div id="memberModal" class="modal-member">
     <div class="modal-card">
         <h2>✨ Daftar Member ASC</h2>
         <p>Pilih platform untuk bergabung</p>
-        <div class="join-options">
-            <button class="btn-join-discord" id="joinDiscordBtn"><i class="fab fa-discord"></i> Join Discord</button>
-            <button class="btn-join-wa" id="joinWaBtn"><i class="fab fa-whatsapp"></i> Join WhatsApp</button>
+        <div style="display:flex; gap:10px; margin:12px 0; flex-wrap:wrap;">
+            <button id="joinDiscordBtn" style="flex:1; min-width:120px; padding:12px; border-radius:60px; font-weight:700; color:white; border:none; cursor:pointer; font-size:1rem; margin:5px; background:linear-gradient(95deg,#5865F2,#4752C4);"><i class="fab fa-discord"></i> Join Discord</button>
+            <button id="joinWaBtn" style="flex:1; min-width:120px; padding:12px; border-radius:60px; font-weight:700; color:white; border:none; cursor:pointer; font-size:1rem; margin:5px; background:linear-gradient(95deg,#25D366,#128C7E);"><i class="fab fa-whatsapp"></i> Join WhatsApp</button>
         </div>
         <button class="close-modal" id="closeModalBtn">Tutup</button>
     </div>
 </div>
 
-<!-- FORM WA MODAL (muncul setelah pilih Join WhatsApp) -->
 <div id="waFormModal" class="modal-member">
     <div class="modal-card">
         <h2>📝 Form Pendaftaran WA</h2>
@@ -327,9 +332,182 @@
     </div>
 </div>
 
+<!-- ============================================ -->
+<!-- LOAD config.js DENGAN FALLBACK                -->
+<!-- ============================================ -->
 <script>
-    // Stars & Particles
-    function createStars() {
+    // FALLBACK CONFIG - dipakai jika config.js gagal dimuat
+    window.CONFIG_FALLBACK = {
+        links: {
+            registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/index.html',
+            adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/login.html',
+            discord: 'https://discord.gg/7hJX3xMfD',
+            waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
+            waColab: '6285781209423',
+            waLaga: '6283854980779',
+            tiktok: 'https://www.tiktok.com/@acr.all.star.crew',
+            sociabuzz: 'https://sociabuzz.com/ascgerage'
+        },
+        carousel: [
+            'https://files.catbox.moe/3nkdr4.jpg',
+            'https://files.catbox.moe/brsgsw.jpg',
+            'https://files.catbox.moe/giz4jo.jpg',
+            'https://files.catbox.moe/3v9ff5.jpg',
+            'https://files.catbox.moe/q6i4tj.jpg',
+            'https://files.catbox.moe/oicxuj.jpg'
+        ],
+        products: [
+            {
+                name: 'kemeja asc garage hitam',
+                title: 'Kemeja ASC • Garage',
+                image: 'https://tr.rbxcdn.com/180DAY-8bb57129bd827a1f239a653ee5b46f96/420/420/Shirt/Webp/noFilter',
+                link: 'https://www.roblox.com/catalog/106160087993164',
+                buttonText: 'BELI SEKARANG'
+            }
+        ],
+        team: {
+            name: 'annn_pov',
+            role: 'Owner & Creative Director',
+            desc: 'pioneer esthetic garage & aura ungu collector',
+            avatar: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter',
+            profileLink: 'https://www.roblox.com/users/10416810312'
+        },
+        partners: [
+            {
+                name: '⚡ TES JOKI',
+                desc: 'Layanan joki terpercaya & aman',
+                logo: 'https://files.catbox.moe/cvxjmi.jpg',
+                link: 'https://chat.whatsapp.com/KImwGed9to89EPPdGpqSty',
+                buttonText: 'Join Grup WhatsApp'
+            },
+            {
+                name: '🎬 CINIMATIK',
+                desc: 'Komunitas pecinta film & sinematik',
+                logo: 'https://files.catbox.moe/8uigk1.jpg',
+                link: 'https://chat.whatsapp.com/Lo2P65eRac5HwPOw4Y0xXO',
+                buttonText: 'Join Grup WhatsApp'
+            }
+        ],
+        requirements: [
+            { icon: 'fa-ban', text: 'Dilarang ngemis GP' },
+            { icon: 'fa-ban', text: 'Dilarang ngemis minta jadi admin' },
+            { icon: 'fa-ban', text: 'No share link 18+' },
+            { icon: 'fa-ban', text: 'No kirim foto/video 18+' },
+            { icon: 'fa-ban', text: 'No kirim link phising' },
+            { icon: 'fa-smile', text: 'Toxic sewajarnya' },
+            { icon: 'fa-ban', text: 'No share link GB lain' },
+            { icon: 'fa-ban', text: 'No kirim stiker 18+' },
+            { icon: 'fa-handshake', text: 'Hormati anggota & admin' },
+            { icon: 'fa-check-circle', text: 'Patuhi aturan & arahan' },
+            { icon: 'fa-ban', text: 'Dilarang curang/merugikan' },
+            { icon: 'fa-calendar-check', text: 'Wajib aktif & ikut kegiatan' }
+        ]
+    };
+</script>
+
+<!-- LOAD config.js (jika gagal, fallback otomatis dipakai) -->
+<script src="config.js" onerror="console.warn('⚠️ config.js tidak ditemukan, memakai fallback config.');"></script>
+
+<!-- SCRIPT UTAMA -->
+<script>
+    (function() {
+        // Ambil config: prioritas config.js, fallback jika gagal
+        const C = window.CONFIG || window.CONFIG_FALLBACK;
+        
+        // === HIDE LOADER SETELAH 5 DETIK ===
+        function hideLoader() {
+            const ld = document.getElementById('loader');
+            if(ld && ld.style.display !== 'none') {
+                ld.style.opacity = '0';
+                setTimeout(() => ld.style.display = 'none', 1000);
+            }
+        }
+        window.addEventListener('load', () => setTimeout(hideLoader, 5000));
+        // Fallback: paksa hide setelah 7 detik
+        setTimeout(hideLoader, 7000);
+        
+        // === SET LINK UTAMA ===
+        const heroBtn = document.getElementById('heroMemberBtn');
+        const floatingAdmin = document.getElementById('floatingAdminBtn');
+        const sociabuzzBtn = document.getElementById('sociabuzzBtn');
+        const tiktokBtnFooter = document.getElementById('tiktokBtnFooter');
+        
+        if(heroBtn) {
+            heroBtn.href = C.links.registerMember;
+            heroBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open(C.links.registerMember, '_blank');
+            });
+        }
+        if(floatingAdmin) floatingAdmin.href = C.links.adminLogin;
+        if(sociabuzzBtn) sociabuzzBtn.href = C.links.sociabuzz;
+        if(tiktokBtnFooter) tiktokBtnFooter.href = C.links.tiktok;
+        
+        // Navbar daftar
+        document.querySelectorAll('#desktopMemberOpen, #mobileMemberOpen').forEach(el => {
+            el.addEventListener('click', () => window.open(C.links.registerMember, '_blank'));
+        });
+        
+        // === RENDER CAROUSEL ===
+        const carouselSlides = document.getElementById('carouselSlides');
+        if(carouselSlides && C.carousel) {
+            carouselSlides.innerHTML = C.carousel.map((url, i) => 
+                `<div class="carousel-slide"><img src="${url}" alt="Gallery ${i+1}" loading="lazy"></div>`
+            ).join('');
+        }
+        
+        // === RENDER REQUIREMENTS ===
+        const reqList = document.getElementById('requirementsList');
+        if(reqList && C.requirements) {
+            reqList.innerHTML = C.requirements.map(r => 
+                `<li><i class="fas ${r.icon}"></i> ${r.text}</li>`
+            ).join('');
+        }
+        
+        // === RENDER PARTNERS ===
+        const partnerGrid = document.getElementById('partnerGrid');
+        if(partnerGrid && C.partners) {
+            partnerGrid.innerHTML = C.partners.map(p => `
+                <div class="partner-card">
+                    <img src="${p.logo}" class="partner-logo" onerror="this.src='https://placehold.co/200x200/3B82F6/FFFFFF?text=Partner'">
+                    <h3>${p.name}</h3>
+                    <p>${p.desc}</p>
+                    <a href="${p.link}" target="_blank" class="partner-wa-btn">
+                        <i class="fab fa-whatsapp"></i> ${p.buttonText}
+                    </a>
+                </div>
+            `).join('');
+        }
+        
+        // === RENDER PRODUCTS ===
+        const productGrid = document.getElementById('productGrid');
+        if(productGrid && C.products) {
+            productGrid.innerHTML = C.products.map(p => `
+                <div class="product-card" data-name="${p.name}">
+                    <div class="product-img"><img src="${p.image}" alt="${p.title}"></div>
+                    <div class="product-title">${p.title}</div>
+                    <button class="btn-buy" data-link="${p.link}">${p.buttonText}</button>
+                </div>
+            `).join('');
+        }
+        
+        // === RENDER TEAM ===
+        const teamSection = document.getElementById('teamSection');
+        if(teamSection && C.team) {
+            teamSection.innerHTML = `
+                <img class="team-avatar" src="${C.team.avatar}" alt="${C.team.name}">
+                <div>
+                    <h4>${C.team.name}</h4>
+                    <div class="role"><i class="fas fa-crown"></i> ${C.team.role}</div>
+                    <p>${C.team.desc}</p>
+                    <a href="${C.team.profileLink}" target="_blank" class="view-profile-btn">
+                        <i class="fab fa-roblox"></i> View Profile →
+                    </a>
+                </div>
+            `;
+        }
+        
+        // === STARS & PARTICLES ===
         const starsContainer = document.getElementById('starsContainer');
         for(let i=0;i<120;i++) {
             const star = document.createElement('div');
@@ -341,9 +519,7 @@
             star.style.animationDelay = Math.random()*5+'s';
             starsContainer.appendChild(star);
         }
-    }
-    function createParticles() {
-        const container = document.getElementById('particleContainer');
+        const particleContainer = document.getElementById('particleContainer');
         for(let i=0;i<50;i++) {
             const p = document.createElement('div');
             p.classList.add('particle');
@@ -352,136 +528,105 @@
             p.style.height = p.style.width;
             p.style.animationDelay = Math.random()*10+'s';
             p.style.animationDuration = Math.random()*8+6+'s';
-            container.appendChild(p);
+            particleContainer.appendChild(p);
         }
-    }
-    createStars();
-    createParticles();
-    
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const ld = document.getElementById('loader');
-            if(ld) { ld.style.opacity = '0'; setTimeout(() => ld.style.display = 'none', 1000); }
-        }, 5000);
-    });
-
-    // Mobile menu
-    const hamburger = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenuOverlay');
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
-    if(hamburger) hamburger.addEventListener('click', () => mobileMenu.classList.add('active'));
-    if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    document.querySelectorAll('#mobileMenuOverlay .menu-items a, #mobileMenuOverlay .menu-items div').forEach(el => {
-        el.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    });
-
-    // Custom Alert
-    const customAlert = document.getElementById('customAlert');
-    const alertOkBtn = document.getElementById('alertOkBtn');
-    let pendingWaLink = '';
-
-    function showCustomAlert(waLink) {
-        pendingWaLink = waLink;
-        customAlert.classList.add('show');
-    }
-
-    function hideCustomAlert() {
-        customAlert.classList.remove('show');
-        if(pendingWaLink) {
-            window.open(pendingWaLink, '_blank');
-            pendingWaLink = '';
+        
+        // === MOBILE MENU ===
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        if(hamburger) hamburger.addEventListener('click', () => mobileMenu.classList.add('active'));
+        if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        document.querySelectorAll('#mobileMenuOverlay .menu-items a').forEach(el => {
+            el.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        });
+        
+        // === CUSTOM ALERT ===
+        const customAlert = document.getElementById('customAlert');
+        const alertOkBtn = document.getElementById('alertOkBtn');
+        let pendingWaLink = '';
+        function showCustomAlert(waLink) {
+            pendingWaLink = waLink;
+            customAlert.classList.add('show');
         }
-    }
-
-    if(alertOkBtn) {
-        alertOkBtn.addEventListener('click', hideCustomAlert);
-    }
-
-    // Member Modal
-    const modalMember = document.getElementById('memberModal');
-    const waFormModal = document.getElementById('waFormModal');
-    const openModalBtns = document.querySelectorAll('#heroMemberBtn, #desktopMemberOpen, #mobileMemberOpen');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const closeWaFormBtn = document.getElementById('closeWaFormBtn');
-    const joinDiscordBtn = document.getElementById('joinDiscordBtn');
-    const joinWaBtn = document.getElementById('joinWaBtn');
-
-    openModalBtns.forEach(btn => btn.addEventListener('click', () => {
-        modalMember.style.display = 'flex';
-        waFormModal.style.display = 'none';
-    }));
-    if(closeModalBtn) closeModalBtn.addEventListener('click', () => modalMember.style.display = 'none');
-    if(closeWaFormBtn) closeWaFormBtn.addEventListener('click', () => waFormModal.style.display = 'none');
-    window.addEventListener('click', (e) => {
-        if(e.target === modalMember) modalMember.style.display = 'none';
-        if(e.target === waFormModal) waFormModal.style.display = 'none';
-    });
-
-    // Join Discord
-    if(joinDiscordBtn) {
-        joinDiscordBtn.addEventListener('click', () => {
-            modalMember.style.display = 'none';
-            window.open("https://discord.gg/7hJX3xMfD", '_blank');
+        function hideCustomAlert() {
+            customAlert.classList.remove('show');
+            if(pendingWaLink) { window.open(pendingWaLink, '_blank'); pendingWaLink = ''; }
+        }
+        if(alertOkBtn) alertOkBtn.addEventListener('click', hideCustomAlert);
+        
+        // === MEMBER MODAL ===
+        const modalMember = document.getElementById('memberModal');
+        const waFormModal = document.getElementById('waFormModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const closeWaFormBtn = document.getElementById('closeWaFormBtn');
+        const joinDiscordBtn = document.getElementById('joinDiscordBtn');
+        const joinWaBtn = document.getElementById('joinWaBtn');
+        
+        if(closeModalBtn) closeModalBtn.addEventListener('click', () => modalMember.style.display = 'none');
+        if(closeWaFormBtn) closeWaFormBtn.addEventListener('click', () => waFormModal.style.display = 'none');
+        window.addEventListener('click', (e) => {
+            if(e.target === modalMember) modalMember.style.display = 'none';
+            if(e.target === waFormModal) waFormModal.style.display = 'none';
         });
-    }
-
-    // Join WhatsApp - buka form WA
-    if(joinWaBtn) {
-        joinWaBtn.addEventListener('click', () => {
-            modalMember.style.display = 'none';
-            waFormModal.style.display = 'flex';
-        });
-    }
-
-    // ==== FUNGSI COPY KE CLIPBOARD ====
-    function copyToClipboard(text) {
-        return new Promise((resolve, reject) => {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(resolve).catch(reject);
-            } else {
-                try {
-                    const textarea = document.createElement('textarea');
-                    textarea.value = text;
-                    textarea.style.position = 'fixed';
-                    textarea.style.left = '-9999px';
-                    textarea.style.top = '-9999px';
-                    textarea.style.width = '1px';
-                    textarea.style.height = '1px';
-                    document.body.appendChild(textarea);
-                    textarea.focus();
-                    textarea.select();
-                    const success = document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    if (success) resolve();
-                    else reject(new Error('execCommand copy failed'));
-                } catch (err) {
-                    reject(err);
+        
+        if(joinDiscordBtn) {
+            joinDiscordBtn.addEventListener('click', () => {
+                modalMember.style.display = 'none';
+                window.open(C.links.discord, '_blank');
+            });
+        }
+        if(joinWaBtn) {
+            joinWaBtn.addEventListener('click', () => {
+                modalMember.style.display = 'none';
+                waFormModal.style.display = 'flex';
+            });
+        }
+        
+        // === COPY TO CLIPBOARD ===
+        function copyToClipboard(text) {
+            return new Promise((resolve, reject) => {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(resolve).catch(reject);
+                } else {
+                    try {
+                        const textarea = document.createElement('textarea');
+                        textarea.value = text;
+                        textarea.style.position = 'fixed';
+                        textarea.style.left = '-9999px';
+                        document.body.appendChild(textarea);
+                        textarea.focus();
+                        textarea.select();
+                        const success = document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        if (success) resolve();
+                        else reject(new Error('execCommand copy failed'));
+                    } catch (err) { reject(err); }
                 }
-            }
-        });
-    }
-
-    // Form WA Submit -> copy intro otomatis, muncul alert, baru arahkan ke WA setelah klik OK
-    const waForm = document.getElementById('waForm');
-    const submitWaBtn = document.getElementById('submitWaBtn');
-    
-    if(waForm) {
-        waForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const namaLengkap = document.getElementById('waNamaLengkap').value.trim();
-            const namaPanggilan = document.getElementById('waNamaPanggilan').value.trim();
-            const gender = document.getElementById('waGender').value;
-            const umur = document.getElementById('waUmur').value.trim();
-            const asal = document.getElementById('waAsal').value.trim();
-            const teamLama = document.getElementById('waTeamLama').value.trim();
-            const alasan = document.getElementById('waAlasan').value.trim();
-
-            if(!namaLengkap || !namaPanggilan || !gender || !umur || !asal || !teamLama || !alasan) {
-                return alert("❌ Lengkapi semua data!");
-            }
-
-            const intro = `╔═══════ ✦ 👑 ✦ ═══════╗
+            });
+        }
+        
+        // === WA FORM SUBMIT ===
+        const waForm = document.getElementById('waForm');
+        const submitWaBtn = document.getElementById('submitWaBtn');
+        
+        if(waForm) {
+            waForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const namaLengkap = document.getElementById('waNamaLengkap').value.trim();
+                const namaPanggilan = document.getElementById('waNamaPanggilan').value.trim();
+                const gender = document.getElementById('waGender').value;
+                const umur = document.getElementById('waUmur').value.trim();
+                const asal = document.getElementById('waAsal').value.trim();
+                const teamLama = document.getElementById('waTeamLama').value.trim();
+                const alasan = document.getElementById('waAlasan').value.trim();
+                
+                if(!namaLengkap || !namaPanggilan || !gender || !umur || !asal || !teamLama || !alasan) {
+                    return alert("❌ Lengkapi semua data!");
+                }
+                
+                const intro = `╔═══════ ✦ 👑 ✦ ═══════╗
         〔 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗔𝗦𝗖 〕
           「 𝗠𝗘𝗠𝗕𝗘𝗥 𝗜𝗡𝗧𝗥𝗢 」
 ╚═══════ ✦ 👑 ✦ ═══════╝
@@ -500,151 +645,141 @@
 ✨ 𝗘𝘃𝗲𝗿𝘆 𝗺𝗲𝗺𝗯𝗲𝗿 𝗵𝗮𝘀 𝗮 𝘀𝘁𝗼𝗿𝘆, 𝗲𝘃𝗲𝗿𝘆 𝘀𝘁𝗼𝗿𝘆 𝗵𝗮𝘀 𝗮 𝘃𝗮𝗹𝘂𝗲 ✨
 
 👑 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 𝗔𝗦𝗖 𝗙𝗮𝗺𝗶𝗹𝘆 👑`;
-
-            const waGroupLink = 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1';
-
-            submitWaBtn.disabled = true;
-            submitWaBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-
-            try {
-                await copyToClipboard(intro);
                 
-                // Reset form & tutup modal WA
-                waForm.reset();
-                waFormModal.style.display = 'none';
+                submitWaBtn.disabled = true;
+                submitWaBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
                 
-                // Tampilkan custom alert, user harus klik OK baru lanjut ke WA
-                showCustomAlert(waGroupLink);
-                
-            } catch (err) {
-                console.error('Copy error:', err);
-                alert('❌ Gagal menyalin intro. Silakan copy manual dari form.');
-                window.open(waGroupLink, '_blank');
-            } finally {
-                submitWaBtn.disabled = false;
-                submitWaBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim & Gabung WA';
-            }
-        });
-    }
-
-    // CAROUSEL
-    const slides = document.querySelectorAll('.carousel-slide');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const dotsContainer = document.getElementById('carouselDots');
-    let currentIndex = 0;
-    let autoInterval;
-    
-    function updateCarousel() {
-        const slidesContainer = document.getElementById('carouselSlides');
-        if(slidesContainer) {
-            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                try {
+                    await copyToClipboard(intro);
+                    waForm.reset();
+                    waFormModal.style.display = 'none';
+                    showCustomAlert(C.links.waGroup);
+                } catch (err) {
+                    console.error('Copy error:', err);
+                    alert('❌ Gagal menyalin intro. Silakan copy manual.');
+                    window.open(C.links.waGroup, '_blank');
+                } finally {
+                    submitWaBtn.disabled = false;
+                    submitWaBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim & Gabung WA';
+                }
+            });
         }
-        document.querySelectorAll('.dot').forEach((dot, idx) => {
-            dot.classList.toggle('active', idx === currentIndex);
-        });
-    }
-    
-    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); }
-    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); }
-    function startAutoSlide() { if(autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 4000); }
-    function resetAutoSlide() { clearInterval(autoInterval); startAutoSlide(); }
-    
-    if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-    if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-    
-    if(dotsContainer && slides.length) {
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if(i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => { currentIndex = i; updateCarousel(); resetAutoSlide(); });
-            dotsContainer.appendChild(dot);
-        });
-    }
-    startAutoSlide();
-
-    // COLAB & LAGA
-    const collabModal = document.getElementById('collabModal');
-    const btnColab = document.getElementById('btnColab');
-    const btnLaga = document.getElementById('btnLaga');
-    const modalTitle = document.getElementById('modalTitle');
-    const sendBtn = document.getElementById('sendCollabBtn');
-    const teamNameInput = document.getElementById('teamNameInput');
-    const closeCollab = document.getElementById('closeCollabModal');
-    let currentAction = '';
-    
-    function openModal(action) {
-        currentAction = action;
-        if(action === 'colab') { modalTitle.innerHTML = '🤝 Ajak Colab'; modalTitle.style.color = '#25D366'; }
-        else { modalTitle.innerHTML = '⚔️ Ajak Laga'; modalTitle.style.color = '#F59E0B'; }
-        if(teamNameInput) teamNameInput.value = '';
-        if(collabModal) collabModal.style.display = 'flex';
-    }
-    
-    if(btnColab) btnColab.addEventListener('click', () => openModal('colab'));
-    if(btnLaga) btnLaga.addEventListener('click', () => openModal('laga'));
-    if(closeCollab) closeCollab.addEventListener('click', () => collabModal.style.display = 'none');
-    window.addEventListener('click', (e) => { if(e.target === collabModal) collabModal.style.display = 'none'; });
-    
-    if(sendBtn) {
-        sendBtn.addEventListener('click', () => {
-            const teamName = teamNameInput ? teamNameInput.value.trim() : '';
-            if(!teamName) return alert("Masukkan Nama Team kamu!");
-            let message = '', waNumber = '';
-            if(currentAction === 'colab') {
-                waNumber = '6285781209423';
-                message = `Assalamualaikum permisi kak saya mau colab dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
-            } else {
-                waNumber = '6283854980779';
-                message = `Assalamualaikum permisi kak saya mau laga dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
-            }
-            window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
-            if(collabModal) collabModal.style.display = 'none';
-        });
-    }
-
-    // Produk & Search
-    document.querySelectorAll('.btn-buy').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const link = btn.getAttribute('data-link');
-            if(link && link !== '#') window.open(link, '_blank');
-            else alert("Link segera rilis!");
-        });
-    });
-    
-    const searchInput = document.getElementById('searchInput');
-    const products = document.querySelectorAll('.product-card');
-    if(searchInput) {
-        searchInput.addEventListener('input', () => {
-            const kw = searchInput.value.toLowerCase();
-            products.forEach(p => {
-                const text = p.getAttribute('data-name') + p.innerText.toLowerCase();
-                p.style.display = text.includes(kw) || kw === '' ? 'block' : 'none';
+        
+        // === CAROUSEL ===
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('carouselDots');
+        let currentIndex = 0;
+        let autoInterval;
+        
+        function updateCarousel() {
+            const sc = document.getElementById('carouselSlides');
+            if(sc) sc.style.transform = `translateX(-${currentIndex * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+        function nextSlide() { if(slides.length) { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); } }
+        function prevSlide() { if(slides.length) { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); } }
+        function startAutoSlide() { if(autoInterval) clearInterval(autoInterval); if(slides.length) autoInterval = setInterval(nextSlide, 4000); }
+        function resetAutoSlide() { clearInterval(autoInterval); startAutoSlide(); }
+        
+        if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+        if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+        
+        if(dotsContainer && slides.length) {
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if(i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => { currentIndex = i; updateCarousel(); resetAutoSlide(); });
+                dotsContainer.appendChild(dot);
+            });
+        }
+        startAutoSlide();
+        
+        // === COLAB & LAGA ===
+        const collabModal = document.getElementById('collabModal');
+        const btnColab = document.getElementById('btnColab');
+        const btnLaga = document.getElementById('btnLaga');
+        const modalTitle = document.getElementById('modalTitle');
+        const sendBtn = document.getElementById('sendCollabBtn');
+        const teamNameInput = document.getElementById('teamNameInput');
+        const closeCollab = document.getElementById('closeCollabModal');
+        let currentAction = '';
+        
+        function openModal(action) {
+            currentAction = action;
+            if(action === 'colab') { modalTitle.innerHTML = '🤝 Ajak Colab'; modalTitle.style.color = '#25D366'; }
+            else { modalTitle.innerHTML = '⚔️ Ajak Laga'; modalTitle.style.color = '#F59E0B'; }
+            if(teamNameInput) teamNameInput.value = '';
+            if(collabModal) collabModal.style.display = 'flex';
+        }
+        
+        if(btnColab) btnColab.addEventListener('click', () => openModal('colab'));
+        if(btnLaga) btnLaga.addEventListener('click', () => openModal('laga'));
+        if(closeCollab) closeCollab.addEventListener('click', () => collabModal.style.display = 'none');
+        window.addEventListener('click', (e) => { if(e.target === collabModal) collabModal.style.display = 'none'; });
+        
+        if(sendBtn) {
+            sendBtn.addEventListener('click', () => {
+                const teamName = teamNameInput ? teamNameInput.value.trim() : '';
+                if(!teamName) return alert("Masukkan Nama Team kamu!");
+                let message = '', waNumber = '';
+                if(currentAction === 'colab') {
+                    waNumber = C.links.waColab;
+                    message = `Assalamualaikum permisi kak saya mau colab dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
+                } else {
+                    waNumber = C.links.waLaga;
+                    message = `Assalamualaikum permisi kak saya mau laga dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
+                }
+                window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
+                if(collabModal) collabModal.style.display = 'none';
+            });
+        }
+        
+        // === PRODUK BUY ===
+        document.querySelectorAll('.btn-buy').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const link = btn.getAttribute('data-link');
+                if(link && link !== '#') window.open(link, '_blank');
+                else alert("Link segera rilis!");
             });
         });
-    }
-    
-    const desktopSearch = document.getElementById('desktopSearchFocus');
-    const mobileSearch = document.getElementById('mobileSearchFocus');
-    if(desktopSearch) desktopSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
-    if(mobileSearch) mobileSearch.addEventListener('click', (e) => { e.preventDefault(); if(searchInput) searchInput.focus(); });
-
-    // Tracking Visitor
-    const domain = 'asc-garage.vercel.app';
-    fetch('https://website-monitor.vercel.app/api/track-visitor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ website: domain, page: window.location.pathname })
-    }).catch(err => console.log('Tracking error:', err));
-
-    setInterval(() => {
+        
+        // === SEARCH ===
+        const searchInput = document.getElementById('searchInput');
+        if(searchInput) {
+            searchInput.addEventListener('input', () => {
+                const kw = searchInput.value.toLowerCase();
+                document.querySelectorAll('.product-card').forEach(p => {
+                    const text = (p.getAttribute('data-name') || '') + p.innerText.toLowerCase();
+                    p.style.display = text.includes(kw) || kw === '' ? 'block' : 'none';
+                });
+            });
+        }
+        document.getElementById('desktopSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
+        document.getElementById('mobileSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
+        
+        // === TRACKING VISITOR ===
+        const domain = 'asc-garage.vercel.app';
         fetch('https://website-monitor.vercel.app/api/track-visitor', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ website: domain, page: window.location.pathname })
         }).catch(err => console.log('Tracking error:', err));
-    }, 30000);
+        
+        setInterval(() => {
+            fetch('https://website-monitor.vercel.app/api/track-visitor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ website: domain, page: window.location.pathname })
+            }).catch(err => console.log('Tracking error:', err));
+        }, 30000);
+        
+        console.log('✅ Website loaded with ' + (window.CONFIG ? 'config.js' : 'fallback config'));
+    })();
 </script>
 </body>
 </html>
