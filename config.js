@@ -9,7 +9,7 @@ window.CONFIG = {
     // ---------- 🔗 LINK UTAMA ----------
     links: {
         registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc',
-        adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/admin.html',
+        adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/admin.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6285781209423',
