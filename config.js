@@ -1,15 +1,7 @@
-// ============================================
-// ⚙️ KONFIGURASI ASC GARAGE
-// ============================================
-// Ubah nilai di sini untuk menyesuaikan website
-// tanpa perlu edit index.html
-// ============================================
-
 window.CONFIG = {
-    // ---------- 🔗 LINK UTAMA ----------
     links: {
-        registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc',
-        adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/admin.php',
+        registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/index.html',
+        adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/login.html',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6285781209423',
@@ -17,8 +9,6 @@ window.CONFIG = {
         tiktok: 'https://www.tiktok.com/@acr.all.star.crew',
         sociabuzz: 'https://sociabuzz.com/ascgerage'
     },
-
-    // ---------- 🖼️ GAMBAR CAROUSEL ----------
     carousel: [
         'https://files.catbox.moe/3nkdr4.jpg',
         'https://files.catbox.moe/brsgsw.jpg',
@@ -27,8 +17,6 @@ window.CONFIG = {
         'https://files.catbox.moe/q6i4tj.jpg',
         'https://files.catbox.moe/oicxuj.jpg'
     ],
-
-    // ---------- 🛍️ PRODUK ----------
     products: [
         {
             name: 'kemeja asc garage hitam',
@@ -38,8 +26,6 @@ window.CONFIG = {
             buttonText: 'BELI SEKARANG'
         }
     ],
-
-    // ---------- 👥 TEAM ----------
     team: {
         name: 'annn_pov',
         role: 'Owner & Creative Director',
@@ -47,8 +33,6 @@ window.CONFIG = {
         avatar: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter',
         profileLink: 'https://www.roblox.com/users/10416810312'
     },
-
-    // ---------- 🤝 PARTNER ----------
     partners: [
         {
             name: '⚡ TES JOKI',
@@ -65,8 +49,6 @@ window.CONFIG = {
             buttonText: 'Join Grup WhatsApp'
         }
     ],
-
-    // ---------- 📜 PERSYARATAN JOIN TEAM ----------
     requirements: [
         { icon: 'fa-ban', text: 'Dilarang ngemis GP' },
         { icon: 'fa-ban', text: 'Dilarang ngemis minta jadi admin' },
