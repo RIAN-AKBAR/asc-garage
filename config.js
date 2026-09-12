@@ -4,7 +4,8 @@ window.CONFIG = {
         adminLogin: 'https://pediatric-mod-editing-hugh.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
-        waColab: '6285781209423',
+        waColab: '6283854980779',
+        waShop: '6285781209423',
         tiktok: 'https://www.tiktok.com/@acr.all.star.crew',
         sociabuzz: 'https://sociabuzz.com/ascgerage'
     },
