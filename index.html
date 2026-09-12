@@ -75,32 +75,10 @@
         .btn-open-member { background: linear-gradient(95deg, #A855F7, #7C3AED); border: none; padding: 12px 32px; border-radius: 60px; font-weight: 700; color: white; margin-top: 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: 0.2s; }
         .btn-open-member:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
         
-        /* === CARD VIDEO === */
-        .video-card-section {
-            margin: 2rem 0;
-        }
-        .video-card {
-            position: relative;
-            width: 100%;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 15px 50px rgba(168,85,247,0.35);
-            border: 1px solid rgba(168,85,247,0.5);
-            background: #0A0820;
-            aspect-ratio: 16 / 9;
-        }
-        .video-card video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        @media (max-width: 550px) {
-            .video-card { border-radius: 20px; }
-        }
+        .video-card-section { margin: 2rem 0; }
+        .video-card { position: relative; width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 50px rgba(168,85,247,0.35); border: 1px solid rgba(168,85,247,0.5); background: #0A0820; aspect-ratio: 16 / 9; }
+        .video-card video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+        @media (max-width: 550px) { .video-card { border-radius: 20px; } }
         
         .carousel-section { margin: 2rem 0; }
         .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; box-shadow: 0 10px 30px rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); background: #0A0820; }
@@ -114,12 +92,31 @@
         .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.4); cursor: pointer; transition: 0.2s; }
         .dot.active { background: #A855F7; width: 24px; border-radius: 20px; }
-        .modal-collab { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10002; }
-        .collab-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 40px; padding: 1.8rem; width: 90%; max-width: 400px; border: 1px solid #A855F7; }
-        .collab-card h3 { font-size: 1.5rem; text-align: center; margin-bottom: 1rem; }
-        .collab-card input { width: 100%; padding: 12px 14px; margin: 8px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; }
-        .collab-card button { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 12px; border: none; cursor: pointer; }
-        .close-collab { background: #2E2560 !important; margin-top: 8px; }
+        
+        /* === MODAL COLAB (Form panjang) === */
+        .modal-colab { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10002; padding: 20px; overflow-y: auto; }
+        .modal-colab.show { display: flex; }
+        .colab-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 1.8rem; width: 100%; max-width: 520px; border: 1px solid #A855F7; max-height: 92vh; overflow-y: auto; }
+        .colab-card h3 { font-size: 1.4rem; text-align: center; margin-bottom: 0.5rem; background: linear-gradient(125deg, #F0E6FF, #C084FC); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .colab-card .subtitle { text-align: center; font-size: 0.8rem; opacity: 0.7; margin-bottom: 1.2rem; }
+        .colab-card label { display: block; font-size: 0.8rem; font-weight: 600; color: #D8B4FE; margin-top: 12px; margin-bottom: 4px; }
+        .colab-card input, .colab-card textarea, .colab-card select { width: 100%; padding: 10px 14px; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 16px; color: white; font-family: inherit; font-size: 0.9rem; }
+        .colab-card textarea { min-height: 60px; resize: vertical; }
+        .colab-card .checkbox-group { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 4px; }
+        .colab-card .checkbox-group label { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #F0EBFF; font-weight: 500; margin: 0; padding: 6px 0; cursor: pointer; }
+        .colab-card .checkbox-group input[type="checkbox"] { width: auto; margin: 0; }
+        .colab-card .btn-send { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 14px; border-radius: 60px; font-weight: 700; color: white; margin-top: 18px; border: none; cursor: pointer; font-size: 1rem; }
+        .colab-card .btn-close { background: #2E2560; margin-top: 8px; width: 100%; padding: 12px; border-radius: 60px; color: white; border: none; cursor: pointer; font-weight: 600; }
+        
+        /* Shop Gamepass Modal */
+        .modal-shop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10002; }
+        .shop-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 1.8rem; width: 90%; max-width: 420px; border: 1px solid #F59E0B; text-align: center; }
+        .shop-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #F59E0B; }
+        .shop-card p { opacity: 0.8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; }
+        .shop-card input { width: 100%; padding: 12px 14px; margin: 8px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; }
+        .shop-card .btn-send { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 14px; border-radius: 60px; font-weight: 700; color: white; margin-top: 12px; border: none; cursor: pointer; }
+        .shop-card .btn-close { background: #2E2560; margin-top: 8px; width: 100%; padding: 12px; border-radius: 60px; color: white; border: none; cursor: pointer; font-weight: 600; }
+        
         .requirements-box { background: rgba(18,14,45,0.7); backdrop-filter: blur(14px); border-radius: 32px; padding: 1.5rem; margin: 1.5rem 0; border: 0.5px solid rgba(168,85,247,0.4); }
         .requirements-box h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; color: #D8B4FE; }
         .requirements-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.6rem; }
@@ -134,8 +131,8 @@
         .partner-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 2px solid #A855F7; }
         .partner-wa-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(95deg, #25D366, #128C7E); padding: 10px 24px; border-radius: 60px; text-decoration: none; color: white; font-weight: 600; }
         .collab-laga-buttons { display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
-        .btn-collab, .btn-laga { flex: 1; min-width: 140px; background: linear-gradient(95deg, #A855F7, #7C3AED); padding: 12px 24px; border-radius: 60px; font-weight: 700; color: white; border: none; cursor: pointer; font-size: 1rem; }
-        .btn-laga { background: linear-gradient(95deg, #F59E0B, #D97706); }
+        .btn-collab, .btn-shop { flex: 1; min-width: 140px; background: linear-gradient(95deg, #A855F7, #7C3AED); padding: 12px 24px; border-radius: 60px; font-weight: 700; color: white; border: none; cursor: pointer; font-size: 1rem; }
+        .btn-shop { background: linear-gradient(95deg, #F59E0B, #D97706); }
         .search-wrapper input { width: 100%; padding: 12px 20px; border-radius: 60px; background: rgba(20,16,45,0.7); border: 0.5px solid #7C3AED; color: white; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
         .product-card { background: rgba(18,14,40,0.65); backdrop-filter: blur(12px); border-radius: 28px; padding: 1rem; border: 0.5px solid rgba(139,92,246,0.35); }
@@ -198,12 +195,13 @@
             .product-grid { grid-template-columns: 1fr; } 
             .team-block { flex-direction: column; text-align: center; } 
             .collab-laga-buttons { flex-direction: column; } 
-            .btn-collab, .btn-laga { width: 100%; } 
+            .btn-collab, .btn-shop { width: 100%; } 
             .alert-box { padding: 1.5rem; } 
             .alert-icon { font-size: 2.8rem; } 
             .alert-title { font-size: 1.1rem; } 
             .alert-desc { font-size: 0.9rem; } 
             .floating-admin { width: 52px; height: 52px; font-size: 1.3rem; bottom: 18px; right: 18px; }
+            .colab-card { padding: 1.2rem; }
         }
     </style>
 </head>
@@ -263,7 +261,6 @@
         <a href="#" class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</a>
     </div>
 
-    <!-- === CARD VIDEO AUTOPLAY LOOP (TANPA BADGE) === -->
     <div class="video-card-section">
         <div class="video-card">
             <video autoplay muted loop playsinline preload="auto">
@@ -281,9 +278,10 @@
         <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
+    <!-- === TOMBOL COLAB & SHOP GAMEPASS === -->
     <div class="collab-laga-buttons">
-        <button class="btn-collab" id="btnColab"><i class="fab fa-whatsapp"></i> 🤝 Ajak Colab</button>
-        <button class="btn-laga" id="btnLaga"><i class="fab fa-whatsapp"></i> ⚔️ Ajak Laga</button>
+        <button class="btn-collab" id="btnColab"><i class="fas fa-handshake"></i> 🤝 Ajak Colab</button>
+        <button class="btn-shop" id="btnShop"><i class="fas fa-shopping-cart"></i> 🛒 Shop Gamepass</button>
     </div>
 
     <div class="requirements-box">
@@ -315,11 +313,11 @@
 <div class="custom-alert" id="customAlert">
     <div class="alert-box">
         <span class="alert-icon"><i class="fas fa-check-circle"></i></span>
-        <span class="alert-title">✅ Intro Berhasil Tersalin!</span>
+        <span class="alert-title">✅ Form Berhasil Dicopy!</span>
         <span class="alert-desc">
-            Intro sudah otomatis tersalin ke clipboard.<br>
+            Form kerjasama sudah otomatis tersalin ke clipboard.<br>
             Silakan <i class="fas fa-paste"></i> <span class="highlight">tempel (CTRL+V / tap & paste)</span><br>
-            ketika sudah masuk grup WhatsApp
+            di chat WhatsApp yang terbuka
         </span>
         <button class="alert-btn" id="alertOkBtn"><i class="fas fa-arrow-right"></i> OK, Lanjutkan</button>
     </div>
@@ -360,12 +358,68 @@
     </div>
 </div>
 
-<div id="collabModal" class="modal-collab">
-    <div class="collab-card">
-        <h3 id="modalTitle">🤝 Ajak Colab</h3>
-        <input type="text" id="teamNameInput" placeholder="Nama Team Kamu" required>
-        <button id="sendCollabBtn">Kirim & Hubungi via WhatsApp</button>
-        <button class="close-collab" id="closeCollabModal">Tutup</button>
+<!-- === MODAL COLAB (Form Kerjasama Panjang) === -->
+<div id="colabModal" class="modal-colab">
+    <div class="colab-card">
+        <h3>🤝 FORM PENDAFTARAN KOLABORASI</h3>
+        <p class="subtitle">🏁 ASC GARAGE • Khusus Kerjasama</p>
+        
+        <label>1. 🏷️ Nama Tim / Komunitas</label>
+        <input type="text" id="colabNamaTim" placeholder="Nama tim kamu" required>
+        
+        <label>2. 👑 Nama Pemilik / Leader</label>
+        <input type="text" id="colabLeader" placeholder="Nama leader" required>
+        
+        <label>3. 📱 Kontak / WA Leader</label>
+        <input type="tel" id="colabWa" placeholder="08xxxxx" required>
+        
+        <label>4. 📲 Sosial Media (TikTok / IG / YT)</label>
+        <input type="text" id="colabSosmed" placeholder="@username / link" required>
+        
+        <label>5. 👥 Jumlah Member Tim</label>
+        <input type="number" id="colabJumlahMember" placeholder="Contoh: 25" required>
+        
+        <label>6. 🎮 Platform / Game Utama</label>
+        <input type="text" id="colabPlatform" placeholder="Contoh: Roblox, ML, dll" required>
+        
+        <label>7. 🤝 Bentuk Kerjasama yang Diinginkan</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" class="colabKerjasama" value="Sinematik & Konten Bareng"> Sinematik & Konten Bareng</label>
+            <label><input type="checkbox" class="colabKerjasama" value="Event & Lomba Bersama"> Event & Lomba Bersama</label>
+            <label><input type="checkbox" class="colabKerjasama" value="Merchandise Kolaborasi"> Merchandise Kolaborasi</label>
+            <label><input type="checkbox" class="colabKerjasama" value="Lainnya"> Lainnya: <input type="text" id="colabLainnya" placeholder="sebutkan..." style="margin-left:6px;padding:4px 8px;border-radius:20px;background:#1E1A42;border:0.5px solid #8B5CF6;color:white;flex:1;font-size:0.8rem;"></label>
+        </div>
+        
+        <label>8. 📝 Alasan Ingin Berkerjasama dengan ASC GARAGE</label>
+        <textarea id="colabAlasan" placeholder="Tulis alasan kamu..." rows="3" required></textarea>
+        
+        <label>9. ⚠️ Pernyataan</label>
+        <div class="checkbox-group">
+            <label><input type="checkbox" class="colabPernyataan" value="Saya menyatakan ini murni untuk KERJASAMA, BUKAN daftar member biasa."> Murni untuk KERJASAMA, bukan daftar member biasa</label>
+            <label><input type="checkbox" class="colabPernyataan" value="Tim kami siap menjaga nama baik kedua pihak."> Siap menjaga nama baik kedua pihak</label>
+            <label><input type="checkbox" class="colabPernyataan" value="Kami siap saling hormat & setara."> Siap saling hormat & setara</label>
+            <label><input type="checkbox" class="colabPernyataan" value="Kami memahami pelanggaran = dicabut kerjasamanya."> Paham pelanggaran = dicabut kerjasama</label>
+        </div>
+        
+        <label>📅 Tanggal</label>
+        <input type="date" id="colabTanggal">
+        
+        <label>✍️ Nama Leader (Tanda Tangan)</label>
+        <input type="text" id="colabTtd" placeholder="Nama leader sebagai TTD" required>
+        
+        <button class="btn-send" id="sendColabBtn"><i class="fab fa-whatsapp"></i> Kirim ke WhatsApp ASC</button>
+        <button class="btn-close" id="closeColabBtn">Tutup</button>
+    </div>
+</div>
+
+<!-- === MODAL SHOP GAMEPASS === -->
+<div id="shopModal" class="modal-shop">
+    <div class="shop-card">
+        <h3>🛒 Shop Gamepass</h3>
+        <p>Isi nama kamu, nanti akan diarahkan ke WhatsApp admin shop gamepass ASC.</p>
+        <input type="text" id="shopNama" placeholder="Nama kamu" required>
+        <button class="btn-send" id="sendShopBtn"><i class="fab fa-whatsapp"></i> Chat Admin Shop</button>
+        <button class="btn-close" id="closeShopBtn">Tutup</button>
     </div>
 </div>
 
@@ -377,7 +431,7 @@
             discord: 'https://discord.gg/7hJX3xMfD',
             waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
             waColab: '6285781209423',
-            waLaga: '6283854980779',
+            waShop: '6285781209423',
             tiktok: 'https://www.tiktok.com/@acr.all.star.crew',
             sociabuzz: 'https://sociabuzz.com/ascgerage'
         },
@@ -622,13 +676,13 @@
             });
         }
         
+        // WA FORM SUBMIT
         const waForm = document.getElementById('waForm');
         const submitWaBtn = document.getElementById('submitWaBtn');
         
         if(waForm) {
             waForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                
                 const namaLengkap = document.getElementById('waNamaLengkap').value.trim();
                 const namaPanggilan = document.getElementById('waNamaPanggilan').value.trim();
                 const gender = document.getElementById('waGender').value;
@@ -680,6 +734,7 @@
             });
         }
         
+        // CAROUSEL
         const slides = document.querySelectorAll('.carousel-slide');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -713,45 +768,150 @@
         }
         startAutoSlide();
         
-        const collabModal = document.getElementById('collabModal');
+        // === COLAB MODAL ===
+        const colabModal = document.getElementById('colabModal');
         const btnColab = document.getElementById('btnColab');
-        const btnLaga = document.getElementById('btnLaga');
-        const modalTitle = document.getElementById('modalTitle');
-        const sendBtn = document.getElementById('sendCollabBtn');
-        const teamNameInput = document.getElementById('teamNameInput');
-        const closeCollab = document.getElementById('closeCollabModal');
-        let currentAction = '';
+        const closeColabBtn = document.getElementById('closeColabBtn');
+        const sendColabBtn = document.getElementById('sendColabBtn');
         
-        function openModal(action) {
-            currentAction = action;
-            if(action === 'colab') { modalTitle.innerHTML = '🤝 Ajak Colab'; modalTitle.style.color = '#25D366'; }
-            else { modalTitle.innerHTML = '⚔️ Ajak Laga'; modalTitle.style.color = '#F59E0B'; }
-            if(teamNameInput) teamNameInput.value = '';
-            if(collabModal) collabModal.style.display = 'flex';
+        function openColab() {
+            colabModal.classList.add('show');
+        }
+        function closeColab() {
+            colabModal.classList.remove('show');
         }
         
-        if(btnColab) btnColab.addEventListener('click', () => openModal('colab'));
-        if(btnLaga) btnLaga.addEventListener('click', () => openModal('laga'));
-        if(closeCollab) closeCollab.addEventListener('click', () => collabModal.style.display = 'none');
-        window.addEventListener('click', (e) => { if(e.target === collabModal) collabModal.style.display = 'none'; });
-        
-        if(sendBtn) {
-            sendBtn.addEventListener('click', () => {
-                const teamName = teamNameInput ? teamNameInput.value.trim() : '';
-                if(!teamName) return alert("Masukkan Nama Team kamu!");
-                let message = '', waNumber = '';
-                if(currentAction === 'colab') {
-                    waNumber = C.links.waColab;
-                    message = `Assalamualaikum permisi kak saya mau colab dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
-                } else {
-                    waNumber = C.links.waLaga;
-                    message = `Assalamualaikum permisi kak saya mau laga dong%0A%0ANama Team: ${encodeURIComponent(teamName)}%0ADari Team: ${encodeURIComponent(teamName)}`;
-                }
-                window.open(`https://wa.me/${waNumber}?text=${message}`, '_blank');
-                if(collabModal) collabModal.style.display = 'none';
+        if(btnColab) btnColab.addEventListener('click', openColab);
+        if(closeColabBtn) closeColabBtn.addEventListener('click', closeColab);
+        if(colabModal) {
+            colabModal.addEventListener('click', (e) => {
+                if(e.target === colabModal) closeColab();
             });
         }
         
+        if(sendColabBtn) {
+            sendColabBtn.addEventListener('click', async () => {
+                // Ambil semua data
+                const namaTim = document.getElementById('colabNamaTim').value.trim();
+                const leader = document.getElementById('colabLeader').value.trim();
+                const wa = document.getElementById('colabWa').value.trim();
+                const sosmed = document.getElementById('colabSosmed').value.trim();
+                const jumlahMember = document.getElementById('colabJumlahMember').value.trim();
+                const platform = document.getElementById('colabPlatform').value.trim();
+                const lainnya = document.getElementById('colabLainnya').value.trim();
+                const alasan = document.getElementById('colabAlasan').value.trim();
+                const tanggal = document.getElementById('colabTanggal').value;
+                const ttd = document.getElementById('colabTtd').value.trim();
+                
+                // Validasi wajib
+                if(!namaTim || !leader || !wa || !sosmed || !jumlahMember || !platform || !alasan || !ttd) {
+                    return alert("❌ Lengkapi semua data yang wajib diisi!");
+                }
+                
+                // Ambil checkbox kerjasama
+                const kerjasamaArr = [];
+                document.querySelectorAll('.colabKerjasama:checked').forEach(cb => {
+                    if(cb.value === 'Lainnya' && lainnya) {
+                        kerjasamaArr.push(`Lainnya: ${lainnya}`);
+                    } else if(cb.value !== 'Lainnya') {
+                        kerjasamaArr.push(cb.value);
+                    }
+                });
+                if(kerjasamaArr.length === 0 && lainnya) kerjasamaArr.push(`Lainnya: ${lainnya}`);
+                
+                // Ambil checkbox pernyataan
+                const pernyataanArr = [];
+                document.querySelectorAll('.colabPernyataan:checked').forEach(cb => {
+                    pernyataanArr.push(cb.value);
+                });
+                
+                // Format kerjasama & pernyataan
+                const kerjasamaText = kerjasamaArr.length > 0 ? kerjasamaArr.map(k => `   □ ${k}`).join('\n') : '   (tidak ada yang dipilih)';
+                const pernyataanText = pernyataanArr.length > 0 ? pernyataanArr.map(p => `   □ ${p}`).join('\n') : '   (tidak ada yang dicentang)';
+                
+                // Format pesan
+                const pesan = `╭─────────────────────────────────────────╮
+│     🤝 FORM PENDAFTARAN KOLABORASI      │
+│         🏁 ASC GARAGE                  │
+╰─────────────────────────────────────────╯
+
+⚠️  KHUSUS KERJASAMA SAJA!
+   BUKAN daftar member biasa!
+
+1. 🏷️ NAMA TIM / KOMUNITAS ANDA:
+   ${namaTim}
+
+2. 👑 NAMA PEMILIK / LEADER TIM ANDA:
+   ${leader}
+
+3. 📱 KONTAK / WA LEADER:
+   ${wa}
+
+4. 📲 SOSIAL MEDIA (TikTok / IG / YouTube):
+   ${sosmed}
+
+5. 👥 JUMLAH MEMBER TIM ANDA:
+   ${jumlahMember}
+
+6. 🎮 PLATFORM / GAME UTAMA:
+   ${platform}
+
+7. 🤝 BENTUK KERJASAMA YANG DIINGINKAN:
+${kerjasamaText}
+
+8. 📝 ALASAN INGIN BERKERJASAMA DENGAN ASC GARAGE:
+   ${alasan}
+
+9. ⚠️ PERNYATAAN:
+${pernyataanText}
+
+📅 TANGGAL: ${tanggal || '-'}
+✍️ NAMA LEADER: ${ttd}`;
+                
+                sendColabBtn.disabled = true;
+                sendColabBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                
+                try {
+                    await copyToClipboard(pesan);
+                    closeColab();
+                    showCustomAlert(`https://wa.me/${C.links.waColab}`);
+                } catch (err) {
+                    console.error('Copy error:', err);
+                    alert('❌ Gagal menyalin form. Silakan copy manual.');
+                    window.open(`https://wa.me/${C.links.waColab}`, '_blank');
+                } finally {
+                    sendColabBtn.disabled = false;
+                    sendColabBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim ke WhatsApp ASC';
+                }
+            });
+        }
+        
+        // === SHOP GAMEPASS MODAL ===
+        const shopModal = document.getElementById('shopModal');
+        const btnShop = document.getElementById('btnShop');
+        const closeShopBtn = document.getElementById('closeShopBtn');
+        const sendShopBtn = document.getElementById('sendShopBtn');
+        
+        if(btnShop) btnShop.addEventListener('click', () => shopModal.style.display = 'flex');
+        if(closeShopBtn) closeShopBtn.addEventListener('click', () => shopModal.style.display = 'none');
+        if(shopModal) {
+            shopModal.addEventListener('click', (e) => {
+                if(e.target === shopModal) shopModal.style.display = 'none';
+            });
+        }
+        
+        if(sendShopBtn) {
+            sendShopBtn.addEventListener('click', () => {
+                const nama = document.getElementById('shopNama').value.trim();
+                if(!nama) return alert("Masukkan nama kamu dulu!");
+                const pesan = `Assalamualaikum kak, saya ${nama} mau beli gamepass ASC 🛒`;
+                window.open(`https://wa.me/${C.links.waShop}?text=${encodeURIComponent(pesan)}`, '_blank');
+                shopModal.style.display = 'none';
+                document.getElementById('shopNama').value = '';
+            });
+        }
+        
+        // PRODUK BUY
         document.querySelectorAll('.btn-buy').forEach(btn => {
             btn.addEventListener('click', () => {
                 const link = btn.getAttribute('data-link');
@@ -760,6 +920,7 @@
             });
         });
         
+        // SEARCH
         const searchInput = document.getElementById('searchInput');
         if(searchInput) {
             searchInput.addEventListener('input', () => {
@@ -773,6 +934,7 @@
         document.getElementById('desktopSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
         document.getElementById('mobileSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
         
+        // TRACKING
         const domain = 'asc-garage.vercel.app';
         fetch('https://website-monitor.vercel.app/api/track-visitor', {
             method: 'POST',
