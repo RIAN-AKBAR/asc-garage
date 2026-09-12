@@ -1,7 +1,7 @@
 window.CONFIG = {
     links: {
-        registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc',
-        adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://pediatric-mod-editing-hugh.trycloudflare.com/register_asc',
+        adminLogin: 'https://pediatric-mod-editing-hugh.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6285781209423',
