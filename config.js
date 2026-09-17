@@ -1,7 +1,7 @@
 window.CONFIG = {
     links: {
-        registerMember: 'https://hardware-gpl-paragraphs-prisoner.trycloudflare.com/register_asc',
-        adminLogin: 'https://hardware-gpl-paragraphs-prisoner.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc',
+        adminLogin: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
