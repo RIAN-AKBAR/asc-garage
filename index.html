@@ -8,6 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- ============================================ -->
+    <!-- 🔧 CEK MAINTENANCE MODE (HARUS DI PALING ATAS) -->
+    <!-- ============================================ -->
+    <script src="config.js" onerror="console.warn('⚠️ config.js tidak ditemukan, memakai fallback config.');"></script>
+    <script>
+        (function() {
+            const MC = window.CONFIG && window.CONFIG.maintenance;
+            if (MC && MC.enabled === true) {
+                // Redirect ke halaman maintenance
+                window.location.replace('maintenance.html');
+            }
+        })();
+    </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Space Grotesk', 'Inter', sans-serif; background: #05040E; color: #F0EBFF; overflow-x: hidden; min-height: 100vh; }
@@ -74,12 +89,10 @@
         .member-hero p { opacity: 0.7; font-size: 0.9rem; }
         .btn-open-member { background: linear-gradient(95deg, #A855F7, #7C3AED); border: none; padding: 12px 32px; border-radius: 60px; font-weight: 700; color: white; margin-top: 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; transition: 0.2s; }
         .btn-open-member:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(168,85,247,0.4); }
-        
         .video-card-section { margin: 2rem 0; }
         .video-card { position: relative; width: 100%; border-radius: 28px; overflow: hidden; box-shadow: 0 15px 50px rgba(168,85,247,0.35); border: 1px solid rgba(168,85,247,0.5); background: #0A0820; aspect-ratio: 16 / 9; }
         .video-card video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
         @media (max-width: 550px) { .video-card { border-radius: 20px; } }
-        
         .carousel-section { margin: 2rem 0; }
         .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; box-shadow: 0 10px 30px rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); background: #0A0820; }
         .carousel-slides { display: flex; transition: transform 0.5s ease-in-out; }
@@ -92,8 +105,6 @@
         .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(168,85,247,0.4); cursor: pointer; transition: 0.2s; }
         .dot.active { background: #A855F7; width: 24px; border-radius: 20px; }
-        
-        /* === MODAL COLAB (Form panjang) === */
         .modal-colab { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10002; padding: 20px; overflow-y: auto; }
         .modal-colab.show { display: flex; }
         .colab-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 1.8rem; width: 100%; max-width: 520px; border: 1px solid #A855F7; max-height: 92vh; overflow-y: auto; }
@@ -107,8 +118,6 @@
         .colab-card .checkbox-group input[type="checkbox"] { width: auto; margin: 0; }
         .colab-card .btn-send { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 14px; border-radius: 60px; font-weight: 700; color: white; margin-top: 18px; border: none; cursor: pointer; font-size: 1rem; }
         .colab-card .btn-close { background: #2E2560; margin-top: 8px; width: 100%; padding: 12px; border-radius: 60px; color: white; border: none; cursor: pointer; font-weight: 600; }
-        
-        /* Shop Gamepass Modal */
         .modal-shop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10002; }
         .shop-card { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 1.8rem; width: 90%; max-width: 420px; border: 1px solid #F59E0B; text-align: center; }
         .shop-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; color: #F59E0B; }
@@ -116,7 +125,6 @@
         .shop-card input { width: 100%; padding: 12px 14px; margin: 8px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; }
         .shop-card .btn-send { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 14px; border-radius: 60px; font-weight: 700; color: white; margin-top: 12px; border: none; cursor: pointer; }
         .shop-card .btn-close { background: #2E2560; margin-top: 8px; width: 100%; padding: 12px; border-radius: 60px; color: white; border: none; cursor: pointer; font-weight: 600; }
-        
         .requirements-box { background: rgba(18,14,45,0.7); backdrop-filter: blur(14px); border-radius: 32px; padding: 1.5rem; margin: 1.5rem 0; border: 0.5px solid rgba(168,85,247,0.4); }
         .requirements-box h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; color: #D8B4FE; }
         .requirements-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.6rem; }
@@ -165,7 +173,6 @@
         .alert-desc .highlight { color: #A855F7; font-weight: 600; }
         .alert-btn { background: linear-gradient(95deg, #25D366, #128C7E); border: none; padding: 12px 40px; border-radius: 60px; font-weight: 700; color: white; font-size: 1rem; cursor: pointer; transition: 0.2s; }
         .alert-btn:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(37,211,102,0.3); }
-        
         .floating-admin {
             position: fixed; bottom: 24px; right: 24px; width: 60px; height: 60px;
             border-radius: 50%; background: linear-gradient(135deg, #F59E0B, #D97706);
@@ -189,17 +196,16 @@
             50% { box-shadow: 0 8px 40px rgba(245,158,11,0.9), 0 0 0 10px rgba(245,158,11,0.1); }
             100% { box-shadow: 0 8px 30px rgba(245,158,11,0.5); }
         }
-        
-        @media (max-width: 550px) { 
-            .member-hero h1 { font-size: 1.6rem; } 
-            .product-grid { grid-template-columns: 1fr; } 
-            .team-block { flex-direction: column; text-align: center; } 
-            .collab-laga-buttons { flex-direction: column; } 
-            .btn-collab, .btn-shop { width: 100%; } 
-            .alert-box { padding: 1.5rem; } 
-            .alert-icon { font-size: 2.8rem; } 
-            .alert-title { font-size: 1.1rem; } 
-            .alert-desc { font-size: 0.9rem; } 
+        @media (max-width: 550px) {
+            .member-hero h1 { font-size: 1.6rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .team-block { flex-direction: column; text-align: center; }
+            .collab-laga-buttons { flex-direction: column; }
+            .btn-collab, .btn-shop { width: 100%; }
+            .alert-box { padding: 1.5rem; }
+            .alert-icon { font-size: 2.8rem; }
+            .alert-title { font-size: 1.1rem; }
+            .alert-desc { font-size: 0.9rem; }
             .floating-admin { width: 52px; height: 52px; font-size: 1.3rem; bottom: 18px; right: 18px; }
             .colab-card { padding: 1.2rem; }
         }
@@ -278,7 +284,6 @@
         <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
-    <!-- === TOMBOL COLAB & SHOP GAMEPASS === -->
     <div class="collab-laga-buttons">
         <button class="btn-collab" id="btnColab"><i class="fas fa-handshake"></i> 🤝 Ajak Colab</button>
         <button class="btn-shop" id="btnShop"><i class="fas fa-shopping-cart"></i> 🛒 Shop Gamepass</button>
@@ -358,30 +363,22 @@
     </div>
 </div>
 
-<!-- === MODAL COLAB (Form Kerjasama Panjang) === -->
 <div id="colabModal" class="modal-colab">
     <div class="colab-card">
         <h3>🤝 FORM PENDAFTARAN KOLABORASI</h3>
         <p class="subtitle">🏁 ASC GARAGE • Khusus Kerjasama</p>
-        
         <label>1. 🏷️ Nama Tim / Komunitas</label>
         <input type="text" id="colabNamaTim" placeholder="Nama tim kamu" required>
-        
         <label>2. 👑 Nama Pemilik / Leader</label>
         <input type="text" id="colabLeader" placeholder="Nama leader" required>
-        
         <label>3. 📱 Kontak / WA Leader</label>
         <input type="tel" id="colabWa" placeholder="08xxxxx" required>
-        
         <label>4. 📲 Sosial Media (TikTok / IG / YT)</label>
         <input type="text" id="colabSosmed" placeholder="@username / link" required>
-        
         <label>5. 👥 Jumlah Member Tim</label>
         <input type="number" id="colabJumlahMember" placeholder="Contoh: 25" required>
-        
         <label>6. 🎮 Platform / Game Utama</label>
         <input type="text" id="colabPlatform" placeholder="Contoh: Roblox, ML, dll" required>
-        
         <label>7. 🤝 Bentuk Kerjasama yang Diinginkan</label>
         <div class="checkbox-group">
             <label><input type="checkbox" class="colabKerjasama" value="Sinematik & Konten Bareng"> Sinematik & Konten Bareng</label>
@@ -389,10 +386,8 @@
             <label><input type="checkbox" class="colabKerjasama" value="Merchandise Kolaborasi"> Merchandise Kolaborasi</label>
             <label><input type="checkbox" class="colabKerjasama" value="Lainnya"> Lainnya: <input type="text" id="colabLainnya" placeholder="sebutkan..." style="margin-left:6px;padding:4px 8px;border-radius:20px;background:#1E1A42;border:0.5px solid #8B5CF6;color:white;flex:1;font-size:0.8rem;"></label>
         </div>
-        
         <label>8. 📝 Alasan Ingin Berkerjasama dengan ASC GARAGE</label>
         <textarea id="colabAlasan" placeholder="Tulis alasan kamu..." rows="3" required></textarea>
-        
         <label>9. ⚠️ Pernyataan</label>
         <div class="checkbox-group">
             <label><input type="checkbox" class="colabPernyataan" value="Saya menyatakan ini murni untuk KERJASAMA, BUKAN daftar member biasa."> Murni untuk KERJASAMA, bukan daftar member biasa</label>
@@ -400,19 +395,15 @@
             <label><input type="checkbox" class="colabPernyataan" value="Kami siap saling hormat & setara."> Siap saling hormat & setara</label>
             <label><input type="checkbox" class="colabPernyataan" value="Kami memahami pelanggaran = dicabut kerjasamanya."> Paham pelanggaran = dicabut kerjasama</label>
         </div>
-        
         <label>📅 Tanggal</label>
         <input type="date" id="colabTanggal">
-        
         <label>✍️ Nama Leader (Tanda Tangan)</label>
         <input type="text" id="colabTtd" placeholder="Nama leader sebagai TTD" required>
-        
         <button class="btn-send" id="sendColabBtn"><i class="fab fa-whatsapp"></i> Kirim ke WhatsApp ASC</button>
         <button class="btn-close" id="closeColabBtn">Tutup</button>
     </div>
 </div>
 
-<!-- === MODAL SHOP GAMEPASS === -->
 <div id="shopModal" class="modal-shop">
     <div class="shop-card">
         <h3>🛒 Shop Gamepass</h3>
@@ -497,7 +488,7 @@
 <script>
     (function() {
         const C = window.CONFIG || window.CONFIG_FALLBACK;
-        
+
         function hideLoader() {
             const ld = document.getElementById('loader');
             if(ld && ld.style.display !== 'none') {
@@ -507,12 +498,12 @@
         }
         window.addEventListener('load', () => setTimeout(hideLoader, 5000));
         setTimeout(hideLoader, 7000);
-        
+
         const heroBtn = document.getElementById('heroMemberBtn');
         const floatingAdmin = document.getElementById('floatingAdminBtn');
         const sociabuzzBtn = document.getElementById('sociabuzzBtn');
         const tiktokBtnFooter = document.getElementById('tiktokBtnFooter');
-        
+
         if(heroBtn) {
             heroBtn.href = C.links.registerMember;
             heroBtn.addEventListener('click', (e) => {
@@ -523,25 +514,25 @@
         if(floatingAdmin) floatingAdmin.href = C.links.adminLogin;
         if(sociabuzzBtn) sociabuzzBtn.href = C.links.sociabuzz;
         if(tiktokBtnFooter) tiktokBtnFooter.href = C.links.tiktok;
-        
+
         document.querySelectorAll('#desktopMemberOpen, #mobileMemberOpen').forEach(el => {
             el.addEventListener('click', () => window.open(C.links.registerMember, '_blank'));
         });
-        
+
         const carouselSlides = document.getElementById('carouselSlides');
         if(carouselSlides && C.carousel) {
-            carouselSlides.innerHTML = C.carousel.map((url, i) => 
+            carouselSlides.innerHTML = C.carousel.map((url, i) =>
                 `<div class="carousel-slide"><img src="${url}" alt="Gallery ${i+1}" loading="lazy"></div>`
             ).join('');
         }
-        
+
         const reqList = document.getElementById('requirementsList');
         if(reqList && C.requirements) {
-            reqList.innerHTML = C.requirements.map(r => 
+            reqList.innerHTML = C.requirements.map(r =>
                 `<li><i class="fas ${r.icon}"></i> ${r.text}</li>`
             ).join('');
         }
-        
+
         const partnerGrid = document.getElementById('partnerGrid');
         if(partnerGrid && C.partners) {
             partnerGrid.innerHTML = C.partners.map(p => `
@@ -555,7 +546,7 @@
                 </div>
             `).join('');
         }
-        
+
         const productGrid = document.getElementById('productGrid');
         if(productGrid && C.products) {
             productGrid.innerHTML = C.products.map(p => `
@@ -566,7 +557,7 @@
                 </div>
             `).join('');
         }
-        
+
         const teamSection = document.getElementById('teamSection');
         if(teamSection && C.team) {
             teamSection.innerHTML = `
@@ -581,7 +572,7 @@
                 </div>
             `;
         }
-        
+
         const starsContainer = document.getElementById('starsContainer');
         for(let i=0;i<120;i++) {
             const star = document.createElement('div');
@@ -604,7 +595,7 @@
             p.style.animationDuration = Math.random()*8+6+'s';
             particleContainer.appendChild(p);
         }
-        
+
         const hamburger = document.getElementById('hamburgerBtn');
         const mobileMenu = document.getElementById('mobileMenuOverlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
@@ -613,7 +604,7 @@
         document.querySelectorAll('#mobileMenuOverlay .menu-items a').forEach(el => {
             el.addEventListener('click', () => mobileMenu.classList.remove('active'));
         });
-        
+
         const customAlert = document.getElementById('customAlert');
         const alertOkBtn = document.getElementById('alertOkBtn');
         let pendingWaLink = '';
@@ -626,21 +617,21 @@
             if(pendingWaLink) { window.open(pendingWaLink, '_blank'); pendingWaLink = ''; }
         }
         if(alertOkBtn) alertOkBtn.addEventListener('click', hideCustomAlert);
-        
+
         const modalMember = document.getElementById('memberModal');
         const waFormModal = document.getElementById('waFormModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const closeWaFormBtn = document.getElementById('closeWaFormBtn');
         const joinDiscordBtn = document.getElementById('joinDiscordBtn');
         const joinWaBtn = document.getElementById('joinWaBtn');
-        
+
         if(closeModalBtn) closeModalBtn.addEventListener('click', () => modalMember.style.display = 'none');
         if(closeWaFormBtn) closeWaFormBtn.addEventListener('click', () => waFormModal.style.display = 'none');
         window.addEventListener('click', (e) => {
             if(e.target === modalMember) modalMember.style.display = 'none';
             if(e.target === waFormModal) waFormModal.style.display = 'none';
         });
-        
+
         if(joinDiscordBtn) {
             joinDiscordBtn.addEventListener('click', () => {
                 modalMember.style.display = 'none';
@@ -653,7 +644,7 @@
                 waFormModal.style.display = 'flex';
             });
         }
-        
+
         function copyToClipboard(text) {
             return new Promise((resolve, reject) => {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -675,11 +666,10 @@
                 }
             });
         }
-        
-        // WA FORM SUBMIT
+
         const waForm = document.getElementById('waForm');
         const submitWaBtn = document.getElementById('submitWaBtn');
-        
+
         if(waForm) {
             waForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -690,11 +680,11 @@
                 const asal = document.getElementById('waAsal').value.trim();
                 const teamLama = document.getElementById('waTeamLama').value.trim();
                 const alasan = document.getElementById('waAlasan').value.trim();
-                
+
                 if(!namaLengkap || !namaPanggilan || !gender || !umur || !asal || !teamLama || !alasan) {
                     return alert("❌ Lengkapi semua data!");
                 }
-                
+
                 const intro = `╔═══════ ✦ 👑 ✦ ═══════╗
         〔 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗔𝗦𝗖 〕
           「 𝗠𝗘𝗠𝗕𝗘𝗥 𝗜𝗡𝗧𝗥𝗢 」
@@ -708,16 +698,16 @@
 ❖ 𝗧𝗲𝗮𝗺/𝗞𝗼𝗺𝘂𝗻𝗶𝘁𝗮𝘀 𝗟𝗮𝗺𝗮 : ${teamLama}
 ❖ 𝗔𝗹𝗮𝘀𝗮𝗻 𝗕𝗲𝗿𝗴𝗮𝗯𝘂𝗻𝗴 𝗱𝗶 𝗔𝗦𝗖 : ${alasan}
 
-════════ ❖ ════════ 
+════════ ❖ ════════
 ❖ ════════
 
 ✨ 𝗘𝘃𝗲𝗿𝘆 𝗺𝗲𝗺𝗯𝗲𝗿 𝗵𝗮𝘀 𝗮 𝘀𝘁𝗼𝗿𝘆, 𝗲𝘃𝗲𝗿𝘆 𝘀𝘁𝗼𝗿𝘆 𝗵𝗮𝘀 𝗮 𝘃𝗮𝗹𝘂𝗲 ✨
 
 👑 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 𝗔𝗦𝗖 𝗙𝗮𝗺𝗶𝗹𝘆 👑`;
-                
+
                 submitWaBtn.disabled = true;
                 submitWaBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-                
+
                 try {
                     await copyToClipboard(intro);
                     waForm.reset();
@@ -733,15 +723,14 @@
                 }
             });
         }
-        
-        // CAROUSEL
+
         const slides = document.querySelectorAll('.carousel-slide');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const dotsContainer = document.getElementById('carouselDots');
         let currentIndex = 0;
         let autoInterval;
-        
+
         function updateCarousel() {
             const sc = document.getElementById('carouselSlides');
             if(sc) sc.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -753,10 +742,10 @@
         function prevSlide() { if(slides.length) { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); } }
         function startAutoSlide() { if(autoInterval) clearInterval(autoInterval); if(slides.length) autoInterval = setInterval(nextSlide, 4000); }
         function resetAutoSlide() { clearInterval(autoInterval); startAutoSlide(); }
-        
+
         if(prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
         if(nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-        
+
         if(dotsContainer && slides.length) {
             slides.forEach((_, i) => {
                 const dot = document.createElement('div');
@@ -767,20 +756,19 @@
             });
         }
         startAutoSlide();
-        
-        // === COLAB MODAL ===
+
         const colabModal = document.getElementById('colabModal');
         const btnColab = document.getElementById('btnColab');
         const closeColabBtn = document.getElementById('closeColabBtn');
         const sendColabBtn = document.getElementById('sendColabBtn');
-        
+
         function openColab() {
             colabModal.classList.add('show');
         }
         function closeColab() {
             colabModal.classList.remove('show');
         }
-        
+
         if(btnColab) btnColab.addEventListener('click', openColab);
         if(closeColabBtn) closeColabBtn.addEventListener('click', closeColab);
         if(colabModal) {
@@ -788,10 +776,9 @@
                 if(e.target === colabModal) closeColab();
             });
         }
-        
+
         if(sendColabBtn) {
             sendColabBtn.addEventListener('click', async () => {
-                // Ambil semua data
                 const namaTim = document.getElementById('colabNamaTim').value.trim();
                 const leader = document.getElementById('colabLeader').value.trim();
                 const wa = document.getElementById('colabWa').value.trim();
@@ -802,13 +789,11 @@
                 const alasan = document.getElementById('colabAlasan').value.trim();
                 const tanggal = document.getElementById('colabTanggal').value;
                 const ttd = document.getElementById('colabTtd').value.trim();
-                
-                // Validasi wajib
+
                 if(!namaTim || !leader || !wa || !sosmed || !jumlahMember || !platform || !alasan || !ttd) {
                     return alert("❌ Lengkapi semua data yang wajib diisi!");
                 }
-                
-                // Ambil checkbox kerjasama
+
                 const kerjasamaArr = [];
                 document.querySelectorAll('.colabKerjasama:checked').forEach(cb => {
                     if(cb.value === 'Lainnya' && lainnya) {
@@ -818,18 +803,15 @@
                     }
                 });
                 if(kerjasamaArr.length === 0 && lainnya) kerjasamaArr.push(`Lainnya: ${lainnya}`);
-                
-                // Ambil checkbox pernyataan
+
                 const pernyataanArr = [];
                 document.querySelectorAll('.colabPernyataan:checked').forEach(cb => {
                     pernyataanArr.push(cb.value);
                 });
-                
-                // Format kerjasama & pernyataan
+
                 const kerjasamaText = kerjasamaArr.length > 0 ? kerjasamaArr.map(k => `   □ ${k}`).join('\n') : '   (tidak ada yang dipilih)';
                 const pernyataanText = pernyataanArr.length > 0 ? pernyataanArr.map(p => `   □ ${p}`).join('\n') : '   (tidak ada yang dicentang)';
-                
-                // Format pesan
+
                 const pesan = `╭─────────────────────────────────────────╮
 │     🤝 FORM PENDAFTARAN KOLABORASI      │
 │         🏁 ASC GARAGE                  │
@@ -867,10 +849,10 @@ ${pernyataanText}
 
 📅 TANGGAL: ${tanggal || '-'}
 ✍️ NAMA LEADER: ${ttd}`;
-                
+
                 sendColabBtn.disabled = true;
                 sendColabBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
-                
+
                 try {
                     await copyToClipboard(pesan);
                     closeColab();
@@ -885,13 +867,12 @@ ${pernyataanText}
                 }
             });
         }
-        
-        // === SHOP GAMEPASS MODAL ===
+
         const shopModal = document.getElementById('shopModal');
         const btnShop = document.getElementById('btnShop');
         const closeShopBtn = document.getElementById('closeShopBtn');
         const sendShopBtn = document.getElementById('sendShopBtn');
-        
+
         if(btnShop) btnShop.addEventListener('click', () => shopModal.style.display = 'flex');
         if(closeShopBtn) closeShopBtn.addEventListener('click', () => shopModal.style.display = 'none');
         if(shopModal) {
@@ -899,7 +880,7 @@ ${pernyataanText}
                 if(e.target === shopModal) shopModal.style.display = 'none';
             });
         }
-        
+
         if(sendShopBtn) {
             sendShopBtn.addEventListener('click', () => {
                 const nama = document.getElementById('shopNama').value.trim();
@@ -910,8 +891,7 @@ ${pernyataanText}
                 document.getElementById('shopNama').value = '';
             });
         }
-        
-        // PRODUK BUY
+
         document.querySelectorAll('.btn-buy').forEach(btn => {
             btn.addEventListener('click', () => {
                 const link = btn.getAttribute('data-link');
@@ -919,8 +899,7 @@ ${pernyataanText}
                 else alert("Link segera rilis!");
             });
         });
-        
-        // SEARCH
+
         const searchInput = document.getElementById('searchInput');
         if(searchInput) {
             searchInput.addEventListener('input', () => {
@@ -933,15 +912,14 @@ ${pernyataanText}
         }
         document.getElementById('desktopSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
         document.getElementById('mobileSearchFocus')?.addEventListener('click', (e) => { e.preventDefault(); searchInput?.focus(); });
-        
-        // TRACKING
+
         const domain = 'asc-garage.vercel.app';
         fetch('https://website-monitor.vercel.app/api/track-visitor', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ website: domain, page: window.location.pathname })
         }).catch(err => console.log('Tracking error:', err));
-        
+
         setInterval(() => {
             fetch('https://website-monitor.vercel.app/api/track-visitor', {
                 method: 'POST',
@@ -949,7 +927,7 @@ ${pernyataanText}
                 body: JSON.stringify({ website: domain, page: window.location.pathname })
             }).catch(err => console.log('Tracking error:', err));
         }, 30000);
-        
+
         console.log('✅ Website loaded with ' + (window.CONFIG ? 'config.js' : 'fallback config'));
     })();
 </script>
