@@ -223,6 +223,32 @@
             50% { transform: translateY(-30px) scale(1.3); opacity: 0.5; }
         }
 
+        /* === STATUS INDICATOR === */
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: #25D366;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #25D366;
+            border-radius: 50%;
+            animation: livePulse 1.5s infinite;
+        }
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+        }
+
         @media (max-width: 480px) {
             .maintenance-card { padding: 2rem 1.2rem; border-radius: 30px; }
             .social-row { flex-direction: column; align-items: stretch; }
@@ -245,6 +271,11 @@
             <img src="logo.png" alt="ASC Garage Logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
         </div>
 
+        <div class="live-status">
+            <span class="live-dot"></span>
+            <span>MEMANTAU STATUS SERVER...</span>
+        </div>
+
         <i class="fas fa-tools maintenance-icon"></i>
 
         <h1 class="maintenance-title">SEDANG MAINTENANCE</h1>
@@ -261,7 +292,7 @@
 
         <div class="refresh-info">
             <i class="fas fa-sync-alt"></i>
-            <span>Refresh otomatis dalam <span class="countdown" id="countdown">10</span> detik</span>
+            <span>Cek otomatis dalam <span class="countdown" id="countdown">5</span> detik</span>
         </div>
 
         <div class="social-row">
@@ -280,53 +311,187 @@
         window.MAINTENANCE_CONFIG = {
             enabled: true,
             message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
-            refreshInterval: 10,
+            refreshInterval: 5,
             waAdmin: '6283854980779',
             tiktok: 'https://www.tiktok.com/@acr.all.star.crew'
         };
     </script>
-    <script src="config.js" onerror="console.warn('⚠️ config.js tidak ditemukan, memakai default maintenance config.');"></script>
+
     <script>
         (function() {
-            const MC = (window.CONFIG && window.CONFIG.maintenance)
-                ? window.CONFIG.maintenance
-                : window.MAINTENANCE_CONFIG;
+            // ============================================
+            // KONFIGURASI CEK BERKALA
+            // ============================================
+            const CHECK_INTERVAL = 5;   // detik - interval cek status maintenance
+            const INDEX_PAGE = 'index.html'; // halaman tujuan setelah maintenance off
 
-            const msgEl = document.getElementById('maintenanceMessage');
-            if (msgEl && MC.message) {
-                msgEl.innerHTML = MC.message;
-            }
-
-            const waBtn = document.getElementById('waMaintenanceBtn');
-            if (waBtn && MC.waAdmin) {
-                waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
-            }
-
-            const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
-            if (tiktokBtn && MC.tiktok) {
-                tiktokBtn.href = MC.tiktok;
-            }
-
-            // AUTO REFRESH COUNTDOWN
-            const refreshSeconds = MC.refreshInterval || 10;
-            let remaining = refreshSeconds;
+            let remaining = CHECK_INTERVAL;
             const countdownEl = document.getElementById('countdown');
+            const msgEl = document.getElementById('maintenanceMessage');
 
-            function updateCountdown() {
-                if (countdownEl) countdownEl.textContent = remaining;
-            }
-            updateCountdown();
+            // Set countdown awal
+            if (countdownEl) countdownEl.textContent = remaining;
 
-            const countdownInterval = setInterval(() => {
-                remaining--;
-                updateCountdown();
-                if (remaining <= 0) {
-                    clearInterval(countdownInterval);
-                    window.location.reload();
+            // ============================================
+            // FUNGSI CEK STATUS MAINTENANCE (FETCH ULANG CONFIG.JS)
+            // ============================================
+            async function checkMaintenanceStatus() {
+                try {
+                    // Fetch config.js dengan cache-buster agar selalu fresh
+                    const res = await fetch('config.js?t=' + Date.now(), {
+                        cache: 'no-store',
+                        headers: { 'Cache-Control': 'no-cache' }
+                    });
+
+                    if (!res.ok) throw new Error('Config tidak dapat diakses');
+
+                    const text = await res.text();
+
+                    // Eksekusi config.js di scope baru untuk baca window.CONFIG
+                    let newConfig = null;
+                    try {
+                        // Buat sandbox function untuk eksekusi config
+                        const sandbox = new Function(`
+                            var window = {};
+                            ${text}
+                            return window.CONFIG;
+                        `);
+                        newConfig = sandbox();
+                    } catch (e) {
+                        // Fallback: regex cari maintenance.enabled
+                        const match = text.match(/enabled\s*:\s*(true|false)/);
+                        if (match) {
+                            const isEnabled = match[1] === 'true';
+                            newConfig = { maintenance: { enabled: isEnabled } };
+                        }
+                    }
+
+                    // Ambil status maintenance
+                    const MC = newConfig && newConfig.maintenance
+                        ? newConfig.maintenance
+                        : null;
+
+                    if (!MC) {
+                        console.warn('⚠️ Maintenance config tidak ditemukan, anggap OFF.');
+                        return true; // maintenance OFF → balik ke index
+                    }
+
+                    // Update pesan jika ada perubahan
+                    if (MC.message && msgEl && msgEl.innerHTML !== MC.message) {
+                        msgEl.innerHTML = MC.message;
+                    }
+
+                    // Return true jika maintenance OFF (enabled = false)
+                    return MC.enabled === false;
+
+                } catch (err) {
+                    console.warn('⚠️ Gagal cek config, tetap di maintenance:', err.message);
+                    return false; // Tetap di maintenance kalau gagal fetch
                 }
-            }, 1000);
+            }
 
-            // DEKORASI BINTANG
+            // ============================================
+            // LOOP CEK BERKALA
+            // ============================================
+            async function tick() {
+                // Update countdown
+                remaining--;
+                if (countdownEl) countdownEl.textContent = Math.max(remaining, 0);
+
+                // Kalau sudah 0, cek status
+                if (remaining <= 0) {
+                    remaining = CHECK_INTERVAL;
+                    if (countdownEl) countdownEl.textContent = remaining;
+
+                    console.log('🔍 Mengecek status maintenance...');
+                    const isOff = await checkMaintenanceStatus();
+
+                    if (isOff) {
+                        console.log('✅ Maintenance OFF! Redirect ke index...');
+                        // Redirect ke index
+                        window.location.replace(INDEX_PAGE);
+                        return; // stop loop
+                    } else {
+                        console.log('🔧 Masih maintenance. Lanjut cek lagi...');
+                    }
+                }
+
+                // Lanjut tick berikutnya
+                setTimeout(tick, 1000);
+            }
+
+            // ============================================
+            // SETUP LINK ADMIN & TIKTOK (dari config.js pertama)
+            // ============================================
+            function setupLinks() {
+                const MC = window.MAINTENANCE_CONFIG;
+
+                const waBtn = document.getElementById('waMaintenanceBtn');
+                if (waBtn && MC.waAdmin) {
+                    waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+                }
+
+                const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
+                if (tiktokBtn && MC.tiktok) {
+                    tiktokBtn.href = MC.tiktok;
+                }
+            }
+            setupLinks();
+
+            // ============================================
+            // MUAT CONFIG.JS AWAL UNTUK SET PESAN & LINK
+            // ============================================
+            (async function loadInitialConfig() {
+                try {
+                    const res = await fetch('config.js?t=' + Date.now(), { cache: 'no-store' });
+                    if (!res.ok) return;
+                    const text = await res.text();
+
+                    const sandbox = new Function(`
+                        var window = {};
+                        ${text}
+                        return window.CONFIG;
+                    `);
+                    const cfg = sandbox();
+
+                    if (cfg && cfg.maintenance) {
+                        const MC = cfg.maintenance;
+
+                        // Kalau ternyata sudah OFF saat load pertama, langsung redirect
+                        if (MC.enabled === false) {
+                            window.location.replace(INDEX_PAGE);
+                            return;
+                        }
+
+                        // Update pesan
+                        if (MC.message && msgEl) msgEl.innerHTML = MC.message;
+
+                        // Update link WA
+                        const waBtn = document.getElementById('waMaintenanceBtn');
+                        if (waBtn && MC.waAdmin) {
+                            waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+                        }
+
+                        // Update link TikTok
+                        const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
+                        if (tiktokBtn && MC.tiktok) {
+                            tiktokBtn.href = MC.tiktok;
+                        }
+
+                        // Update interval countdown
+                        if (MC.refreshInterval && MC.refreshInterval > 0) {
+                            remaining = MC.refreshInterval;
+                            if (countdownEl) countdownEl.textContent = remaining;
+                        }
+                    }
+                } catch (err) {
+                    console.warn('⚠️ Gagal load config awal:', err.message);
+                }
+            })();
+
+            // ============================================
+            // DEKORASI: BINTANG
+            // ============================================
             const starsContainer = document.getElementById('starsContainer');
             if (starsContainer) {
                 for (let i = 0; i < 100; i++) {
@@ -341,7 +506,9 @@
                 }
             }
 
-            // DEKORASI PARTIKEL
+            // ============================================
+            // DEKORASI: PARTIKEL
+            // ============================================
             const particleContainer = document.getElementById('particleContainer');
             if (particleContainer) {
                 for (let i = 0; i < 40; i++) {
@@ -356,7 +523,9 @@
                 }
             }
 
-            // FLOATING DOTS
+            // ============================================
+            // DEKORASI: FLOATING DOTS
+            // ============================================
             for (let i = 0; i < 6; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('floating-dot');
@@ -369,7 +538,11 @@
                 document.body.appendChild(dot);
             }
 
-            console.log('🔧 Maintenance mode active. Refresh in ' + refreshSeconds + 's');
+            // ============================================
+            // MULAI LOOP CEK BERKALA
+            // ============================================
+            console.log('🔧 Maintenance mode active. Auto-check every ' + CHECK_INTERVAL + 's...');
+            setTimeout(tick, 1000);
         })();
     </script>
 </body>
