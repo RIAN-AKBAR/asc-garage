@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>ASC GARAGE | Maintenance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            background: #05040E;
+            color: #F0EBFF;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .bg-soft { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5; background: radial-gradient(circle at 20% 30%, #0D0B1F, #020106); }
+        .grid-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(139,92,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.03) 1px, transparent 1px); background-size: 50px 50px; z-index: -4; pointer-events: none; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4; pointer-events: none; }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: twinkle 3s infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 0.8; transform: scale(1); } }
+
+        .aura-float { position: fixed; width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(139,92,246,0.25), rgba(79,42,165,0) 70%); top: -30vh; right: -30vw; filter: blur(120px); z-index: -3; animation: auraMove 18s infinite alternate ease-in-out; }
+        .aura-float2 { position: fixed; width: 65vh; height: 65vh; background: radial-gradient(circle, rgba(168,85,247,0.22), rgba(236,72,153,0) 70%); bottom: -20vh; left: -20vw; filter: blur(110px); z-index: -3; animation: auraMove2 22s infinite alternate; }
+        .aura-float3 { position: fixed; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(59,130,246,0.12), rgba(139,92,246,0) 70%); top: 40%; left: 30%; filter: blur(100px); z-index: -3; animation: auraMove3 15s infinite alternate; }
+        @keyframes auraMove { 0% { transform: translate(0,0) scale(1); opacity: 0.4; } 100% { transform: translate(60px, -40px) scale(1.3); opacity: 0.9; } }
+        @keyframes auraMove2 { 0% { transform: translate(0,0) scale(1); opacity: 0.3; } 100% { transform: translate(-70px, 50px) scale(1.4); opacity: 0.8; } }
+        @keyframes auraMove3 { 0% { transform: translate(0,0) scale(1); opacity: 0.2; } 100% { transform: translate(40px, 40px) scale(1.2); opacity: 0.6; } }
+
+        .particle-field { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; pointer-events: none; overflow: hidden; }
+        .particle { position: absolute; background: linear-gradient(135deg, #A855F7, #C084FC); border-radius: 50%; opacity: 0.4; animation: floatParticle 12s infinite linear; }
+        @keyframes floatParticle { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.3; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+
+        /* === MAINTENANCE CARD === */
+        .maintenance-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(14, 10, 34, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 40px;
+            padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.25), 0 0 80px rgba(168, 85, 247, 0.1);
+            animation: cardFloat 6s ease-in-out infinite alternate;
+        }
+        @keyframes cardFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .logo-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .logo-wrap img {
+            width: clamp(80px, 20vw, 110px);
+            height: clamp(80px, 20vw, 110px);
+            border-radius: 50%;
+            object-fit: contain;
+            border: 2px solid rgba(168, 85, 247, 0.5);
+            padding: 6px;
+            background: rgba(10, 7, 22, 0.6);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+            animation: pulseLogo 2.5s ease-in-out infinite;
+        }
+        @keyframes pulseLogo {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); transform: scale(0.98); }
+            50% { box-shadow: 0 0 45px rgba(192, 132, 252, 0.8); transform: scale(1.03); }
+        }
+
+        .maintenance-icon {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: #A855F7;
+            margin-bottom: 1rem;
+            display: block;
+            animation: wrenchSpin 4s ease-in-out infinite;
+        }
+        @keyframes wrenchSpin {
+            0%, 100% { transform: rotate(-15deg) scale(1); }
+            50% { transform: rotate(15deg) scale(1.1); }
+        }
+
+        .maintenance-title {
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
+            font-weight: 800;
+            background: linear-gradient(125deg, #F0E6FF, #C084FC, #A855F7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .maintenance-subtitle {
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            opacity: 0.75;
+            line-height: 1.7;
+            margin-bottom: 1.8rem;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #A855F7, #C084FC, #A855F7, transparent);
+            margin: 0 auto 1.8rem;
+            border-radius: 10px;
+        }
+
+        .progress-wrap {
+            width: 100%;
+            height: 4px;
+            background: rgba(139, 92, 246, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.8rem;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #A855F7, #C084FC, #E9D5FF);
+            border-radius: 10px;
+            animation: progressLoad 10s linear infinite;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        }
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .refresh-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+            color: #C084FC;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.8rem;
+        }
+        .refresh-info i {
+            animation: spinIcon 2s linear infinite;
+        }
+        @keyframes spinIcon {
+            100% { transform: rotate(360deg); }
+        }
+        .refresh-info .countdown {
+            font-weight: 700;
+            color: #E9D5FF;
+            min-width: 24px;
+            display: inline-block;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .social-btn.wa {
+            background: linear-gradient(95deg, #25D366, #128C7E);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+        .social-btn.tiktok {
+            background: #19153A;
+            border: 1px solid #FF1A66;
+            box-shadow: 0 4px 20px rgba(255, 26, 102, 0.2);
+        }
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .footer-note {
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            opacity: 0.4;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .floating-dot {
+            position: fixed;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #A855F7, #C084FC);
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.3;
+            animation: floatDot 8s infinite ease-in-out;
+        }
+        @keyframes floatDot {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+            50% { transform: translateY(-30px) scale(1.3); opacity: 0.5; }
+        }
+
+        @media (max-width: 480px) {
+            .maintenance-card { padding: 2rem 1.2rem; border-radius: 30px; }
+            .social-row { flex-direction: column; align-items: stretch; }
+            .social-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-soft"></div>
+    <div class="grid-overlay"></div>
+    <div class="aura-float"></div>
+    <div class="aura-float2"></div>
+    <div class="aura-float3"></div>
+    <div class="stars" id="starsContainer"></div>
+    <div class="particle-field" id="particleContainer"></div>
+
+    <div class="maintenance-card">
+        <div class="logo-wrap">
+            <img src="logo.png" alt="ASC Garage Logo" onerror="this.src='https://placehold.co/200x200/8B5CF6/FFFFFF?text=ASC'">
+        </div>
+
+        <i class="fas fa-tools maintenance-icon"></i>
+
+        <h1 class="maintenance-title">SEDANG MAINTENANCE</h1>
+        <p class="maintenance-subtitle" id="maintenanceMessage">
+            Kami sedang melakukan perbaikan dan peningkatan sistem.<br>
+            Mohon tunggu sebentar, halaman akan otomatis refresh.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="progress-wrap">
+            <div class="progress-bar"></div>
+        </div>
+
+        <div class="refresh-info">
+            <i class="fas fa-sync-alt"></i>
+            <span>Refresh otomatis dalam <span class="countdown" id="countdown">10</span> detik</span>
+        </div>
+
+        <div class="social-row">
+            <a href="#" id="waMaintenanceBtn" class="social-btn wa" target="_blank">
+                <i class="fab fa-whatsapp"></i> Hubungi Admin
+            </a>
+            <a href="#" id="tiktokMaintenanceBtn" class="social-btn tiktok" target="_blank">
+                <i class="fab fa-tiktok"></i> TikTok Kami
+            </a>
+        </div>
+
+        <p class="footer-note">© ASC GARAGE — esthetic universe</p>
+    </div>
+
+    <script>
+        window.MAINTENANCE_CONFIG = {
+            enabled: true,
+            message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
+            refreshInterval: 10,
+            waAdmin: '6283854980779',
+            tiktok: 'https://www.tiktok.com/@acr.all.star.crew'
+        };
+    </script>
+    <script src="config.js" onerror="console.warn('⚠️ config.js tidak ditemukan, memakai default maintenance config.');"></script>
+    <script>
+        (function() {
+            const MC = (window.CONFIG && window.CONFIG.maintenance)
+                ? window.CONFIG.maintenance
+                : window.MAINTENANCE_CONFIG;
+
+            const msgEl = document.getElementById('maintenanceMessage');
+            if (msgEl && MC.message) {
+                msgEl.innerHTML = MC.message;
+            }
+
+            const waBtn = document.getElementById('waMaintenanceBtn');
+            if (waBtn && MC.waAdmin) {
+                waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+            }
+
+            const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
+            if (tiktokBtn && MC.tiktok) {
+                tiktokBtn.href = MC.tiktok;
+            }
+
+            // AUTO REFRESH COUNTDOWN
+            const refreshSeconds = MC.refreshInterval || 10;
+            let remaining = refreshSeconds;
+            const countdownEl = document.getElementById('countdown');
+
+            function updateCountdown() {
+                if (countdownEl) countdownEl.textContent = remaining;
+            }
+            updateCountdown();
+
+            const countdownInterval = setInterval(() => {
+                remaining--;
+                updateCountdown();
+                if (remaining <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.reload();
+                }
+            }, 1000);
+
+            // DEKORASI BINTANG
+            const starsContainer = document.getElementById('starsContainer');
+            if (starsContainer) {
+                for (let i = 0; i < 100; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = Math.random() * 2 + 1 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    starsContainer.appendChild(star);
+                }
+            }
+
+            // DEKORASI PARTIKEL
+            const particleContainer = document.getElementById('particleContainer');
+            if (particleContainer) {
+                for (let i = 0; i < 40; i++) {
+                    const p = document.createElement('div');
+                    p.classList.add('particle');
+                    p.style.left = Math.random() * 100 + '%';
+                    p.style.width = Math.random() * 4 + 2 + 'px';
+                    p.style.height = p.style.width;
+                    p.style.animationDelay = Math.random() * 10 + 's';
+                    p.style.animationDuration = Math.random() * 8 + 6 + 's';
+                    particleContainer.appendChild(p);
+                }
+            }
+
+            // FLOATING DOTS
+            for (let i = 0; i < 6; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('floating-dot');
+                dot.style.width = Math.random() * 8 + 4 + 'px';
+                dot.style.height = dot.style.width;
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.top = Math.random() * 100 + '%';
+                dot.style.animationDelay = Math.random() * 5 + 's';
+                dot.style.animationDuration = Math.random() * 6 + 4 + 's';
+                document.body.appendChild(dot);
+            }
+
+            console.log('🔧 Maintenance mode active. Refresh in ' + refreshSeconds + 's');
+        })();
+    </script>
+</body>
+</html>
