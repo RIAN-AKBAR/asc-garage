@@ -1,4 +1,17 @@
 window.CONFIG = {
+    // ============================================
+    // 🔧 MAINTENANCE MODE
+    // enabled: true  → website redirect ke maintenance.html
+    // enabled: false → website berjalan normal
+    // ============================================
+    maintenance: {
+        enabled: true,
+        message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
+        refreshInterval: 10, // detik
+        waAdmin: '6283854980779',
+        tiktok: 'https://www.tiktok.com/@acr.all.star.crew'
+    },
+
     links: {
         registerMember: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc',
         adminLogin: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc/login.php',
