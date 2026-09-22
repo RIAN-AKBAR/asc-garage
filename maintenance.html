@@ -223,7 +223,7 @@
             50% { transform: translateY(-30px) scale(1.3); opacity: 0.5; }
         }
 
-        /* === STATUS INDICATOR === */
+        /* === LIVE STATUS INDICATOR === */
         .live-status {
             display: inline-flex;
             align-items: center;
@@ -236,6 +236,8 @@
             border: 1px solid rgba(37, 211, 102, 0.3);
             margin-bottom: 1rem;
             letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 600;
         }
         .live-dot {
             width: 6px;
@@ -247,6 +249,25 @@
         @keyframes livePulse {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
             50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+        }
+
+        /* === REFRESH BADGE === */
+        .refresh-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            color: #C084FC;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            margin-top: 0.6rem;
+            letter-spacing: 0.5px;
+        }
+        .refresh-badge i {
+            font-size: 0.6rem;
+            animation: spinIcon 2s linear infinite;
         }
 
         @media (max-width: 480px) {
@@ -273,7 +294,7 @@
 
         <div class="live-status">
             <span class="live-dot"></span>
-            <span>MEMANTAU STATUS SERVER...</span>
+            <span>Memantau Status Server</span>
         </div>
 
         <i class="fas fa-tools maintenance-icon"></i>
@@ -292,7 +313,7 @@
 
         <div class="refresh-info">
             <i class="fas fa-sync-alt"></i>
-            <span>Cek otomatis dalam <span class="countdown" id="countdown">5</span> detik</span>
+            <span>Refresh otomatis dalam <span class="countdown" id="countdown">10</span> detik</span>
         </div>
 
         <div class="social-row">
@@ -304,14 +325,23 @@
             </a>
         </div>
 
+        <div class="refresh-badge">
+            <i class="fas fa-circle-notch"></i>
+            <span id="refreshCounter">Auto refresh aktif</span>
+        </div>
+
         <p class="footer-note">© ASC GARAGE — esthetic universe</p>
     </div>
 
     <script>
+        // ============================================
+        // KONFIGURASI DEFAULT (akan dioverride oleh config.js)
+        // ============================================
         window.MAINTENANCE_CONFIG = {
             enabled: true,
             message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
-            refreshInterval: 5,
+            refreshInterval: 10,   // detik - auto refresh halaman
+            checkInterval: 3,      // detik - cek status maintenance
             waAdmin: '6283854980779',
             tiktok: 'https://www.tiktok.com/@acr.all.star.crew'
         };
@@ -320,173 +350,199 @@
     <script>
         (function() {
             // ============================================
-            // KONFIGURASI CEK BERKALA
+            // KONFIGURASI
             // ============================================
-            const CHECK_INTERVAL = 5;   // detik - interval cek status maintenance
-            const INDEX_PAGE = 'index.html'; // halaman tujuan setelah maintenance off
+            const DEFAULT_REFRESH_INTERVAL = 10; // detik refresh halaman
+            const DEFAULT_CHECK_INTERVAL = 3;    // detik cek config.js
+            const INDEX_PAGE = 'index.html';
 
-            let remaining = CHECK_INTERVAL;
+            let refreshInterval = DEFAULT_REFRESH_INTERVAL;
+            let checkInterval = DEFAULT_CHECK_INTERVAL;
+
+            let refreshCountdown = refreshInterval;
+            let checkCountdown = checkInterval;
+
             const countdownEl = document.getElementById('countdown');
             const msgEl = document.getElementById('maintenanceMessage');
+            const refreshCounterEl = document.getElementById('refreshCounter');
 
-            // Set countdown awal
-            if (countdownEl) countdownEl.textContent = remaining;
+            let isRedirecting = false; // cegah double redirect
 
             // ============================================
-            // FUNGSI CEK STATUS MAINTENANCE (FETCH ULANG CONFIG.JS)
+            // FUNGSI: FETCH & PARSE CONFIG.JS
             // ============================================
-            async function checkMaintenanceStatus() {
+            async function fetchConfig() {
                 try {
-                    // Fetch config.js dengan cache-buster agar selalu fresh
                     const res = await fetch('config.js?t=' + Date.now(), {
                         cache: 'no-store',
                         headers: { 'Cache-Control': 'no-cache' }
                     });
-
                     if (!res.ok) throw new Error('Config tidak dapat diakses');
-
                     const text = await res.text();
 
-                    // Eksekusi config.js di scope baru untuk baca window.CONFIG
-                    let newConfig = null;
                     try {
-                        // Buat sandbox function untuk eksekusi config
                         const sandbox = new Function(`
                             var window = {};
                             ${text}
                             return window.CONFIG;
                         `);
-                        newConfig = sandbox();
+                        return sandbox();
                     } catch (e) {
-                        // Fallback: regex cari maintenance.enabled
+                        // Fallback regex
                         const match = text.match(/enabled\s*:\s*(true|false)/);
                         if (match) {
-                            const isEnabled = match[1] === 'true';
-                            newConfig = { maintenance: { enabled: isEnabled } };
+                            return { maintenance: { enabled: match[1] === 'true' } };
                         }
+                        return null;
                     }
-
-                    // Ambil status maintenance
-                    const MC = newConfig && newConfig.maintenance
-                        ? newConfig.maintenance
-                        : null;
-
-                    if (!MC) {
-                        console.warn('⚠️ Maintenance config tidak ditemukan, anggap OFF.');
-                        return true; // maintenance OFF → balik ke index
-                    }
-
-                    // Update pesan jika ada perubahan
-                    if (MC.message && msgEl && msgEl.innerHTML !== MC.message) {
-                        msgEl.innerHTML = MC.message;
-                    }
-
-                    // Return true jika maintenance OFF (enabled = false)
-                    return MC.enabled === false;
-
                 } catch (err) {
-                    console.warn('⚠️ Gagal cek config, tetap di maintenance:', err.message);
-                    return false; // Tetap di maintenance kalau gagal fetch
+                    console.warn('⚠️ Gagal fetch config:', err.message);
+                    return null;
                 }
             }
 
             // ============================================
-            // LOOP CEK BERKALA
+            // FUNGSI: CEK STATUS MAINTENANCE
             // ============================================
-            async function tick() {
-                // Update countdown
-                remaining--;
-                if (countdownEl) countdownEl.textContent = Math.max(remaining, 0);
+            async function checkMaintenanceStatus() {
+                const cfg = await fetchConfig();
+                if (!cfg || !cfg.maintenance) {
+                    console.warn('⚠️ Config maintenance tidak ditemukan, anggap OFF.');
+                    return true; // OFF → redirect
+                }
 
-                // Kalau sudah 0, cek status
-                if (remaining <= 0) {
-                    remaining = CHECK_INTERVAL;
-                    if (countdownEl) countdownEl.textContent = remaining;
+                const MC = cfg.maintenance;
 
-                    console.log('🔍 Mengecek status maintenance...');
+                // Update pesan jika berubah
+                if (MC.message && msgEl && msgEl.innerHTML !== MC.message) {
+                    msgEl.innerHTML = MC.message;
+                }
+
+                // Update refresh interval jika berubah
+                if (MC.refreshInterval && MC.refreshInterval > 0) {
+                    refreshInterval = MC.refreshInterval;
+                }
+                if (MC.checkInterval && MC.checkInterval > 0) {
+                    checkInterval = MC.checkInterval;
+                }
+
+                // Update link WA & TikTok
+                if (MC.waAdmin) {
+                    const waBtn = document.getElementById('waMaintenanceBtn');
+                    if (waBtn) waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+                }
+                if (MC.tiktok) {
+                    const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
+                    if (tiktokBtn) tiktokBtn.href = MC.tiktok;
+                }
+
+                return MC.enabled === false; // true = maintenance OFF
+            }
+
+            // ============================================
+            // FUNGSI: REDIRECT KE INDEX
+            // ============================================
+            function redirectToIndex() {
+                if (isRedirecting) return;
+                isRedirecting = true;
+                console.log('✅ Maintenance OFF! Redirect ke ' + INDEX_PAGE);
+                if (refreshCounterEl) refreshCounterEl.textContent = 'Mengalihkan ke website...';
+                window.location.replace(INDEX_PAGE);
+            }
+
+            // ============================================
+            // FUNGSI: LOOP UTAMA (1 detik sekali)
+            // ============================================
+            async function mainLoop() {
+                if (isRedirecting) return;
+
+                // --- Countdown refresh halaman ---
+                refreshCountdown--;
+                if (countdownEl) countdownEl.textContent = Math.max(refreshCountdown, 0);
+
+                // --- Countdown cek config ---
+                checkCountdown--;
+
+                // Update badge
+                if (refreshCounterEl) {
+                    refreshCounterEl.textContent = `Refresh dalam ${Math.max(refreshCountdown, 0)}s • Cek dalam ${Math.max(checkCountdown, 0)}s`;
+                }
+
+                // --- Waktunya cek status maintenance ---
+                if (checkCountdown <= 0) {
+                    checkCountdown = checkInterval;
                     const isOff = await checkMaintenanceStatus();
-
                     if (isOff) {
-                        console.log('✅ Maintenance OFF! Redirect ke index...');
-                        // Redirect ke index
-                        window.location.replace(INDEX_PAGE);
-                        return; // stop loop
-                    } else {
-                        console.log('🔧 Masih maintenance. Lanjut cek lagi...');
+                        redirectToIndex();
+                        return;
                     }
                 }
 
-                // Lanjut tick berikutnya
-                setTimeout(tick, 1000);
+                // --- Waktunya refresh halaman ---
+                if (refreshCountdown <= 0) {
+                    console.log('🔄 Auto refresh halaman...');
+                    window.location.reload();
+                    return;
+                }
+
+                // Lanjut loop berikutnya
+                setTimeout(mainLoop, 1000);
             }
 
             // ============================================
-            // SETUP LINK ADMIN & TIKTOK (dari config.js pertama)
+            // INISIALISASI AWAL
             // ============================================
-            function setupLinks() {
-                const MC = window.MAINTENANCE_CONFIG;
-
+            (async function init() {
+                // Set link default dulu
+                const MC0 = window.MAINTENANCE_CONFIG;
                 const waBtn = document.getElementById('waMaintenanceBtn');
-                if (waBtn && MC.waAdmin) {
-                    waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+                if (waBtn && MC0.waAdmin) {
+                    waBtn.href = `https://wa.me/${MC0.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
                 }
-
                 const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
-                if (tiktokBtn && MC.tiktok) {
-                    tiktokBtn.href = MC.tiktok;
+                if (tiktokBtn && MC0.tiktok) {
+                    tiktokBtn.href = MC0.tiktok;
                 }
-            }
-            setupLinks();
 
-            // ============================================
-            // MUAT CONFIG.JS AWAL UNTUK SET PESAN & LINK
-            // ============================================
-            (async function loadInitialConfig() {
-                try {
-                    const res = await fetch('config.js?t=' + Date.now(), { cache: 'no-store' });
-                    if (!res.ok) return;
-                    const text = await res.text();
+                // Fetch config pertama kali
+                const cfg = await fetchConfig();
+                if (cfg && cfg.maintenance) {
+                    const MC = cfg.maintenance;
 
-                    const sandbox = new Function(`
-                        var window = {};
-                        ${text}
-                        return window.CONFIG;
-                    `);
-                    const cfg = sandbox();
-
-                    if (cfg && cfg.maintenance) {
-                        const MC = cfg.maintenance;
-
-                        // Kalau ternyata sudah OFF saat load pertama, langsung redirect
-                        if (MC.enabled === false) {
-                            window.location.replace(INDEX_PAGE);
-                            return;
-                        }
-
-                        // Update pesan
-                        if (MC.message && msgEl) msgEl.innerHTML = MC.message;
-
-                        // Update link WA
-                        const waBtn = document.getElementById('waMaintenanceBtn');
-                        if (waBtn && MC.waAdmin) {
-                            waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
-                        }
-
-                        // Update link TikTok
-                        const tiktokBtn = document.getElementById('tiktokMaintenanceBtn');
-                        if (tiktokBtn && MC.tiktok) {
-                            tiktokBtn.href = MC.tiktok;
-                        }
-
-                        // Update interval countdown
-                        if (MC.refreshInterval && MC.refreshInterval > 0) {
-                            remaining = MC.refreshInterval;
-                            if (countdownEl) countdownEl.textContent = remaining;
-                        }
+                    // Kalau ternyata sudah OFF, langsung redirect
+                    if (MC.enabled === false) {
+                        redirectToIndex();
+                        return;
                     }
-                } catch (err) {
-                    console.warn('⚠️ Gagal load config awal:', err.message);
+
+                    // Update pesan
+                    if (MC.message && msgEl) msgEl.innerHTML = MC.message;
+
+                    // Update interval
+                    if (MC.refreshInterval && MC.refreshInterval > 0) {
+                        refreshInterval = MC.refreshInterval;
+                    }
+                    if (MC.checkInterval && MC.checkInterval > 0) {
+                        checkInterval = MC.checkInterval;
+                    }
+
+                    // Update links
+                    if (MC.waAdmin && waBtn) {
+                        waBtn.href = `https://wa.me/${MC.waAdmin}?text=${encodeURIComponent('Halo admin, saya mau tanya tentang maintenance ASC Garage')}`;
+                    }
+                    if (MC.tiktok && tiktokBtn) {
+                        tiktokBtn.href = MC.tiktok;
+                    }
                 }
+
+                // Set countdown awal
+                refreshCountdown = refreshInterval;
+                checkCountdown = checkInterval;
+                if (countdownEl) countdownEl.textContent = refreshCountdown;
+
+                // Mulai loop
+                console.log('🔧 Maintenance mode aktif. Refresh tiap ' + refreshInterval + 's, cek config tiap ' + checkInterval + 's');
+                setTimeout(mainLoop, 1000);
             })();
 
             // ============================================
@@ -537,12 +593,6 @@
                 dot.style.animationDuration = Math.random() * 6 + 4 + 's';
                 document.body.appendChild(dot);
             }
-
-            // ============================================
-            // MULAI LOOP CEK BERKALA
-            // ============================================
-            console.log('🔧 Maintenance mode active. Auto-check every ' + CHECK_INTERVAL + 's...');
-            setTimeout(tick, 1000);
         })();
     </script>
 </body>
