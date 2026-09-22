@@ -5,7 +5,7 @@ window.CONFIG = {
     // enabled: false → website berjalan normal
     // ============================================
     maintenance: {
-        enabled: true,
+        enabled: false,
         message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
         refreshInterval: 10, // detik
         waAdmin: '6283854980779',
