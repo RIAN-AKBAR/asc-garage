@@ -5,10 +5,10 @@ window.CONFIG = {
     // enabled: false → website berjalan normal
     // ============================================
     maintenance: {
-        enabled: false,
+        enabled: true,
         message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
         refreshInterval: 10, // detik
-        waAdmin: '6283854980779',
+        waAdmin: '6285781209423',
         tiktok: 'https://www.tiktok.com/@acr.all.star.crew'
     },
 
