@@ -5,7 +5,7 @@ window.CONFIG = {
     // enabled: false → website berjalan normal
     // ============================================
     maintenance: {
-        enabled: true,
+        enabled: false,
         message: 'Kami sedang melakukan perbaikan dan peningkatan sistem.<br>Mohon tunggu sebentar, halaman akan otomatis refresh.',
         refreshInterval: 10, // detik
         waAdmin: '6285781209423',
@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc',
-        adminLogin: 'https://north-charming-impaired-missed.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://suggest-emission-broadcasting-knew.trycloudflare.com/register_asc',
+        adminLogin: 'https://suggest-emission-broadcasting-knew.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
