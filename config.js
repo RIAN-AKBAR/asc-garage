@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'https://useful-nights-sensitivity-email.trycloudflare.com/register_asc',
-        adminLogin: 'https://useful-nights-sensitivity-email.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://biol-recommends-matthew-publisher.trycloudflare.com/register_asc',
+        adminLogin: 'https://biol-recommends-matthew-publisher.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
