@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'https://maps-aids-attend-stranger.trycloudflare.com/register_asc',
-        adminLogin: 'https://maps-aids-attend-stranger.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://centered-blocked-neural-taken.trycloudflare.com/register_asc',
+        adminLogin: 'https://centered-blocked-neural-taken.trycloudflare.com/register_asc/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
