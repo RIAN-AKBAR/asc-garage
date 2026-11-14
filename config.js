@@ -5,7 +5,7 @@ window.CONFIG = {
     // enabled: false → website berjalan normal
     // ============================================
     maintenance: {
-        enabled: true,
+        enabled: false,
         message: 'Kami sedang melakukan perbaikan sistem.',
         refreshInterval: 10, // detik
         waAdmin: '6285167089251',
@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'https://fix-structures-wallace-lobby.trycloudflare.com/register_asc',
-        adminLogin: 'https://fix-structures-wallace-lobby.trycloudflare.com/register_asc/login.php',
+        registerMember: 'https://attribute-comparative-montana-therapist.trycloudflare.com/asc-garage',
+        adminLogin: 'https://attribute-comparative-montana-therapist.trycloudflare.com/asc-garage/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
