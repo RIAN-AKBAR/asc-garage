@@ -17,6 +17,7 @@
         (function() {
             const MC = window.CONFIG && window.CONFIG.maintenance;
             if (MC && MC.enabled === true) {
+                // Redirect ke halaman maintenance
                 window.location.replace('maintenance.html');
             }
         })();
@@ -152,6 +153,14 @@
         .view-profile-btn { background: linear-gradient(95deg, #7C3AED, #A855F7); padding: 6px 18px; border-radius: 40px; text-decoration: none; color: white; font-weight: 600; display: inline-block; margin-top: 6px; }
         footer { text-align: center; padding: 1.5rem; border-top: 0.5px solid #2E2660; margin-top: 1rem; }
         .tiktok-btn { background: #19153A; display: inline-flex; gap: 8px; padding: 8px 24px; border-radius: 60px; text-decoration: none; color: white; border: 0.5px solid #FF1A66; }
+        .modal-member { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px); justify-content: center; align-items: center; z-index: 10001; }
+        .modal-card { background: rgba(14,10,34,0.96); backdrop-filter: blur(20px); border-radius: 40px; padding: 1.5rem; width: 90%; max-width: 420px; border: 1px solid #A855F7; }
+        .modal-card h2 { font-size: 1.5rem; text-align: center; }
+        .modal-card p { text-align: center; opacity: 0.7; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .modal-form input, .modal-form select, .modal-form textarea { width: 100%; padding: 10px 14px; margin: 6px 0; background: #1E1A42; border: 0.5px solid #8B5CF6; border-radius: 60px; color: white; font-family: inherit; }
+        .modal-form textarea { border-radius: 20px; min-height: 60px; resize: vertical; }
+        .modal-form button { width: 100%; background: linear-gradient(95deg, #25D366, #128C7E); padding: 12px; border-radius: 60px; font-weight: bold; color: white; margin-top: 10px; border: none; cursor: pointer; }
+        .close-modal { background: #2E2560; margin-top: 10px; width: 100%; padding: 8px; border-radius: 60px; color: white; border: none; cursor: pointer; }
         .custom-alert { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(16px); justify-content: center; align-items: center; z-index: 99999; }
         .custom-alert.show { display: flex; }
         .alert-box { background: rgba(14,10,34,0.98); backdrop-filter: blur(20px); border-radius: 32px; padding: 2rem 2rem 1.8rem; max-width: 440px; width: 92%; border: 1px solid #25D366; box-shadow: 0 20px 60px rgba(37,211,102,0.2); text-align: center; animation: alertPop 0.4s cubic-bezier(0.2,0.9,0.4,1.1); }
@@ -255,7 +264,7 @@
         <div class="member-hero-logo"><img src="logo.png" alt="logo"></div>
         <h1>DAFTAR MEMBER</h1>
         <p>bergabung jadi keluarga ASC GARAGE, dapatkan update eksklusif</p>
-        <a href="#" class="btn-open-member" id="heroMemberBtn"><i class="fab fa-discord"></i> Daftar Member Sekarang</a>
+        <a href="#" class="btn-open-member" id="heroMemberBtn"><i class="fas fa-user-plus"></i> Daftar Member Sekarang</a>
     </div>
 
     <div class="video-card-section">
@@ -319,6 +328,41 @@
     </div>
 </div>
 
+<div id="memberModal" class="modal-member">
+    <div class="modal-card">
+        <h2>✨ Daftar Member ASC</h2>
+        <p>Pilih platform untuk bergabung</p>
+        <div style="display:flex; gap:10px; margin:12px 0; flex-wrap:wrap;">
+            <button id="joinDiscordBtn" style="flex:1; min-width:120px; padding:12px; border-radius:60px; font-weight:700; color:white; border:none; cursor:pointer; font-size:1rem; margin:5px; background:linear-gradient(95deg,#5865F2,#4752C4);"><i class="fab fa-discord"></i> Join Discord</button>
+            <button id="joinWaBtn" style="flex:1; min-width:120px; padding:12px; border-radius:60px; font-weight:700; color:white; border:none; cursor:pointer; font-size:1rem; margin:5px; background:linear-gradient(95deg,#25D366,#128C7E);"><i class="fab fa-whatsapp"></i> Join WhatsApp</button>
+        </div>
+        <button class="close-modal" id="closeModalBtn">Tutup</button>
+    </div>
+</div>
+
+<div id="waFormModal" class="modal-member">
+    <div class="modal-card">
+        <h2>📝 Form Pendaftaran WA</h2>
+        <p>Isi data berikut untuk bergabung ke grup WhatsApp</p>
+        <form class="modal-form" id="waForm">
+            <input type="text" id="waNamaLengkap" placeholder="❖ Nama Lengkap" required>
+            <input type="text" id="waNamaPanggilan" placeholder="❖ Nama Panggilan" required>
+            <select id="waGender" required>
+                <option value="">❖ Gender</option>
+                <option>Perempuan</option>
+                <option>Laki-laki</option>
+                <option>Non-binary</option>
+            </select>
+            <input type="number" id="waUmur" placeholder="❖ Umur" required>
+            <input type="text" id="waAsal" placeholder="❖ Asal" required>
+            <input type="text" id="waTeamLama" placeholder="❖ Team/Komunitas Lama" required>
+            <textarea id="waAlasan" placeholder="❖ Alasan Bergabung di ASC" rows="2" required></textarea>
+            <button type="submit" id="submitWaBtn"><i class="fab fa-whatsapp"></i> Kirim & Gabung WA</button>
+        </form>
+        <button class="close-modal" id="closeWaFormBtn">Tutup</button>
+    </div>
+</div>
+
 <div id="colabModal" class="modal-colab">
     <div class="colab-card">
         <h3>🤝 FORM PENDAFTARAN KOLABORASI</h3>
@@ -373,9 +417,9 @@
 <script>
     window.CONFIG_FALLBACK = {
         links: {
-            registerMember: 'https://discord.gg/6ZkZ9KjMP',
+            registerMember: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/index.html',
             adminLogin: 'https://classroom-homeless-turbo-costumes.trycloudflare.com/register_asc/login.html',
-            discord: 'https://discord.gg/6ZkZ9KjMP',
+            discord: 'https://discord.gg/7hJX3xMfD',
             waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
             waColab: '6285781209423',
             waShop: '6285781209423',
@@ -471,7 +515,6 @@
         if(sociabuzzBtn) sociabuzzBtn.href = C.links.sociabuzz;
         if(tiktokBtnFooter) tiktokBtnFooter.href = C.links.tiktok;
 
-        // Semua trigger "Daftar Member" → Discord
         document.querySelectorAll('#desktopMemberOpen, #mobileMemberOpen').forEach(el => {
             el.addEventListener('click', () => window.open(C.links.registerMember, '_blank'));
         });
@@ -575,6 +618,33 @@
         }
         if(alertOkBtn) alertOkBtn.addEventListener('click', hideCustomAlert);
 
+        const modalMember = document.getElementById('memberModal');
+        const waFormModal = document.getElementById('waFormModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const closeWaFormBtn = document.getElementById('closeWaFormBtn');
+        const joinDiscordBtn = document.getElementById('joinDiscordBtn');
+        const joinWaBtn = document.getElementById('joinWaBtn');
+
+        if(closeModalBtn) closeModalBtn.addEventListener('click', () => modalMember.style.display = 'none');
+        if(closeWaFormBtn) closeWaFormBtn.addEventListener('click', () => waFormModal.style.display = 'none');
+        window.addEventListener('click', (e) => {
+            if(e.target === modalMember) modalMember.style.display = 'none';
+            if(e.target === waFormModal) waFormModal.style.display = 'none';
+        });
+
+        if(joinDiscordBtn) {
+            joinDiscordBtn.addEventListener('click', () => {
+                modalMember.style.display = 'none';
+                window.open(C.links.discord, '_blank');
+            });
+        }
+        if(joinWaBtn) {
+            joinWaBtn.addEventListener('click', () => {
+                modalMember.style.display = 'none';
+                waFormModal.style.display = 'flex';
+            });
+        }
+
         function copyToClipboard(text) {
             return new Promise((resolve, reject) => {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -593,6 +663,63 @@
                         if (success) resolve();
                         else reject(new Error('execCommand copy failed'));
                     } catch (err) { reject(err); }
+                }
+            });
+        }
+
+        const waForm = document.getElementById('waForm');
+        const submitWaBtn = document.getElementById('submitWaBtn');
+
+        if(waForm) {
+            waForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const namaLengkap = document.getElementById('waNamaLengkap').value.trim();
+                const namaPanggilan = document.getElementById('waNamaPanggilan').value.trim();
+                const gender = document.getElementById('waGender').value;
+                const umur = document.getElementById('waUmur').value.trim();
+                const asal = document.getElementById('waAsal').value.trim();
+                const teamLama = document.getElementById('waTeamLama').value.trim();
+                const alasan = document.getElementById('waAlasan').value.trim();
+
+                if(!namaLengkap || !namaPanggilan || !gender || !umur || !asal || !teamLama || !alasan) {
+                    return alert("❌ Lengkapi semua data!");
+                }
+
+                const intro = `╔═══════ ✦ 👑 ✦ ═══════╗
+        〔 𝗪𝗘𝗟𝗖𝗢𝗠𝗘 𝗧𝗢 𝗔𝗦𝗖 〕
+          「 𝗠𝗘𝗠𝗕𝗘𝗥 𝗜𝗡𝗧𝗥𝗢 」
+╚═══════ ✦ 👑 ✦ ═══════╝
+
+❖ 𝗡𝗮𝗺𝗮 𝗟𝗲𝗻𝗴𝗸𝗮𝗽 : ${namaLengkap}
+❖ 𝗡𝗮𝗺𝗮 𝗣𝗮𝗻𝗴𝗴𝗶𝗹𝗮𝗻 : ${namaPanggilan}
+❖ 𝗚𝗲𝗻𝗱𝗲𝗿 : ${gender}
+❖ 𝗨𝗺𝘂𝗿 : ${umur}
+❖ 𝗔𝘀𝗮𝗹 : ${asal}
+❖ 𝗧𝗲𝗮𝗺/𝗞𝗼𝗺𝘂𝗻𝗶𝘁𝗮𝘀 𝗟𝗮𝗺𝗮 : ${teamLama}
+❖ 𝗔𝗹𝗮𝘀𝗮𝗻 𝗕𝗲𝗿𝗴𝗮𝗯𝘂𝗻𝗴 𝗱𝗶 𝗔𝗦𝗖 : ${alasan}
+
+════════ ❖ ════════
+❖ ════════
+
+✨ 𝗘𝘃𝗲𝗿𝘆 𝗺𝗲𝗺𝗯𝗲𝗿 𝗵𝗮𝘀 𝗮 𝘀𝘁𝗼𝗿𝘆, 𝗲𝘃𝗲𝗿𝘆 𝘀𝘁𝗼𝗿𝘆 𝗵𝗮𝘀 𝗮 𝘃𝗮𝗹𝘂𝗲 ✨
+
+👑 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗧𝗼 𝗔𝗦𝗖 𝗙𝗮𝗺𝗶𝗹𝘆 👑`;
+
+                submitWaBtn.disabled = true;
+                submitWaBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+                try {
+                    await copyToClipboard(intro);
+                    waForm.reset();
+                    waFormModal.style.display = 'none';
+                    showCustomAlert(C.links.waGroup);
+                } catch (err) {
+                    console.error('Copy error:', err);
+                    alert('❌ Gagal menyalin intro. Silakan copy manual.');
+                    window.open(C.links.waGroup, '_blank');
+                } finally {
+                    submitWaBtn.disabled = false;
+                    submitWaBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Kirim & Gabung WA';
                 }
             });
         }
