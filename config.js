@@ -43,7 +43,7 @@ window.CONFIG = {
         name: 'annn_pov',
         role: 'Owner & Creative Director',
         desc: 'pioneer esthetic garage & aura ungu collector',
-        avatar: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-64683385F8377D365AD4AD3B01C558C8-Png/150/150/AvatarHeadshot/Webp/noFilter',
+        avatar: 'https://tr.rbxcdn.com/30DAY-AvatarHeadshot-ACEBACA40FB4FEDD9E6101462346EBC9-Png/150/150/AvatarHeadshot/Webp/noFilter',
         profileLink: 'https://www.roblox.com/users/10416810312'
     },
     partners: [
