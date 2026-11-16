@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'https://concert-county-handmade-review.trycloudflare.com/asc-garage',
-        adminLogin: 'https://concert-county-handmade-review.trycloudflare.com/asc-garage/login.php',
+        registerMember: 'https://association-dimensional-happened-digest.trycloudflare.com/asc-garage',
+        adminLogin: 'https://association-dimensional-happened-digest.trycloudflare.com/asc-garage/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
