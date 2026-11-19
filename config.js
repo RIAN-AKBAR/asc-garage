@@ -13,8 +13,8 @@ window.CONFIG = {
     },
 
     links: {
-        registerMember: 'silverhold-hosting.web.id/asc-garage',
-        adminLogin: 'silverhold-hosting.web.id/asc-garage/login.php',
+        registerMember: 'https://silverhold-hosting.web.id/asc-garage',
+        adminLogin: 'https://silverhold-hosting.web.id/asc-garage/login.php',
         discord: 'https://discord.gg/7hJX3xMfD',
         waGroup: 'https://chat.whatsapp.com/FCiXQDejHtEC1s12z074dh?s=cl&p=a&ilr=1',
         waColab: '6283854980779',
